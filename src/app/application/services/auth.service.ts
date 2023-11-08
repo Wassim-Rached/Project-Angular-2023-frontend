@@ -13,4 +13,14 @@ export class AuthService {
   login(username: string, password: string): Observable<any> {
     return this.http.post(this.URL + "token", { username, password })
   }
+  logout() {
+    this.unauthentificate()
+  }
+  authentificate(token: string) {
+    localStorage.setItem("token", token)
+  }
+  unauthentificate() {
+    localStorage.removeItem("token")
+  }
 }
+
