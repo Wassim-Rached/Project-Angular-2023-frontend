@@ -10,10 +10,10 @@ import { Status } from '../classes/join-us';
   providedIn: 'root'
 })
 export class ActivityService {
-  private readonly URL = "https://mini-project-iset.onrender.com/api/"
+  private readonly URL = "https://mini-project-iset.onrender.com/api/activities/"
   constructor(private http: HttpClient) { }
   getAllActivities(): Observable<Activity[]> {
-    return this.http.get<Activity[]>(this.URL + "activity");
+    return this.http.get<Activity[]>(this.URL);
   }
   getActivityById(activityId: string): Observable<Activity> {
     return this.http.get<Activity>(this.URL + "activity/" + activityId);
