@@ -24,6 +24,7 @@ import { SignInComponent } from './application/components/sign-in/sign-in.compon
 import { SignUpComponent } from './application/components/sign-up/sign-up.component';
 import { ChangePasswordComponent } from './application/components/change-password/change-password.component';
 import { Error404Component } from './application/components/error404/error404.component';
+import { ActivitiesPageComponent } from './application/components/activities-page/activities-page.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { Error404Component } from './application/components/error404/error404.co
     SignInComponent,
     SignUpComponent,
     ChangePasswordComponent,
-    Error404Component
+    Error404Component,
+    ActivitiesPageComponent
   ],
   imports: [
     BrowserModule,
