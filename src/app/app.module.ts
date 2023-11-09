@@ -15,6 +15,8 @@ import { DevTeamComponent } from './application/components/dev-team/dev-team.com
 import { NavbarComponent } from './application/components/navbar/navbar.component';
 import { FooterComponent } from './application/components/footer/footer.component';
 import { DashboardComponent } from './application/components/dashboard/dashboard.component';
+import { GreetingComponent } from './application/components/greeting/greeting.component';
+import { HotActivitiesComponent } from './application/components/hot-activities/hot-activities.component';
 // activity based components
 import { ActivityOverViewComponent } from './application/components/activity-over-view/activity-over-view.component';
 import { ActivityListComponent } from './application/components/activity-list/activity-list.component';
@@ -41,6 +43,8 @@ import { MaterialModule } from './material.module';
     AboutUsComponent,
     JoinUsComponent,
     DevTeamComponent,
+    GreetingComponent,
+    HotActivitiesComponent,
     // activity based components
     ActivitiesFeedComponent,
     ActivityListComponent,
