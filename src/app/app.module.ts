@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,6 +28,7 @@ import { SignInComponent } from './application/components/sign-in/sign-in.compon
 import { SignUpComponent } from './application/components/sign-up/sign-up.component';
 // error based components
 import { Error404Component } from './application/components/error404/error404.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -53,11 +55,14 @@ import { Error404Component } from './application/components/error404/error404.co
     // error based components
     Error404Component,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
