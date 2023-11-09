@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css");
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
@@ -8,10 +9,31 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-/* 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } 
-*/
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hightlight {
+  color: rgb(21, 143, 74);
+}
+
+.fs-10 {
+  font-size: 4rem !important;
+}
+
+.font-weak {
+  color: #ccc;
+}
+
+.font-middle-weak {
+  color: #545454;
+}
