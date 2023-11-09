@@ -10,6 +10,7 @@ import { ProfileComponent } from './application/components/profile/profile.compo
 import { ChangePasswordComponent } from './application/components/change-password/change-password.component';
 import { SignInComponent } from './application/components/sign-in/sign-in.component';
 import { SignUpComponent } from './application/components/sign-up/sign-up.component';
+import { JoinUsComponent } from './application/components/join-us/join-us.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'join-us', title: 'join us', component: JoinUsComponent },
   {
     path: 'account',
     title: 'account',
