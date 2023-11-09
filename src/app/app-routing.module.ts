@@ -11,6 +11,7 @@ import { ChangePasswordComponent } from './application/components/change-passwor
 import { SignInComponent } from './application/components/sign-in/sign-in.component';
 import { SignUpComponent } from './application/components/sign-up/sign-up.component';
 import { JoinUsComponent } from './application/components/join-us/join-us.component';
+import { DevTeamComponent } from './application/components/dev-team/dev-team.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -53,6 +54,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'dev-team', title: 'dev-team', component: DevTeamComponent },
   { path: 'signin', title: 'signin', component: SignInComponent },
   { path: 'signup', title: 'signup', component: SignUpComponent },
   { path: '**', title: 'NOT FOUND 404! ', component: Error404Component },
