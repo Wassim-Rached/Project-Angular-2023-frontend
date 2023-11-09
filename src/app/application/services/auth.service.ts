@@ -20,15 +20,15 @@ export class AuthService {
     this.unauthentificate();
   }
 
-  public authentificate(token: string) {
-    localStorage.setItem('token', token);
+  public authentificate(token: Token) {
+    localStorage.setItem('x-accessToken', token.access);
   }
 
   public unauthentificate() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('x-accessToken');
   }
 
   public getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('x-accessToken');
   }
 }
