@@ -25,6 +25,7 @@ export class AccountService {
   public deleteAccountById(accountId: string) {
     return this.http.delete(this.URL + accountId);
   }
+
   public getAllJoiningForms(): Observable<JoinUs[]> {
     return this.http.get<JoinUs[]>(this.URL + 'join_us');
   }
