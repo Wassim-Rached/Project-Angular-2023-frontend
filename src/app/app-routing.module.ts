@@ -5,6 +5,11 @@ import { ActivityListComponent } from './application/components/activity-list/ac
 import { ActivityOverViewComponent } from './application/components/activity-over-view/activity-over-view.component';
 import { ActivitiesPageComponent } from './application/components/activities-page/activities-page.component';
 import { Error404Component } from './application/components/error404/error404.component';
+import { AccountPageComponent } from './application/components/account-page/account-page.component';
+import { ProfileComponent } from './application/components/profile/profile.component';
+import { ChangePasswordComponent } from './application/components/change-password/change-password.component';
+import { SignInComponent } from './application/components/sign-in/sign-in.component';
+import { SignUpComponent } from './application/components/sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -33,6 +38,21 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'account',
+    title: 'account',
+    component: AccountPageComponent,
+    children: [
+      { path: 'profile', title: 'Profile', component: ProfileComponent },
+      {
+        path: 'change-password',
+        title: 'change password',
+        component: ChangePasswordComponent,
+      },
+    ],
+  },
+  { path: 'signin', title: 'signin', component: SignInComponent },
+  { path: 'signup', title: 'signup', component: SignUpComponent },
   { path: '**', title: 'NOT FOUND 404! ', component: Error404Component },
 ];
 
