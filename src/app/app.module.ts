@@ -23,6 +23,7 @@ import { ActivityManagmentComponent } from './application/components/activity-ma
 import { SignInComponent } from './application/components/sign-in/sign-in.component';
 import { SignUpComponent } from './application/components/sign-up/sign-up.component';
 import { ChangePasswordComponent } from './application/components/change-password/change-password.component';
+import { Error404Component } from './application/components/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ChangePasswordComponent } from './application/components/change-passwor
     ActivityManagmentComponent,
     SignInComponent,
     SignUpComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
