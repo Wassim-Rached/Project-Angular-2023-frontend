@@ -1,1 +1,21 @@
-<p>navbar works!</p>
+<mat-toolbar id="toolbar-nav" color="primary">
+  <div class="left-nav">
+    <div class="logo-container">
+      <img src="assets/logo.png" alt="" />
+    </div>
+    <span routerLink="/" class="logo-text"
+      ><span class="eco">Eco</span>save</span
+    >
+  </div>
+  <div class="middle-nav">
+    <ul>
+      <li><a routerLink="join-us">Join us</a></li>
+      <li><a routerLink="activities">Activities</a></li>
+      <li><a routerLink="activities">Dev-Team</a></li>
+    </ul>
+  </div>
+  <div class="right-nav">
+    <button routerLink="signup" class="btn btn-secondary">sign up</button>
+    <button routerLink="signin" class="btn btn-dark">sign in</button>
+  </div>
+</mat-toolbar>

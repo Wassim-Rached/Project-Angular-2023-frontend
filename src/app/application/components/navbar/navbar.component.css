@@ -1,0 +1,67 @@
+#toolbar-nav {
+  color: #ececec;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.left-nav .logo-container {
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.left-nav .logo-container img {
+  width: 50px;
+}
+
+.left-nav .logo-text {
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+
+.left-nav .logo-text .eco {
+  background-color: rgb(0, 132, 1);
+  color: #fff;
+}
+
+.middle-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.middle-nav ul {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  gap: 13px;
+  text-transform: uppercase;
+  color: rgb(218, 218, 218);
+  margin: 0;
+}
+
+.middle-nav ul li {
+  cursor: pointer;
+}
+
+.middle-nav ul li:hover {
+  color: #ffffff;
+  transition: 0.3s ease-in-out;
+}
+
+.right-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
