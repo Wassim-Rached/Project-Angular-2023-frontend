@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // application based components
@@ -22,6 +22,7 @@ import { ActivityOverViewComponent } from './application/components/activity-ove
 import { ActivityListComponent } from './application/components/activity-list/activity-list.component';
 import { ActivitiesPageComponent } from './application/components/activities-page/activities-page.component';
 import { ActivitiesFeedComponent } from './application/components/activities-feed/activities-feed.component';
+import { ActivityCardComponent } from './application/components/activity-card/activity-card.component';
 // user based components
 import { ProfileComponent } from './application/components/profile/profile.component';
 import { AccountPageComponent } from './application/components/account-page/account-page.component';
@@ -31,6 +32,7 @@ import { SignUpComponent } from './application/components/sign-up/sign-up.compon
 // error based components
 import { Error404Component } from './application/components/error404/error404.component';
 import { MaterialModule } from './material.module';
+import { AuthInterceptor } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { MaterialModule } from './material.module';
     SignUpComponent,
     // error based components
     Error404Component,
+    ActivityCardComponent,
   ],
 
   imports: [
@@ -68,7 +71,14 @@ import { MaterialModule } from './material.module';
     BrowserAnimationsModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [
+    // other services
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
