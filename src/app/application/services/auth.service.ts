@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { environment } from '../environments';
+import { Token } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +12,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  public signin(username: string, password: string): Observable<any> {
-    return this.http.post(this.URL + 'token', { username, password });
+  public signin(username: string, password: string): Observable<Token> {
+    return this.http.post<Token>(this.URL + 'token/', { username, password });
   }
 
   public logout() {
