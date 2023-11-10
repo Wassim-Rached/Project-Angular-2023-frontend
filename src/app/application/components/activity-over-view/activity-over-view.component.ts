@@ -1,10 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivityService } from '../../services/activity.service';
+import { ActivatedRoute } from '@angular/router';
+import { Activity } from '../../classes/activity';
 
 @Component({
   selector: 'app-activity-over-view',
   templateUrl: './activity-over-view.component.html',
-  styleUrls: ['./activity-over-view.component.css']
+  styleUrls: ['./activity-over-view.component.css'],
 })
-export class ActivityOverViewComponent {
+export class ActivityOverViewComponent implements OnInit {
+  activity?: Activity;
 
+  constructor(
+    private activityService: ActivityService,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    const activityId = this.activatedRoute.snapshot.params['id'];
+    this.activityService.getActivityById(activityId).subscribe({
+      next: (activity) => {
+        this.activity = activity;
+        console.log(activity);
+      },
+      error: (error) => {
+        this.activity = undefined;
+      },
+    });
+  }
 }

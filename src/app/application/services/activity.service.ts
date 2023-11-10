@@ -13,11 +13,10 @@ import { environment } from '../environments';
 export class ActivityService {
   private readonly URL = environment['BASE_API_URL'] + 'activities/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getAllActivities(): Observable<Activity[]> {
-    return this.http.get<Activity[]>(this.URL + 'activity');
-
+    return this.http.get<Activity[]>(this.URL);
   }
 
   public getActivityById(activityId: string): Observable<Activity> {
