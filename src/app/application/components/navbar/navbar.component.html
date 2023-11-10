@@ -21,6 +21,7 @@
     <button *ngIf="!userAccount" routerLink="signin" class="btn btn-dark">
       sign in
     </button>
+    <button *ngIf="userAccount" routerLink="dashborad" class="btn btn-info">Dashboard</button>
     <button *ngIf="userAccount" (click)="onLogout()" class="btn btn-danger">
       logout
     </button>

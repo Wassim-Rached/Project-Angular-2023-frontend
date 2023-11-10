@@ -9,7 +9,7 @@ import { Account } from '../../classes/account';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  userAccount?: Account | null;
+  userAccount?: Account;
 
   constructor(
     private authService: AuthService,
@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
         this.userAccount = account;
       },
       error: (error) => {
-        this.userAccount = null;
+        this.userAccount = undefined;
       },
     });
   }
