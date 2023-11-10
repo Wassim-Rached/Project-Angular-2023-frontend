@@ -1,21 +1,34 @@
 <div class="container mt-5">
-  <h1 class="text-center fs-2">Login</h1>
+  <h1 class="text-center fs-1 highlight">Sign in</h1>
   <form
     [formGroup]="loginForm"
     (ngSubmit)="onSubmit(loginForm)"
     class="form-signin"
   >
+    <div
+      class="text-center text-danger d-flex align-items-center justify-content-center h-30px"
+    >
+      <span *ngIf="errorDescription">
+        {{ errorDescription }}
+      </span>
+    </div>
     <div class="form-label-group">
       <label class="form-label" for="inputUsername">Username</label>
       <input
         type="text"
         id="inputUsername"
-        class="form-control"
+        [ngClass]="{
+          'is-invalid': fieldHasError('username'),
+          'form-control': true
+        }"
         formControlName="username"
         placeholder="Username"
         required
         autofocus
       />
+      <div *ngIf="fieldHasError('username')" class="invalid-feedback">
+        {{ getFieldErrorMessage("username") }}
+      </div>
     </div>
 
     <div class="form-label-group">
@@ -23,11 +36,17 @@
       <input
         type="password"
         id="inputPassword"
-        class="form-control"
+        [ngClass]="{
+          'is-invalid': fieldHasError('password'),
+          'form-control': true
+        }"
         formControlName="password"
         placeholder="Password"
         required
       />
+      <div *ngIf="fieldHasError('password')" class="invalid-feedback">
+        {{ getFieldErrorMessage("password") }}
+      </div>
     </div>
 
     <button class="mt-4 btn btn-primary" type="submit">Sign in</button>
