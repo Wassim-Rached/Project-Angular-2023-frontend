@@ -7,7 +7,7 @@ export class Activity {
 
   constructor(
     public readonly id?: string,
-    public readonly numberOfLikes?: number,
+    public readonly number_of_likes?: number,
     public categories?: Categorie[],
     public title?: string,
     public photo?: File,
