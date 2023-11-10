@@ -1,10 +1,12 @@
 <mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="logo-bg"></div>
-    <mat-card-title>{{ activity.title }}</mat-card-title>
+    <mat-card-title class="fs-6">{{
+      activity.title | slice : 0 : 40
+    }}</mat-card-title>
     <mat-card-subtitle>
-      <div *ngIf="activity.isFree" class="badge bg-success">Free</div>
-      <div *ngIf="!activity.isFree" class="badge bg-primary">Paid</div>
+      <div *ngIf="activity.is_free" class="badge bg-success">Free</div>
+      <div *ngIf="!activity.is_free" class="badge bg-primary">Paid</div>
     </mat-card-subtitle>
   </mat-card-header>
   <img
@@ -13,11 +15,6 @@
     [src]="activity.photo_url"
     alt="Photo of a Shiba Inu"
   />
-  <!-- <mat-card-content>
-    <p>
-      {{ activity.description | slice : 0 : 50 }}
-    </p>
-  </mat-card-content> -->
   <mat-card-actions>
     <button mat-button>
       LIKE
