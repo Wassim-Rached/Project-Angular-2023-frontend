@@ -32,7 +32,7 @@ import { SignUpComponent } from './application/components/sign-up/sign-up.compon
 // error based components
 import { Error404Component } from './application/components/error404/error404.component';
 import { MaterialModule } from './material.module';
-import { AuthInterceptor } from './services/auth-interceptor.service';
+import { AuthInterceptor } from './application/services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
