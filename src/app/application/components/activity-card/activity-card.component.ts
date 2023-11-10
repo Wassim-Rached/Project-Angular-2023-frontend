@@ -7,8 +7,12 @@ import { ActivityService } from '../../services/activity.service';
   templateUrl: './activity-card.component.html',
   styleUrls: ['./activity-card.component.css'],
 })
-export class ActivityCardComponent {
+export class ActivityCardComponent implements OnInit {
   @Input() activity!: Activity;
 
   constructor(private activityService: ActivityService) {}
+
+  ngOnInit(): void {
+    console.log(this.activity.number_of_likes);
+  }
 }
