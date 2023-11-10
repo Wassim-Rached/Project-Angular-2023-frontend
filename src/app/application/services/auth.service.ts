@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../environments';
 import { Token } from '../types';
+import { Router } from '@angular/router';
+import { Role } from '../classes/account';
 
 @Injectable({
   providedIn: 'root',
@@ -10,26 +12,9 @@ import { Token } from '../types';
 export class AuthService {
   private readonly URL = environment['BASE_API_URL'] + 'authentication/';
 
-  //
-  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
-  isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
-  isAdmin = true;
-  setAuthenticated() {
-    this.isLoggedInSubject.next(true);
-    localStorage.setItem('isLoggedIn', 'true');
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  setUnauthenticated() {
-    this.isLoggedInSubject.next(false);
-    localStorage.removeItem('isLoggedIn');
-  }
-
-  get isLoggedIn(): boolean {
-    return this.isLoggedInSubject.value;
-  }
-
-  constructor(private http: HttpClient) {}
-
+  // signin & logout
   public signin(username: string, password: string): Observable<Token> {
     return this.http.post<Token>(this.URL + 'token/', { username, password });
   }
@@ -38,17 +23,64 @@ export class AuthService {
     this.unauthentificate();
   }
 
+  // authentification
   public authentificate(token: Token) {
-    this.setAuthenticated();
-    localStorage.setItem('x-accessToken', token.access);
+    this.setToken(token.access);
   }
 
   public unauthentificate() {
-    this.setUnauthenticated();
-    localStorage.removeItem('x-accessToken');
+    this.removeToken();
+  }
+
+  // redirections
+  public redirectAfterSignin() {
+    this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGIN']]);
+  }
+
+  public redirectAfterLogout() {
+    this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGOUT']]);
+  }
+
+  // Token
+  public setToken(token: string) {
+    localStorage.setItem('x-accessToken', token);
   }
 
   public getToken(): string | null {
     return localStorage.getItem('x-accessToken');
+  }
+
+  public removeToken() {
+    localStorage.removeItem('x-accessToken');
+  }
+
+  // Role
+  public setRole(role?: string) {
+    localStorage.setItem('role', role ?? 'user');
+  }
+
+  public getRole(): Role | null {
+    return localStorage.getItem('role') as Role;
+  }
+
+  public removeRole() {
+    localStorage.removeItem('role');
+  }
+
+  //
+  public isAuthenticated(): boolean {
+    return this.getToken() !== null;
+  }
+
+  public isUser(): boolean {
+    return this.getRole() === 'user';
+  }
+
+  public isAdmin(): boolean {
+    return this.getRole() === 'admin';
+  }
+
+  public isMember(): boolean {
+    return this.getRole() === 'member';
   }
 }
