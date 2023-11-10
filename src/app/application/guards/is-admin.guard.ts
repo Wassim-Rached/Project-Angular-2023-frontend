@@ -1,13 +1,16 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AccountService } from '../services/account.service';
 import { AuthService } from '../services/auth.service';
+import { environment } from '../environments';
 
 export const isAdminGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
-  const routed = inject(Router);
+  const routerService = inject(Router);
 
-  if (authService.isAdmin) return true;
-  routed.navigate(['/']);
+  if (authService.isAdmin()) {
+    return true;
+  }
+
+  routerService.navigate([environment['DEFAULT_REDIRECT_FORBIDDEN']]);
   return false;
 };
