@@ -12,7 +12,7 @@ export class Activity {
     public title?: string,
     public photo?: File,
     public readonly photo_url?: string,
-    public isFree?: boolean,
+    public is_free?: boolean,
     public price?: number,
     public description?: string,
     public maxParticipants?: number,
