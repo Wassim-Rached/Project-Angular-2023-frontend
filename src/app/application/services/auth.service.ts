@@ -13,7 +13,7 @@ export class AuthService {
   //
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
-
+  isAdmin = true;
   setAuthenticated() {
     this.isLoggedInSubject.next(true);
     localStorage.setItem('isLoggedIn', 'true');

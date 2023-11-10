@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { GuardsCheckEnd, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './application/components/home/home.component';
 import { ActivityListComponent } from './application/components/activity-list/activity-list.component';
 import { ActivityOverViewComponent } from './application/components/activity-over-view/activity-over-view.component';
@@ -12,11 +12,13 @@ import { SignInComponent } from './application/components/sign-in/sign-in.compon
 import { SignUpComponent } from './application/components/sign-up/sign-up.component';
 import { JoinUsComponent } from './application/components/join-us/join-us.component';
 import { DevTeamComponent } from './application/components/dev-team/dev-team.component';
+import { isAdminGuard } from './application/guards/is-admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'dashboard',
+    canActivate: [isAdminGuard],
     loadChildren: () =>
       import('./application/admin/admin-routing.module').then(
         (m) => m.AdminRoutingModule
