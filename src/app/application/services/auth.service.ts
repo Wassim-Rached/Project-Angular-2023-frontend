@@ -9,8 +9,10 @@ import { Token } from '../types';
 })
 export class AuthService {
   private readonly URL = environment['BASE_API_URL'] + 'authentication/';
-
-  constructor(private http: HttpClient) {}
+  public isAuthenticated: boolean;
+  constructor(private http: HttpClient) {
+    this.isAuthenticated = this.getToken() != null;
+  }
 
   public signin(username: string, password: string): Observable<Token> {
     return this.http.post<Token>(this.URL + 'token/', { username, password });
