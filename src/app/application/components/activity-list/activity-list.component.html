@@ -1,1 +1,8 @@
-<p>activity-list works!</p>
+<div class="container">
+  <h1>Activity Liste</h1>
+  <div class="row">
+    <div *ngFor="let activity of activities" class="mb-6 col-md-6">
+      <app-activity-card [activity]="activity"></app-activity-card>
+    </div>
+  </div>
+</div>

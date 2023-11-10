@@ -15,7 +15,14 @@
     </ul>
   </div>
   <div class="right-nav">
-    <button routerLink="signup" class="btn btn-secondary">sign up</button>
-    <button routerLink="signin" class="btn btn-dark">sign in</button>
+    <button *ngIf="!userAccount" routerLink="signup" class="btn btn-secondary">
+      sign up
+    </button>
+    <button *ngIf="!userAccount" routerLink="signin" class="btn btn-dark">
+      sign in
+    </button>
+    <button *ngIf="userAccount" (click)="onLogout()" class="btn btn-danger">
+      logout
+    </button>
   </div>
 </mat-toolbar>

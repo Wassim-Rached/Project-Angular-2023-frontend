@@ -1,5 +1,12 @@
-<div id="hot-activities">
-  <h1 class="text-center fs-1 vh-100 bg-success">
-    <span class="text-white">Hot</span> activities
+<div id="hot-activities" class="min-vh-100 p-md-5">
+  <h1 class="text-center fs-1">
+    <span class="highlight">Hot</span> activities
   </h1>
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let activity of activities" class="mb-4 col-md-4">
+        <app-activity-card [activity]="activity"></app-activity-card>
+      </div>
+    </div>
+  </div>
 </div>
