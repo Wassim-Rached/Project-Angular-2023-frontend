@@ -10,7 +10,6 @@ import { Account } from '../../classes/account';
 })
 export class NavbarComponent implements OnInit {
   userAccount?: Account;
-  isAuthenticated = false;
 
   constructor(
     private authService: AuthService,
@@ -18,9 +17,6 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.isAuthenticated.subscribe((isAuthenticated) => {
-      this.isAuthenticated = isAuthenticated;
-    });
     this.accountService.getMyAccount().subscribe({
       next: (account) => {
         this.userAccount = account;
