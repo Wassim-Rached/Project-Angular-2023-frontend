@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { GuardsCheckEnd, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './application/components/home/home.component';
 import { ActivityListComponent } from './application/components/activity-list/activity-list.component';
 import { ActivityOverViewComponent } from './application/components/activity-over-view/activity-over-view.component';
