@@ -1,15 +1,35 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
-  <div>
-    <label>
-      username:
-      <input formControlName="username" placeholder="Your username" />
-    </label>
-  </div>
-  <div>
-    <label>
-      Email:
-      <input formControlName="password" placeholder="Your password" />
-    </label>
-  </div>
-  <button type="submit">Signin</button>
-</form>
+<div class="container mt-5">
+  <h1 class="text-center fs-2">Login</h1>
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit(loginForm)"
+    class="form-signin"
+  >
+    <div class="form-label-group">
+      <label class="form-label" for="inputUsername">Username</label>
+      <input
+        type="text"
+        id="inputUsername"
+        class="form-control"
+        formControlName="username"
+        placeholder="Username"
+        required
+        autofocus
+      />
+    </div>
+
+    <div class="form-label-group">
+      <label class="form-label" for="inputPassword">Password</label>
+      <input
+        type="password"
+        id="inputPassword"
+        class="form-control"
+        formControlName="password"
+        placeholder="Password"
+        required
+      />
+    </div>
+
+    <button class="mt-4 btn btn-primary" type="submit">Sign in</button>
+  </form>
+</div>
