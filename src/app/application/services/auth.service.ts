@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environments';
 import { Token } from '../types';
 
@@ -9,6 +9,24 @@ import { Token } from '../types';
 })
 export class AuthService {
   private readonly URL = environment['BASE_API_URL'] + 'authentication/';
+
+  //
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
+
+  setAuthenticated() {
+    this.isLoggedInSubject.next(true);
+    localStorage.setItem('isLoggedIn', 'true');
+  }
+
+  setUnauthenticated() {
+    this.isLoggedInSubject.next(false);
+    localStorage.removeItem('isLoggedIn');
+  }
+
+  get isLoggedIn(): boolean {
+    return this.isLoggedInSubject.value;
+  }
 
   constructor(private http: HttpClient) {}
 
@@ -21,10 +39,12 @@ export class AuthService {
   }
 
   public authentificate(token: Token) {
+    this.setAuthenticated();
     localStorage.setItem('x-accessToken', token.access);
   }
 
   public unauthentificate() {
+    this.setUnauthenticated();
     localStorage.removeItem('x-accessToken');
   }
 

@@ -9,7 +9,8 @@ import { Account } from '../../classes/account';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  userAccount?: Account;
+  public userAccount?: Account;
+  public isLoggedIn!: boolean;
 
   constructor(
     private authService: AuthService,
@@ -17,6 +18,16 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //
+    this.isLoggedIn = this.authService.isLoggedIn;
+    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
+      if (isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
+        console.log(isLoggedIn);
+      }
+    });
+
+    //
     this.accountService.getMyAccount().subscribe({
       next: (account) => {
         this.userAccount = account;
