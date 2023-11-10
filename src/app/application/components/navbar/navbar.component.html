@@ -14,21 +14,23 @@
     </ul>
   </div>
   <div class="right-nav">
-    <button *ngIf="!isLoggedIn" routerLink="signup" class="btn btn-secondary">
+    <button *ngIf="!userAccount" routerLink="signup" class="btn btn-secondary">
       sign up
     </button>
-    <button *ngIf="!isLoggedIn" routerLink="signin" class="btn btn-dark">
+    <button *ngIf="!userAccount" routerLink="signin" class="btn btn-dark">
       sign in
     </button>
-    <!-- <button
-      *ngIf="userAccount?.role == 'admin'"
-      routerLink="dashboard"
-      class="btn btn-info"
-    >
+    <button *ngIf="isAdmin" routerLink="dashboard" class="btn btn-info">
       Dashboard
-    </button> -->
-    <button *ngIf="isLoggedIn" (click)="onLogout()" class="btn btn-danger">
+    </button>
+    <button *ngIf="userAccount" (click)="onLogout()" class="btn btn-danger">
       logout
     </button>
+    <span
+      [routerLink]="['profile', userAccount.id]"
+      class="profile-img-container"
+      *ngIf="userAccount"
+      ><img [src]="userAccount.photo_url" [alt]="userAccount.user?.last_name"
+    /></span>
   </div>
 </mat-toolbar>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { AccountService } from '../../services/account.service';
 import { Account } from '../../classes/account';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,35 +11,36 @@ import { Account } from '../../classes/account';
 })
 export class NavbarComponent implements OnInit {
   public userAccount?: Account;
-  public isLoggedIn!: boolean;
+  public isAdmin = false;
 
   constructor(
     private authService: AuthService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     //
-    this.isLoggedIn = this.authService.isLoggedIn;
-    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
-      if (isLoggedIn) {
-        this.isLoggedIn = isLoggedIn;
-        console.log(isLoggedIn);
-      }
-    });
-
-    //
-    this.accountService.getMyAccount().subscribe({
-      next: (account) => {
-        this.userAccount = account;
-      },
-      error: (error) => {
-        this.userAccount = undefined;
+    this.router.events.subscribe({
+      next: (event) => {
+        if (event.constructor.name === 'NavigationEnd') {
+          this.accountService.getMyAccount().subscribe({
+            next: (account) => {
+              this.userAccount = account;
+              this.authService.setRole(account.role);
+              this.isAdmin = this.authService.isAdmin();
+            },
+            error: (error) => {
+              this.userAccount = undefined;
+            },
+          });
+        }
       },
     });
   }
 
   onLogout(): void {
     this.authService.logout();
+    this.authService.redirectAfterLogout();
   }
 }
