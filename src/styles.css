@@ -22,7 +22,7 @@ a:hover {
   color: inherit;
 }
 
-.hightlight {
+.highlight {
   color: rgb(21, 143, 74);
 }
 
@@ -36,4 +36,16 @@ a:hover {
 
 .font-middle-weak {
   color: #545454;
+}
+
+.been-liked {
+  color: rgb(191, 15, 15);
+}
+
+.logo-bg {
+  background-image: url("assets/logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: 1px solid #ccc;
 }

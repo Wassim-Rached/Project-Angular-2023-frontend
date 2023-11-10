@@ -12,11 +12,13 @@ import { SignInComponent } from './application/components/sign-in/sign-in.compon
 import { SignUpComponent } from './application/components/sign-up/sign-up.component';
 import { JoinUsComponent } from './application/components/join-us/join-us.component';
 import { DevTeamComponent } from './application/components/dev-team/dev-team.component';
+import { isAdminGuard } from './application/guards/is-admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'dashboard',
+    canActivate: [isAdminGuard],
     loadChildren: () =>
       import('./application/admin/admin-routing.module').then(
         (m) => m.AdminRoutingModule
@@ -42,11 +44,11 @@ const routes: Routes = [
   },
   { path: 'join-us', title: 'join us', component: JoinUsComponent },
   {
-    path: 'account',
-    title: 'account',
+    path: 'profile',
+    title: 'profile',
     component: AccountPageComponent,
     children: [
-      { path: 'profile', title: 'Profile', component: ProfileComponent },
+      { path: ':profileId', title: 'Profile', component: ProfileComponent },
       {
         path: 'change-password',
         title: 'change password',

@@ -11,11 +11,26 @@
     <ul>
       <li><a routerLink="join-us">Join us</a></li>
       <li><a routerLink="activities">Activities</a></li>
-      <li><a routerLink="dev-team">Dev-Team</a></li>
     </ul>
   </div>
   <div class="right-nav">
-    <button routerLink="signup" class="btn btn-secondary">sign up</button>
-    <button routerLink="signin" class="btn btn-dark">sign in</button>
+    <button *ngIf="!userAccount" routerLink="signup" class="btn btn-secondary">
+      sign up
+    </button>
+    <button *ngIf="!userAccount" routerLink="signin" class="btn btn-dark">
+      sign in
+    </button>
+    <button *ngIf="isAdmin" routerLink="dashboard" class="btn btn-info">
+      Dashboard
+    </button>
+    <button *ngIf="userAccount" (click)="onLogout()" class="btn btn-danger">
+      logout
+    </button>
+    <span
+      [routerLink]="['profile', userAccount.id]"
+      class="profile-img-container"
+      *ngIf="userAccount"
+      ><img [src]="userAccount.photo_url" [alt]="userAccount.user?.last_name"
+    /></span>
   </div>
 </mat-toolbar>
