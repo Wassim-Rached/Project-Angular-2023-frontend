@@ -44,11 +44,11 @@ const routes: Routes = [
   },
   { path: 'join-us', title: 'join us', component: JoinUsComponent },
   {
-    path: 'account',
-    title: 'account',
+    path: 'profile',
+    title: 'profile',
     component: AccountPageComponent,
     children: [
-      { path: 'profile', title: 'Profile', component: ProfileComponent },
+      { path: ':profileId', title: 'Profile', component: ProfileComponent },
       {
         path: 'change-password',
         title: 'change password',
