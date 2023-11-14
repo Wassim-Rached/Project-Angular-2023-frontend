@@ -21,9 +21,7 @@ const routes: Routes = [
     path: 'dashboard',
     canActivate: [isAdminGuard],
     loadChildren: () =>
-      import('./application/admin/admin-routing.module').then(
-        (m) => m.AdminRoutingModule
-      ),
+      import('./application/admin/admin.module').then((m) => m.AdminModule),
   },
   { path: 'home', title: 'welcome to our club ', component: HomeComponent },
   {
