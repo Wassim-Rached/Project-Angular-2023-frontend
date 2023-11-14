@@ -11,6 +11,7 @@ import { RegistrationDetailsComponent } from './components/registration-details/
 // activity components
 import { ActivityManagmentComponent } from './components/activity-managment/activity-managment.component';
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ActivityDetailsComponent } from './components/activity-details/activity
     // activity based components
     ActivityDetailsComponent,
     ActivityManagmentComponent,
+    SideBarComponent,
   ],
   imports: [CommonModule, AdminRoutingModule],
 })
