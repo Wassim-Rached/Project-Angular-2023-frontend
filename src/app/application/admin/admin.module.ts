@@ -13,6 +13,9 @@ import { ActivityManagmentComponent } from './components/activity-managment/acti
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { GreetingAdminComponent } from './components/greeting-admin/greeting-admin.component';
+import { ActivityListAdminComponent } from './components/activity-list-admin/activity-list-admin.component';
+import { ActivityCreateAdminComponent } from './components/activity-create-admin/activity-create-admin.component';
+import { MaterialModule } from 'src/app/material.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { GreetingAdminComponent } from './components/greeting-admin/greeting-adm
     ActivityManagmentComponent,
     SideBarComponent,
     GreetingAdminComponent,
+    ActivityListAdminComponent,
+    ActivityCreateAdminComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule],
+  imports: [CommonModule, MaterialModule, AdminRoutingModule],
 })
 export class AdminModule {}
