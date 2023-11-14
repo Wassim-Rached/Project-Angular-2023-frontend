@@ -12,6 +12,7 @@ import { RegistrationDetailsComponent } from './components/registration-details/
 import { ActivityManagmentComponent } from './components/activity-managment/activity-managment.component';
 import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { GreetingAdminComponent } from './components/greeting-admin/greeting-admin.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     ActivityDetailsComponent,
     ActivityManagmentComponent,
     SideBarComponent,
+    GreetingAdminComponent,
   ],
   imports: [CommonModule, AdminRoutingModule],
 })
