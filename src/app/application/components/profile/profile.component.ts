@@ -8,5 +8,6 @@ import { Account } from '../../classes/account';
 })
 export class ProfileComponent {
   @Input() account!: Account;
+
   constructor() {}
 }

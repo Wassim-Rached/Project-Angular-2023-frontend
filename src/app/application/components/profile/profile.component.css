@@ -1,0 +1,27 @@
+.bg-male {
+  background-color: blue;
+}
+.bg-female {
+  background-color: pink;
+}
+
+#profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#profile-img-container {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+}
+
+#profile-img-container img {
+  width: 200px;
+  height: 200px;
+}
