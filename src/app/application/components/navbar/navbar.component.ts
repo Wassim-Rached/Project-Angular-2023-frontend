@@ -30,6 +30,8 @@ export class NavbarComponent implements OnInit {
               this.userAccount = account;
               // set the user role
               this.authService.setRole(account.role);
+              // set the user account id
+              this.authService.setAccountId(account.id!);
               // get the admin status
               this.isAdmin = this.authService.isAdmin();
             },
