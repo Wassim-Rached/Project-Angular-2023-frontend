@@ -4,4 +4,5 @@ export const environment = {
   DEFAULT_REDIRECT_AFTER_LOGIN: '/',
   DEFAULT_REDIRECT_AFTER_LOGOUT: '/',
   DEFAULT_REDIRECT_FORBIDDEN: '/',
+  ACCESS_TOKEN_NAME: 'x-accessToken',
 };
