@@ -20,17 +20,21 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //
+    // subscribe to the router events
     this.router.events.subscribe({
       next: (event) => {
         if (event.constructor.name === 'NavigationEnd') {
           this.accountService.getMyAccount().subscribe({
             next: (account) => {
+              // set the user account
               this.userAccount = account;
+              // set the user role
               this.authService.setRole(account.role);
+              // get the admin status
               this.isAdmin = this.authService.isAdmin();
             },
             error: (error) => {
+              // set the user account to undefined
               this.userAccount = undefined;
             },
           });
@@ -40,7 +44,9 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogout(): void {
+    // logout the user
     this.authService.logout();
-    this.authService.redirectAfterLogout();
+    // reset the admin status
+    this.isAdmin = this.authService.isAdmin();
   }
 }
