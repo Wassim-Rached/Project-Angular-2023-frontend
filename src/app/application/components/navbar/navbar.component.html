@@ -20,7 +20,7 @@
     <button *ngIf="!userAccount" routerLink="signin" class="btn btn-dark">
       sign in
     </button>
-    <button *ngIf="isAdmin" routerLink="dashboard" class="btn btn-info">
+    <button *ngIf="userAccount && isAdmin" routerLink="dashboard" class="btn btn-info">
       Dashboard
     </button>
     <button *ngIf="userAccount" (click)="onLogout()" class="btn btn-danger">
