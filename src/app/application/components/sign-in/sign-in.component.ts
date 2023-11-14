@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class SignInComponent implements OnInit {
   errorDescription?: string;
   loginForm!: FormGroup;
+  isSubmitting: boolean = false;
 
   constructor(private authService: AuthService, private fb: FormBuilder) {}
 
@@ -21,26 +22,40 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup): void {
-    const username = form.value.username;
-    const password = form.value.password;
+    // disable the submit button
+    this.isSubmitting = true;
+    const { username, password } = form.value;
+
     this.authService.signin(username, password).subscribe({
       next: (token) => {
+        // authentificate the user
         this.authService.authentificate(token);
+        // then redirect him
         this.authService.redirectAfterSignin();
       },
       error: (error) => {
+        // enable the submit button
+        this.isSubmitting = false;
+
+        // handle the errors
         if (error.status === 400) {
+          // for validation errors
           this.handleFormErrors(error.error);
+          this.errorDescription = '';
         } else if (error.status === 401) {
+          // for unauthorized errors
           this.errorDescription = 'Invalid credentials';
         } else {
-          console.error('Unexpected error:', error);
+          // for unexpected errors
+          this.errorDescription = 'Unexpected error';
         }
       },
     });
   }
 
   private handleFormErrors(errors: any): void {
+    // set the errors from the backend
+    // on the form controls
     for (const field in errors) {
       if (this.loginForm.get(field)) {
         this.loginForm.get(field)?.setErrors({ serverError: errors[field][0] });
