@@ -1,1 +1,15 @@
-<p>profile works!</p>
+<div>
+    <div>
+     <img [src]="account.photo_url" alt="">
+    </div>
+    <div>
+     <p>userName : </p>{{account.user?.username }}
+    </div>
+    <div>
+     <p>email : </p>{{account.user?.email}}
+    </div>
+    <div>
+     <p>phoneNumber:</p> {{account.user?.phone_number}}
+    </div>
+
+ </div>
