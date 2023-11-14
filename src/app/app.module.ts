@@ -14,7 +14,6 @@ import { JoinUsComponent } from './application/components/join-us/join-us.compon
 import { DevTeamComponent } from './application/components/dev-team/dev-team.component';
 import { NavbarComponent } from './application/components/navbar/navbar.component';
 import { FooterComponent } from './application/components/footer/footer.component';
-import { DashboardComponent } from './application/components/dashboard/dashboard.component';
 import { GreetingComponent } from './application/components/greeting/greeting.component';
 import { HotActivitiesComponent } from './application/components/hot-activities/hot-activities.component';
 // activity based components
@@ -40,7 +39,6 @@ import { AuthInterceptor } from './application/services/auth-interceptor.service
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    DashboardComponent,
     HomeComponent,
     AboutUsComponent,
     JoinUsComponent,

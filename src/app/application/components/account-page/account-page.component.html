@@ -1,1 +1,9 @@
-<p>account-page works!</p>
+<app-profile *ngIf="account" [account]="account"></app-profile>
+<div *ngIf="isOwner">
+  <div>
+    <button routerLink="change-password">change Password</button>
+  </div>
+  <div>
+    <button (click)="onDelete()">Delete Account</button>
+  </div>
+</div>

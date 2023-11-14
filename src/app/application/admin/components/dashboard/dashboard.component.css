@@ -1,0 +1,7 @@
+#dashboard {
+  height: calc(100vh - 64px);
+}
+
+#dashboard-content {
+  background-color: rgb(255, 255, 255);
+}

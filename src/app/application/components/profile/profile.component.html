@@ -1,1 +1,12 @@
-<p>profile works!</p>
+<div
+  id="profile-container"
+  class="w-100 p-5 text-white"
+  [ngClass]="account.user?.gender === 'M' ? 'bg-male' : 'bg-female'"
+>
+  <div class="overflow-hidden" id="profile-img-container">
+    <img [src]="account.photo_url" [alt]="account.user?.username" />
+  </div>
+  <p class="fs-3 p-4">
+    {{ account.user?.username }}
+  </p>
+</div>

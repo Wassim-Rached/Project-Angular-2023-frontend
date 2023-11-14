@@ -14,25 +14,29 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // signin & logout
+  // signin handling
   public signin(username: string, password: string): Observable<Token> {
     return this.http.post<Token>(this.URL + 'token/', { username, password });
   }
 
+  // logout handling
   public logout() {
     this.unauthentificate();
+    this.removeRole();
+    this.removeAccountId();
+    this.redirectAfterLogout();
   }
 
-  // authentification
+  // authentification handling
   public authentificate(token: Token) {
     this.setToken(token.access);
   }
 
   public unauthentificate() {
-    this.removeToken();
+    this.removeAccessToken();
   }
 
-  // redirections
+  // redirections handling
   public redirectAfterSignin() {
     this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGIN']]);
   }
@@ -41,20 +45,20 @@ export class AuthService {
     this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGOUT']]);
   }
 
-  // Token
-  public setToken(token: string) {
-    localStorage.setItem('x-accessToken', token);
+  // Token handling
+  public setToken(access_token: string) {
+    localStorage.setItem(environment['ACCESS_TOKEN_NAME'], access_token);
   }
 
-  public getToken(): string | null {
-    return localStorage.getItem('x-accessToken');
+  public getAcessToken(): string | null {
+    return localStorage.getItem(environment['ACCESS_TOKEN_NAME']);
   }
 
-  public removeToken() {
-    localStorage.removeItem('x-accessToken');
+  public removeAccessToken() {
+    localStorage.removeItem(environment['ACCESS_TOKEN_NAME']);
   }
 
-  // Role
+  // Role handling
   public setRole(role?: string) {
     localStorage.setItem('role', role ?? 'user');
   }
@@ -67,9 +71,22 @@ export class AuthService {
     localStorage.removeItem('role');
   }
 
-  //
+  // AccountId handling
+  public setAccountId(accountId: string) {
+    localStorage.setItem('accountId', accountId);
+  }
+
+  public getAccountId(): string | null {
+    return localStorage.getItem('accountId');
+  }
+
+  public removeAccountId() {
+    localStorage.removeItem('accountId');
+  }
+
+  // informations about the user
   public isAuthenticated(): boolean {
-    return this.getToken() !== null;
+    return this.getAcessToken() !== null;
   }
 
   public isUser(): boolean {
