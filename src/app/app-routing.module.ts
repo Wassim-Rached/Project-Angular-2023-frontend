@@ -6,8 +6,6 @@ import { ActivityOverViewComponent } from './application/components/activity-ove
 import { ActivitiesPageComponent } from './application/components/activities-page/activities-page.component';
 import { Error404Component } from './application/components/error404/error404.component';
 import { AccountPageComponent } from './application/components/account-page/account-page.component';
-import { ProfileComponent } from './application/components/profile/profile.component';
-import { ChangePasswordComponent } from './application/components/change-password/change-password.component';
 import { SignInComponent } from './application/components/sign-in/sign-in.component';
 import { SignUpComponent } from './application/components/sign-up/sign-up.component';
 import { JoinUsComponent } from './application/components/join-us/join-us.component';
@@ -46,14 +44,6 @@ const routes: Routes = [
     path: 'profile/:profileId',
     title: 'profile',
     component: AccountPageComponent,
-    children: [
-      { path: '', title: 'Profile', component: ProfileComponent },
-      {
-        path: 'change-password',
-        title: 'change password',
-        component: ChangePasswordComponent,
-      },
-    ],
   },
   { path: 'dev-team', title: 'dev-team', component: DevTeamComponent },
   {
