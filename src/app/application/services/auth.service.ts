@@ -23,6 +23,7 @@ export class AuthService {
   public logout() {
     this.unauthentificate();
     this.removeRole();
+    this.removeAccountId();
     this.redirectAfterLogout();
   }
 
@@ -68,6 +69,19 @@ export class AuthService {
 
   public removeRole() {
     localStorage.removeItem('role');
+  }
+
+  // AccountId handling
+  public setAccountId(accountId: string) {
+    localStorage.setItem('accountId', accountId);
+  }
+
+  public getAccountId(): string | null {
+    return localStorage.getItem('accountId');
+  }
+
+  public removeAccountId() {
+    localStorage.removeItem('accountId');
   }
 
   // informations about the user
