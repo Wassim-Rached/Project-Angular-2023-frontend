@@ -31,10 +31,6 @@ export class ActivityService {
     return this.http.patch<Activity>(this.URL + id, activity);
   }
 
-  public deleteActivity(id: number) {
-    return this.http.delete(this.URL + id);
-  }
-
   public getAllCategories(): Observable<Categorie[]> {
     return this.http.get<Categorie[]>(this.URL + 'categories');
   }
