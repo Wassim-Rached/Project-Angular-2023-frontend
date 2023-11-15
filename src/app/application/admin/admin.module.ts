@@ -16,7 +16,8 @@ import { GreetingAdminComponent } from './components/greeting-admin/greeting-adm
 import { ActivityListAdminComponent } from './components/activity-list-admin/activity-list-admin.component';
 import { ActivityCreateAdminComponent } from './components/activity-create-admin/activity-create-admin.component';
 import { MaterialModule } from 'src/app/material.module';
-
+import { CategoryFormaterPipe } from '../pipes/category-formater.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     // dashboard component
@@ -32,7 +33,13 @@ import { MaterialModule } from 'src/app/material.module';
     GreetingAdminComponent,
     ActivityListAdminComponent,
     ActivityCreateAdminComponent,
+    CategoryFormaterPipe,
   ],
-  imports: [CommonModule, MaterialModule, AdminRoutingModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    AdminRoutingModule,
+    ReactiveFormsModule,
+  ],
 })
 export class AdminModule {}
