@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Activity } from '../classes/activity';
 import { Observable } from 'rxjs';
@@ -15,8 +15,8 @@ export class ActivityService {
 
   constructor(private http: HttpClient) {}
 
-  public getAllActivities(): Observable<Activity[]> {
-    return this.http.get<Activity[]>(this.URL);
+  public getAllActivities(params?: HttpParams): Observable<Activity[]> {
+    return this.http.get<Activity[]>(this.URL, { params: params });
   }
 
   public getActivityById(activityId: string): Observable<Activity> {
