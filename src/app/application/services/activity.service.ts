@@ -27,8 +27,12 @@ export class ActivityService {
     return this.http.post<Activity>(this.URL, activity);
   }
 
-  public updateActivity(id: number, activity: Activity): Observable<Activity> {
+  public updateActivity(id: string, activity: Activity): Observable<Activity> {
     return this.http.patch<Activity>(this.URL + id, activity);
+  }
+
+  public deleteActivityById(id: string) {
+    return this.http.delete(this.URL + id);
   }
 
   public getAllCategories(): Observable<Categorie[]> {
