@@ -10,7 +10,7 @@
                 <option value="-created_at">Oldest</option>
                 <option value="likes_count">Most Liked</option>
               </select>
-              <button class="btn btn-primary  m-2">Search</button>
+              <button class="btn btn-primary  m-2" [disabled]="isSubmitting">Search</button>
           </div>
          
         </form>
