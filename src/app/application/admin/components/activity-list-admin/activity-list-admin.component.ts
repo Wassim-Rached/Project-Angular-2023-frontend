@@ -14,6 +14,7 @@ export class ActivityListAdminComponent implements OnInit {
     const isUserSure = window.confirm(
       'are you sure about deleting this activity ?'
     );
+    if (!isUserSure) return;
     this.activityService.deleteActivityById(id!).subscribe({
       next: (res) => {
         this.activities = this.activities.filter(
