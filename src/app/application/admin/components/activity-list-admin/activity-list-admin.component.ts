@@ -12,6 +12,8 @@ import { ActivityService } from 'src/app/application/services/activity.service';
 export class ActivityListAdminComponent implements OnInit {
   activities: Activity[] = [];
   Form!: FormGroup;
+  isSubmitting = false;
+
   constructor(
     private activityService: ActivityService,
     private fb: FormBuilder
@@ -19,23 +21,30 @@ export class ActivityListAdminComponent implements OnInit {
 
   onSubmit() {
     const { title__icontains, ordering } = this.Form.value;
-    const params = new HttpParams();
-    params.set('title__icontains', title__icontains);
-    params.set('ordering', ordering);
-    this.activityService.getAllActivities(params).subscribe({
-      next: (activities) => {
-        this.activities = activities;
-      },
-    });
+    this.queryActivities(ordering, title__icontains);
   }
+
   ngOnInit(): void {
     this.Form = this.fb.nonNullable.group({
       title__icontains: [''],
       ordering: ['created_at'],
     });
-    this.activityService.getAllActivities().subscribe({
+    this.queryActivities('created_at', '');
+  }
+
+  queryActivities(ordering: string, title__icontains: string) {
+    this.isSubmitting = true;
+    const params = new HttpParams()
+      .set('title__icontains', title__icontains)
+      .set('ordering', ordering);
+    this.activityService.getAllActivities(params).subscribe({
       next: (activities) => {
         this.activities = activities;
+        this.isSubmitting = false;
+      },
+      error: (err) => {
+        console.log(err);
+        this.isSubmitting = false;
       },
     });
   }
