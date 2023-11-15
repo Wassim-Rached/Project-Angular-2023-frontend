@@ -10,6 +10,18 @@ import { ActivityService } from 'src/app/application/services/activity.service';
   styleUrls: ['./activity-list-admin.component.css'],
 })
 export class ActivityListAdminComponent implements OnInit {
+  onDelete(id: string) {
+    const isUserSure = window.confirm(
+      'are you sure about deleting this activity ?'
+    );
+    this.activityService.deleteActivityById(id!).subscribe({
+      next: (res) => {
+        this.activities = this.activities.filter(
+          (activity) => activity.id != id
+        );
+      },
+    });
+  }
   activities: Activity[] = [];
   Form!: FormGroup;
   isSubmitting = false;

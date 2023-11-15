@@ -42,11 +42,11 @@
                 </td>
              
                 <td>
-                    <button type="button"  class="btn btn-warning">Modify</button>
+                    <button type="button"  class="btn btn-warning" [routerLink]="activity.id">Modify</button>
                    
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-danger" (click)="onDelete(activity.id!)">Delete</button>
                 </td>
                 
               </tr>
