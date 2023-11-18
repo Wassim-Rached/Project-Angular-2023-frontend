@@ -16,7 +16,7 @@
     alt="Photo of a Shiba Inu"
   />
   <mat-card-actions>
-    <button mat-button>
+    <button (click)="onLike()" mat-button [disabled]="!isAuthenticated">
       LIKE
       <mat-icon class="been-liked">favorite</mat-icon>
     </button>
