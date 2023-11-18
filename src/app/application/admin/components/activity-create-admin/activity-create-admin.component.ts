@@ -29,6 +29,7 @@ export class ActivityCreateAdminComponent implements OnInit {
   resetForm() {
     this.form.reset();
   }
+
   onSubmit() {
     const data = this.form.value;
     delete data.photo;

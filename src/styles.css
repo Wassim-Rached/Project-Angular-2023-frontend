@@ -54,3 +54,7 @@ a:hover {
   background-position: center;
   border: 1px solid #ccc;
 }
+
+.non-navheight {
+  height: calc(100vh - 64px);
+}

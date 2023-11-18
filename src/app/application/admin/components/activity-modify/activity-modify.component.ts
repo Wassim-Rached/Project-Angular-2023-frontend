@@ -41,7 +41,7 @@ export class ActivityModifyComponent implements OnInit {
     this.form = this.fb.nonNullable.group({
       title: [this.activity.title],
       photo: [null],
-      isFree: [this.activity.is_free],
+      is_free: [this.activity.is_free],
       price: [this.activity.price],
       maxParticipants: [this.activity.maxParticipants],
       date: [this.activity.date],

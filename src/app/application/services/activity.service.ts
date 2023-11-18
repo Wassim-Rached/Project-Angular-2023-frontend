@@ -94,6 +94,12 @@ export class ActivityService {
     );
   }
 
+  public didLike(activityId: string): Observable<{ did_like: boolean }> {
+    return this.http.get<{ did_like: boolean }>(
+      this.URL + activityId + '/did_like/'
+    );
+  }
+
   public setLiked(activityId: string): Observable<Status> {
     return this.http.post<Status>(this.URL + activityId + '/like/', {});
   }

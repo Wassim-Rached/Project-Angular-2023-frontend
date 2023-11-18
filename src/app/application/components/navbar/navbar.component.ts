@@ -20,27 +20,36 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // handle loading the current account
+    this.loadCurrentAccount();
+
     // subscribe to the router events
+    // for logout and when changing
+    // the route in general
     this.router.events.subscribe({
       next: (event) => {
         if (event.constructor.name === 'NavigationEnd') {
-          this.accountService.getMyAccount().subscribe({
-            next: (account) => {
-              // set the user account
-              this.userAccount = account;
-              // set the user role
-              this.authService.setRole(account.role);
-              // set the user account id
-              this.authService.setAccountId(account.id!);
-              // get the admin status
-              this.isAdmin = this.authService.isAdmin();
-            },
-            error: (error) => {
-              // set the user account to undefined
-              this.userAccount = undefined;
-            },
-          });
+          this.loadCurrentAccount();
         }
+      },
+    });
+  }
+
+  public loadCurrentAccount(): void {
+    this.accountService.getMyAccount().subscribe({
+      next: (account) => {
+        // set the user account
+        this.userAccount = account;
+        // set the user role
+        this.authService.setRole(account.role);
+        // set the user account id
+        this.authService.setAccountId(account.id!);
+        // get the admin status
+        this.isAdmin = this.authService.isAdmin();
+      },
+      error: (error) => {
+        // set the user account to undefined
+        this.userAccount = undefined;
       },
     });
   }

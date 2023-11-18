@@ -20,7 +20,6 @@ import { HotActivitiesComponent } from './application/components/hot-activities/
 import { ActivityOverViewComponent } from './application/components/activity-over-view/activity-over-view.component';
 import { ActivityListComponent } from './application/components/activity-list/activity-list.component';
 import { ActivitiesPageComponent } from './application/components/activities-page/activities-page.component';
-import { ActivitiesFeedComponent } from './application/components/activities-feed/activities-feed.component';
 import { ActivityCardComponent } from './application/components/activity-card/activity-card.component';
 // user based components
 import { ProfileComponent } from './application/components/profile/profile.component';
@@ -46,7 +45,6 @@ import { AuthInterceptor } from './application/services/auth-interceptor.service
     GreetingComponent,
     HotActivitiesComponent,
     // activity based components
-    ActivitiesFeedComponent,
     ActivityListComponent,
     ActivityOverViewComponent,
     ActivitiesPageComponent,

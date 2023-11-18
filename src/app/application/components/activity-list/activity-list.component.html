@@ -1,6 +1,18 @@
-<div class="container">
-  <h1>Activity List</h1>
-  <div class="row">
+<div class="mb-5 container">
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <div class="input-group mb-3">
+      <span class="input-group-text">Search</span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="search for an activity by title..."
+        formControlName="title__icontains"
+      />
+      <button [disabled]="isSubmitting" class="btn btn-primary">search</button>
+    </div>
+  </form>
+  <div *ngIf="isSubmitting">loading...</div>
+  <div *ngIf="!isSubmitting" class="row">
     <div *ngFor="let activity of activities" class="mb-6 mt-4 col-md-6">
       <app-activity-card [activity]="activity"></app-activity-card>
     </div>

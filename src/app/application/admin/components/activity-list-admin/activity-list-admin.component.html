@@ -1,56 +1,76 @@
 <div>
-    <form class="container" [formGroup]="Form" (ngSubmit)="onSubmit()">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Search</span>
-            <input type="text" class="form-control" placeholder="search for an activity " formControlName="title__icontains"  >
-          </div>
-          <div class="row p-3">
-            <select class="form-select"  formControlName="ordering">
-                <option value="created_at" >Newest</option>
-                <option value="-created_at">Oldest</option>
-                <option value="likes_count">Most Liked</option>
-              </select>
-              <button class="btn btn-primary  m-2" [disabled]="isSubmitting">Search</button>
-          </div>
-         
-        </form>
-    <div>
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Photo</th>
-                <th scope="col">Title</th>
-                <th scope="col">Categories</th>
-                <th scope="col">Subscription Type</th>
-                <th scope="col">Modify</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let activity of  activities">
-                <th scope="row"> <img [src]="activity.photo_url" alt="" width="40" height="40"></th>
-                <td>{{activity.title}}</td>
-                <td>
-                    <div class="badge bg-info m-1" *ngFor="let category of activity.categories">
-                        {{category.name}}
-                    </div>
-                  
-                </td>
-                <td>
-                    <div *ngIf="activity.is_free" class="badge bg-success">Free</div>
-                    <div *ngIf="!activity.is_free" class="badge bg-primary">Paid</div>
-                </td>
-             
-                <td>
-                    <button type="button"  class="btn btn-warning" [routerLink]="['/dashboard/activities/list',activity.id]">Modify</button>
-                   
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger" (click)="onDelete(activity.id!)">Delete</button>
-                </td>
-                
-              </tr>
-            </tbody>
-          </table>
+  <form class="container" [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">Search</span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="search for an activity "
+        formControlName="title__icontains"
+      />
     </div>
+    <div class="row p-3">
+      <select class="form-select" formControlName="ordering">
+        <option value="created_at">Newest</option>
+        <option value="-created_at">Oldest</option>
+        <option value="likes_count">Most Liked</option>
+      </select>
+      <button class="btn btn-primary m-2" [disabled]="isSubmitting">
+        Search
+      </button>
+    </div>
+  </form>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Photo</th>
+          <th scope="col">Title</th>
+          <th scope="col">Categories</th>
+          <th scope="col">Subscription Type</th>
+          <th scope="col">Modify</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let activity of activities">
+          <th scope="row">
+            <img [src]="activity.photo_url" alt="" width="40" height="40" />
+          </th>
+          <td>{{ activity.title }}</td>
+          <td>
+            <div
+              class="badge bg-info m-1"
+              *ngFor="let category of activity.categories"
+            >
+              {{ category.name }}
+            </div>
+          </td>
+          <td>
+            <div *ngIf="activity.is_free" class="badge bg-success">Free</div>
+            <div *ngIf="!activity.is_free" class="badge bg-primary">Paid</div>
+          </td>
+
+          <td>
+            <button
+              type="button"
+              class="btn btn-warning"
+              [routerLink]="['/dashboard/activities/list', activity.id]"
+            >
+              Modify
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="onDelete(activity.id!)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,1 +1,7 @@
-<p>activity-over-view works!</p>
+<div class="container">
+  {{ activity | json }}
+  <div *ngFor="let account of activity?.registred_accounts">
+    <img [src]="account.photo_url" alt="" />
+    <p>{{ account.user?.username }}</p>
+  </div>
+</div>

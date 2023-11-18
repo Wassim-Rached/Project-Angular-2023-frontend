@@ -1,42 +1,66 @@
 <div>
-    <form class="container" [formGroup]="Form" (ngSubmit)="onSubmit()">
-        <div>
-            <select name="activityId" id="activityId" formControlName="activityId">
-                <option *ngFor="let activity of activities" [value]="activity.id">{{activity.title}}</option>
-            </select>
-           
-                <button type="submit" class="btn btn-primary m-2 "> Submit</button>
-            
-        </div>
-
-        </form>
+  <form class="container" [formGroup]="Form" (ngSubmit)="onSubmit()">
     <div>
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Photo</th>
-                <th scope="col">Name</th>
-                <th scope="col">email</th>
-                <th scope="col">Paid</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let registration of  registrations">
-                <th scope="row"> <img [src]="registration.account?.photo_url" alt="" width="40" height="40"></th>
-                <td>{{registration.account?.user?.username}}</td>   
-                <td>
-                  {{registration.account?.user?.email}}
-                  
-                </td>
-                <td>
-                   <button class="btn btn-primary " [disabled]="registration.is_payed" (click)="onPay(registration.id!)">Paid</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger" [disabled]="registration.status=='Accepted'" (click)="onAccept(registration.id!)">Accepted</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <select
+        class="form-select"
+        name="activityId"
+        id="activityId"
+        formControlName="activityId"
+      >
+        <option *ngFor="let activity of activities" [value]="activity.id">
+          {{ activity.title }}
+        </option>
+      </select>
+      <div class="row p-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
     </div>
+  </form>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Photo</th>
+          <th scope="col">Name</th>
+          <th scope="col">email</th>
+          <th scope="col">Paid</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let registration of registrations">
+          <th scope="row">
+            <img
+              [src]="registration.account?.photo_url"
+              alt=""
+              width="40"
+              height="40"
+            />
+          </th>
+          <td>{{ registration.account?.user?.username }}</td>
+          <td>
+            {{ registration.account?.user?.email }}
+          </td>
+          <td>
+            <button
+              class="btn btn-primary"
+              [disabled]="registration.is_payed"
+              (click)="onPay(registration.id!)"
+            >
+              Paid
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger"
+              [disabled]="registration.status == 'Accepted'"
+              (click)="onAccept(registration.id!)"
+            >
+              Accepted
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

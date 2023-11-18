@@ -1,9 +1,9 @@
 <app-profile *ngIf="account" [account]="account"></app-profile>
-<div *ngIf="isOwner">
+<div class="container" *ngIf="isOwner">
   <div>
-    <button routerLink="change-password">change Password</button>
+    <app-change-password></app-change-password>
   </div>
-  <div>
-    <button (click)="onDelete()">Delete Account</button>
+  <div class="mt-4">
+    <button class="btn btn-danger" (click)="onDelete()">Delete Account</button>
   </div>
 </div>

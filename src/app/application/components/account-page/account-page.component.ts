@@ -38,6 +38,12 @@ export class AccountPageComponent implements OnInit {
   }
 
   onDelete() {
+    const confirmDelete = confirm(
+      'Are you sure you want to delete your account?'
+    );
+
+    if (!confirmDelete) return;
+
     this.accountService.deleteAccountById(this.account.id!).subscribe({
       next: (data) => {
         this.authService.logout();

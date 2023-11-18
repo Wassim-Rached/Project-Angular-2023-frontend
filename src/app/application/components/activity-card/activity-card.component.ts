@@ -10,7 +10,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ActivityCardComponent implements OnInit {
   @Input() activity!: Activity;
-  public isAuthenticated!: boolean;
+  isAuthenticated!: boolean;
+  didLike: boolean = false;
 
   constructor(
     private activityService: ActivityService,
@@ -18,19 +19,25 @@ export class ActivityCardComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
+    if (this.isAuthenticated) {
+      this.activityService.didLike(this.activity.id!).subscribe({
+        next: (response) => {
+          this.didLike = response.did_like;
+        },
+      });
+    }
   }
 
   public onLike() {
+    if (this.didLike) return;
     if (!this.isAuthenticated) return;
 
     this.activityService.setLiked(this.activity.id!).subscribe({
-      next: (res) => {
-        console.log(res);
+      next: (response) => {
         this.activity.number_of_likes! += 1;
+        this.didLike = true;
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 }
