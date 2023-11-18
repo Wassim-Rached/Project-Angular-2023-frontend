@@ -93,7 +93,7 @@ export class ActivityService {
     );
   }
 
-  public toggleLike(activityId: string): Observable<Status> {
-    return this.http.post<Status>(this.URL + activityId, {});
+  public setLiked(activityId: string): Observable<Status> {
+    return this.http.post<Status>(this.URL + activityId + '/like/', {});
   }
 }
