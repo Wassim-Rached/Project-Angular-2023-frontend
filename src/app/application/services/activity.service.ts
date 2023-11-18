@@ -50,8 +50,8 @@ export class ActivityService {
 
   public getActivityRegistrations(
     activityId: string
-  ): Observable<Registration> {
-    return this.http.get<Registration>(
+  ): Observable<Registration[]> {
+    return this.http.get<Registration[]>(
       this.URL + activityId + '/registrations'
     );
   }
@@ -68,7 +68,7 @@ export class ActivityService {
 
   public acceptRegistration(registerationId: string): Observable<Status> {
     return this.http.post<Status>(
-      this.URL + registerationId + '/registrations/accept',
+      this.URL + 'registrations/' + registerationId + '/accept/',
       {}
     );
   }
@@ -82,7 +82,7 @@ export class ActivityService {
 
   public payRegistration(registerationId: string): Observable<Status> {
     return this.http.post<Status>(
-      this.URL + registerationId + '/registrations/pay',
+      this.URL + registerationId + '/registrations/pay ',
       {}
     );
   }
