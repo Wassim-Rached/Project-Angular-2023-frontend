@@ -6,6 +6,7 @@ import { Categorie } from '../classes/categorie';
 import { Registration } from '../classes/registration';
 import { Status } from '../classes/join-us';
 import { environment } from '../environments';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +14,14 @@ import { environment } from '../environments';
 export class ActivityService {
   private readonly URL = environment['BASE_API_URL'] + 'activities/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   public getAllActivities(params?: HttpParams): Observable<Activity[]> {
     return this.http.get<Activity[]>(this.URL, { params: params });
   }
 
   public getActivityById(activityId: string): Observable<Activity> {
-    return this.http.get<Activity>(this.URL + 'activity/' + activityId);
+    return this.http.get<Activity>(this.URL + activityId);
   }
 
   public createActivity(activity: Activity): Observable<Activity> {
@@ -95,5 +96,11 @@ export class ActivityService {
 
   public setLiked(activityId: string): Observable<Status> {
     return this.http.post<Status>(this.URL + activityId + '/like/', {});
+  }
+
+  public redirectAfterUpdate() {
+    this.router.navigate([
+      environment['DEFAULT_REDIRECT_AFTER_ACTIVITY_UPDATE'],
+    ]);
   }
 }
