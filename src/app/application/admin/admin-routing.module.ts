@@ -8,6 +8,7 @@ import { ActivityListAdminComponent } from './components/activity-list-admin/act
 import { ActivityCreateAdminComponent } from './components/activity-create-admin/activity-create-admin.component';
 import { RegistrationManagmentComponent } from './components/registration-managment/registration-managment.component';
 import { RegistrationsListComponent } from './components/registrations-list/registrations-list.component';
+import { ActivityModifyComponent } from './components/activity-modify/activity-modify.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,11 @@ const routes: Routes = [
             path: 'list',
             title: 'activity list',
             component: ActivityListAdminComponent,
+          },
+          {
+            path: 'list/:activityId',
+            title: 'update activity',
+            component: ActivityModifyComponent,
           },
           {
             path: 'create',
