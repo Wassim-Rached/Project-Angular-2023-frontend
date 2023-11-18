@@ -18,6 +18,7 @@ import { ActivityCreateAdminComponent } from './components/activity-create-admin
 import { MaterialModule } from 'src/app/material.module';
 import { CategoryFormaterPipe } from '../pipes/category-formater.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivityModifyComponent } from './components/activity-modify/activity-modify.component';
 @NgModule({
   declarations: [
     // dashboard component
@@ -34,6 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ActivityListAdminComponent,
     ActivityCreateAdminComponent,
     CategoryFormaterPipe,
+    ActivityModifyComponent,
   ],
   imports: [
     CommonModule,
