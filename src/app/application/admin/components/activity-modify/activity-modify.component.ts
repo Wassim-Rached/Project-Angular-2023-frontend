@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Activity } from 'src/app/application/classes/activity';
+import { Categorie } from 'src/app/application/classes/categorie';
 import { ActivityService } from 'src/app/application/services/activity.service';
 
 @Component({
@@ -13,6 +14,8 @@ export class ActivityModifyComponent implements OnInit {
   form!: FormGroup;
   activity!: Activity;
   activityId!: string;
+  allCategories: Categorie[] = [];
+
   constructor(
     private fb: FormBuilder,
     private activityService: ActivityService,
@@ -26,6 +29,15 @@ export class ActivityModifyComponent implements OnInit {
       next: (activity) => {
         this.activity = activity;
         this.initForm();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+
+    this.activityService.getAllCategories().subscribe({
+      next: (data) => {
+        this.allCategories = data;
       },
       error: (error) => {
         console.log(error);
@@ -46,6 +58,7 @@ export class ActivityModifyComponent implements OnInit {
       maxParticipants: [this.activity.maxParticipants],
       date: [this.activity.date],
       description: [this.activity.description],
+      categories: [this.activity.categories],
     });
   }
 
@@ -62,5 +75,9 @@ export class ActivityModifyComponent implements OnInit {
         alert('activity not updated !! try again later');
       },
     });
+  }
+
+  public get isFree() {
+    return this.form.get('is_free')?.value ?? false;
   }
 }

@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 
+// different modules
+import { NgSelectModule } from '@ng-select/ng-select';
+
 // dashboard component
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 // register components
@@ -42,6 +45,7 @@ import { ActivityModifyComponent } from './components/activity-modify/activity-m
     MaterialModule,
     AdminRoutingModule,
     ReactiveFormsModule,
+    NgSelectModule,
   ],
 })
 export class AdminModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Categorie } from 'src/app/application/classes/categorie';
 import { ActivityService } from 'src/app/application/services/activity.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { ActivityService } from 'src/app/application/services/activity.service';
 })
 export class ActivityCreateAdminComponent implements OnInit {
   form!: FormGroup;
+  allCategories: Categorie[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -19,13 +21,23 @@ export class ActivityCreateAdminComponent implements OnInit {
     this.form = this.fb.nonNullable.group({
       title: [''],
       photo: [null],
-      isFree: [true],
-      price: [''],
+      is_free: [true],
+      price: [0],
       maxParticipants: [''],
       date: [''],
       description: [''],
+      categories: [''],
+    });
+    this.activityService.getAllCategories().subscribe({
+      next: (data) => {
+        this.allCategories = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
     });
   }
+
   resetForm() {
     this.form.reset();
   }
@@ -43,5 +55,9 @@ export class ActivityCreateAdminComponent implements OnInit {
         alert('activity not created !! try again later');
       },
     });
+  }
+
+  public get isFree() {
+    return this.form.get('is_free')?.value;
   }
 }
