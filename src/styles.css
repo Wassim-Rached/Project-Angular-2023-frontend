@@ -63,3 +63,18 @@ a:hover {
 .non-navheight {
   height: calc(100vh - 64px);
 }
+
+.profile-img-container {
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.profile-img-container img {
+  width: 100%;
+}
