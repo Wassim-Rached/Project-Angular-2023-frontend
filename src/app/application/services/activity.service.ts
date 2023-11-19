@@ -57,7 +57,7 @@ export class ActivityService {
   }
 
   public registerToActivity(activityId: string) {
-    return this.http.post(this.URL + '/registrations', {
+    return this.http.post(this.URL + 'registrations/', {
       activity: activityId,
     });
   }
