@@ -1,26 +1,27 @@
+// different modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
-
-// different modules
 import { NgSelectModule } from '@ng-select/ng-select';
 
 // dashboard component
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 // register components
 import { RegistrationsListComponent } from './components/registrations-list/registrations-list.component';
 import { RegistrationManagmentComponent } from './components/registration-managment/registration-managment.component';
 import { RegistrationDetailsComponent } from './components/registration-details/registration-details.component';
+
 // activity components
 import { ActivityManagmentComponent } from './components/activity-managment/activity-managment.component';
-import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
-import { SideBarComponent } from './components/side-bar/side-bar.component';
-import { GreetingAdminComponent } from './components/greeting-admin/greeting-admin.component';
 import { ActivityListAdminComponent } from './components/activity-list-admin/activity-list-admin.component';
 import { ActivityCreateAdminComponent } from './components/activity-create-admin/activity-create-admin.component';
+import { ActivityModifyComponent } from './components/activity-modify/activity-modify.component';
+
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { GreetingAdminComponent } from './components/greeting-admin/greeting-admin.component';
 import { MaterialModule } from 'src/app/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivityModifyComponent } from './components/activity-modify/activity-modify.component';
 import { UserNameFormaterPipe } from '../pipes/user-name-formater.pipe';
 @NgModule({
   declarations: [
@@ -31,7 +32,6 @@ import { UserNameFormaterPipe } from '../pipes/user-name-formater.pipe';
     RegistrationManagmentComponent,
     RegistrationDetailsComponent,
     // activity based components
-    ActivityDetailsComponent,
     ActivityManagmentComponent,
     SideBarComponent,
     GreetingAdminComponent,

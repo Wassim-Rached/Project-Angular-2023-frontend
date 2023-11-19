@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { GreetingAdminComponent } from './components/greeting-admin/greeting-admin.component';
 import { ActivityManagmentComponent } from './components/activity-managment/activity-managment.component';
-import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 import { ActivityListAdminComponent } from './components/activity-list-admin/activity-list-admin.component';
 import { ActivityCreateAdminComponent } from './components/activity-create-admin/activity-create-admin.component';
 import { RegistrationManagmentComponent } from './components/registration-managment/registration-managment.component';
@@ -38,11 +37,6 @@ const routes: Routes = [
             path: 'create',
             title: 'activity create',
             component: ActivityCreateAdminComponent,
-          },
-          {
-            path: ':activityId',
-            title: 'activity details',
-            component: ActivityDetailsComponent,
           },
         ],
       },
