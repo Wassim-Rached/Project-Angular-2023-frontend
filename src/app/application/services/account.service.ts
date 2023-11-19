@@ -25,7 +25,14 @@ export class AccountService {
   public deleteAccountById(accountId: string) {
     return this.http.delete(this.URL + accountId);
   }
-
+  public changePassword(
+    accountId: string,
+    old_password: string,
+    new_password: string
+  ): Observable<any> {
+    const body = { old_password, new_password };
+    return this.http.post(this.URL + accountId + '/change_password/', body);
+  }
   public getAllJoiningForms(): Observable<JoinUs[]> {
     return this.http.get<JoinUs[]>(this.URL + 'join_us');
   }
