@@ -21,6 +21,7 @@ import { ActivityCreateAdminComponent } from './components/activity-create-admin
 import { MaterialModule } from 'src/app/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivityModifyComponent } from './components/activity-modify/activity-modify.component';
+import { UserNameFormaterPipe } from '../pipes/user-name-formater.pipe';
 @NgModule({
   declarations: [
     // dashboard component
@@ -37,6 +38,8 @@ import { ActivityModifyComponent } from './components/activity-modify/activity-m
     ActivityListAdminComponent,
     ActivityCreateAdminComponent,
     ActivityModifyComponent,
+    //pipes
+    UserNameFormaterPipe,
   ],
   imports: [
     CommonModule,
