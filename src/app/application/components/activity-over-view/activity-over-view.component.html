@@ -1,7 +1,48 @@
 <div class="container">
-  {{ activity | json }}
-  <div *ngFor="let account of activity?.registred_accounts">
-    <img [src]="account.photo_url" alt="" />
-    <p>{{ account.user?.username }}</p>
+
+  <div *ngIf="!activity">
+   activity not found ! 
   </div>
+<div class="container"  *ngIf="activity">
+<div class="row">
+  <div class="col-8">
+    <div>
+      <img [src]="activity.photo_url" alt="" width="400">
+         <h1>{{ activity.title }}</h1>
+         
+    </div>
+    <div>
+      <p><strong>Categories:</strong></p>
+       <div class="badge bg-info m-1" *ngFor="let category of activity.categories">
+        {{category.name}}
+        </div>
+        <p><strong>Number of likes:</strong></p>
+        <div class="badge bg-danger">
+          {{activity.number_of_likes}}
+        </div>
+    </div>
+    <div>
+      <p><strong>Description:</strong></p>
+      <p>{{ activity.description }}</p>
+    </div>
+   <div>
+    <button class="btn btn-success  btn-lg " (click)="onRegister(activity.id!)">Register now</button>
+   </div>
+  </div>
+<div class="col-4">
+  <ul>
+    <li *ngFor="let account of activity.registred_accounts">
+      <span
+      [routerLink]="['profile', account.id]"
+      class="profile-img-container"
+    
+      ><img [src]="account.photo_url" [alt]="account.user?.username"
+    /></span>
+    </li>
+  </ul>
+</div>
+{{activity | json}}
+</div>
+  
+</div>
 </div>

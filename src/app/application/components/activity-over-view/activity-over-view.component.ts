@@ -21,10 +21,19 @@ export class ActivityOverViewComponent implements OnInit {
     this.activityService.getActivityById(activityId).subscribe({
       next: (activity) => {
         this.activity = activity;
-        console.log(activity);
       },
       error: (error) => {
         this.activity = undefined;
+      },
+    });
+  }
+  onRegister(activityId: string) {
+    this.activityService.registerToActivity(activityId).subscribe({
+      next: (res) => {
+        alert('Registration done !');
+      },
+      error: (error) => {
+        console.log('Error', error);
       },
     });
   }
