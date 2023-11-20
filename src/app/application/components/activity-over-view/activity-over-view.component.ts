@@ -9,6 +9,8 @@ import { Activity } from '../../classes/activity';
   styleUrls: ['./activity-over-view.component.css'],
 })
 export class ActivityOverViewComponent implements OnInit {
+  isAuthenticated: any;
+  didLike: boolean = false;
   activity?: Activity;
 
   constructor(
@@ -37,4 +39,6 @@ export class ActivityOverViewComponent implements OnInit {
       },
     });
   }
+
+  onLike() {}
 }

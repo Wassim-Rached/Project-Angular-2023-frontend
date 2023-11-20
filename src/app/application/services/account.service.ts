@@ -14,6 +14,17 @@ export class AccountService {
 
   constructor(private http: HttpClient) {}
 
+  public createAccount(account: Account): Observable<Account> {
+    return this.http.post<Account>(this.URL, account);
+  }
+
+  public updateAccount(
+    accountId: string,
+    account: Account
+  ): Observable<Account> {
+    return this.http.patch<Account>(this.URL + accountId, account);
+  }
+
   public getAccountById(accountId: string): Observable<Account> {
     return this.http.get<Account>(this.URL + accountId);
   }

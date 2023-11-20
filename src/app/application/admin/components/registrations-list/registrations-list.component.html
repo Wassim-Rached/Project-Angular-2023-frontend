@@ -37,7 +37,9 @@
               height="40"
             />
           </th>
-          <td>{{ registration.account?.user?.username }}</td>
+          <td>
+            {{ registration.account?.user?.username! | userNameFormater }}
+          </td>
           <td>
             {{ registration.account?.user?.email }}
           </td>

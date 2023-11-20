@@ -1,26 +1,28 @@
+// diffrent modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+// custom modules
+import { MaterialModule } from './material.module';
+import { AuthInterceptor } from './application/services/auth-interceptor.service';
 // application based components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './application/components/home/home.component';
-import { AboutUsComponent } from './application/components/about-us/about-us.component';
-import { JoinUsComponent } from './application/components/join-us/join-us.component';
-import { DevTeamComponent } from './application/components/dev-team/dev-team.component';
 import { NavbarComponent } from './application/components/navbar/navbar.component';
 import { FooterComponent } from './application/components/footer/footer.component';
+import { JoinUsComponent } from './application/components/join-us/join-us.component';
+// static components
 import { GreetingComponent } from './application/components/greeting/greeting.component';
-import { HotActivitiesComponent } from './application/components/hot-activities/hot-activities.component';
+import { AboutUsComponent } from './application/components/about-us/about-us.component';
+import { DevTeamComponent } from './application/components/dev-team/dev-team.component';
 // activity based components
 import { ActivityOverViewComponent } from './application/components/activity-over-view/activity-over-view.component';
 import { ActivityListComponent } from './application/components/activity-list/activity-list.component';
-import { ActivitiesPageComponent } from './application/components/activities-page/activities-page.component';
 import { ActivityCardComponent } from './application/components/activity-card/activity-card.component';
+import { HotActivitiesComponent } from './application/components/hot-activities/hot-activities.component';
 // user based components
 import { ProfileComponent } from './application/components/profile/profile.component';
 import { AccountPageComponent } from './application/components/account-page/account-page.component';
@@ -29,8 +31,7 @@ import { SignInComponent } from './application/components/sign-in/sign-in.compon
 import { SignUpComponent } from './application/components/sign-up/sign-up.component';
 // error based components
 import { Error404Component } from './application/components/error404/error404.component';
-import { MaterialModule } from './material.module';
-import { AuthInterceptor } from './application/services/auth-interceptor.service';
+import { SharedModuleModule } from './shared-module/shared-module.module';
 
 @NgModule({
   declarations: [
@@ -39,15 +40,16 @@ import { AuthInterceptor } from './application/services/auth-interceptor.service
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    AboutUsComponent,
     JoinUsComponent,
-    DevTeamComponent,
+    // static components
     GreetingComponent,
-    HotActivitiesComponent,
+    AboutUsComponent,
+    DevTeamComponent,
     // activity based components
     ActivityListComponent,
     ActivityOverViewComponent,
-    ActivitiesPageComponent,
+    ActivityCardComponent,
+    HotActivitiesComponent,
     // user based components
     AccountPageComponent,
     ChangePasswordComponent,
@@ -56,7 +58,6 @@ import { AuthInterceptor } from './application/services/auth-interceptor.service
     SignUpComponent,
     // error based components
     Error404Component,
-    ActivityCardComponent,
   ],
 
   imports: [
@@ -65,7 +66,9 @@ import { AuthInterceptor } from './application/services/auth-interceptor.service
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    // custom modules
     MaterialModule,
+    SharedModuleModule,
   ],
   providers: [
     // other services

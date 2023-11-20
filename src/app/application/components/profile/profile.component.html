@@ -7,6 +7,6 @@
     <img [src]="account.photo_url" [alt]="account.user?.username" />
   </div>
   <p class="fs-3 p-3">
-    {{ account.user?.username }}
+    {{ account.user?.username! | userNameFormater }}
   </p>
 </div>

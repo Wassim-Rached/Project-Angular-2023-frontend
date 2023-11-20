@@ -45,7 +45,12 @@ const routes: Routes = [
     canActivate: [isUnauthenticatedGuard],
     component: SignInComponent,
   },
-  { path: 'signup', title: 'signup', component: SignUpComponent },
+  {
+    path: 'signup',
+    title: 'signup',
+    component: SignUpComponent,
+    canActivate: [isUnauthenticatedGuard],
+  },
   { path: '**', title: 'NOT FOUND 404! ', component: Error404Component },
 ];
 
