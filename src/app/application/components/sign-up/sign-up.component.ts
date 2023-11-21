@@ -48,46 +48,46 @@ export class SignUpComponent implements OnInit {
     this.errorDescription = '';
 
     // create the account
-    // this.accountService.createAccount(account).subscribe({
-    //   next: (response) => {
-    //     // sign in the user
-    //     const id = response.id;
-    //     this.authService.signin(data.username, data.password).subscribe({
-    //       next: (response) => {
-    //         // authentificate the user
-    //         this.authService.authentificate(response);
-    //         // update the photo
-    //         this.accountService
-    //           .updateAccount(id!, formData as Account)
-    //           .subscribe({
-    //             next: (response) => {
-    //               this.isSubmitting = false;
-    //               this.Form.reset();
+    this.accountService.createAccount(account).subscribe({
+      next: (response) => {
+        // sign in the user
+        const id = response.id;
+        this.authService.signin(data.username, data.password).subscribe({
+          next: (response) => {
+            // authentificate the user
+            this.authService.authentificate(response);
+            this.authService.redirectAfterSignin();
+            // update the photo
+            // this.accountService
+            //   .updateAccount(id!, formData as Account)
+            //   .subscribe({
+            //     next: (response) => {
+            //       this.isSubmitting = false;
+            //       this.Form.reset();
 
-    //               this.authService.redirectAfterSignin();
-    //             },
-    //           });
-    //       },
-    //     });
-    //   },
-    //   error: (error) => {
-    //     // enable the submit button
-    //     this.isSubmitting = false;
+            //     },
+            //   });
+          },
+        });
+      },
+      error: (error) => {
+        // enable the submit button
+        this.isSubmitting = false;
 
-    //     // handle the errors
-    //     if (error.status === 400) {
-    //       // for validation errors
-    //       this.handleFormErrors(error.error);
-    //       this.errorDescription = '';
-    //     } else if (error.status === 401) {
-    //       // for unauthorized errors
-    //       this.errorDescription = 'Invalid credentials';
-    //     } else {
-    //       // for unexpected errors
-    //       this.errorDescription = 'Unexpected error';
-    //     }
-    //   },
-    // });
+        // handle the errors
+        if (error.status === 400) {
+          // for validation errors
+          this.handleFormErrors(error.error);
+          this.errorDescription = '';
+        } else if (error.status === 401) {
+          // for unauthorized errors
+          this.errorDescription = 'Invalid credentials';
+        } else {
+          // for unexpected errors
+          this.errorDescription = 'Unexpected error';
+        }
+      },
+    });
   }
 
   private handleFormErrors(errors: any): void {
