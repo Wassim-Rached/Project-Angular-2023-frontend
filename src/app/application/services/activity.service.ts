@@ -56,8 +56,8 @@ export class ActivityService {
     );
   }
 
-  public registerToActivity(activityId: string) {
-    return this.http.post(this.URL + 'registrations/', {
+  public registerToActivity(activityId: string): Observable<Registration> {
+    return this.http.post<Registration>(this.URL + 'registrations/', {
       activity: activityId,
     });
   }
