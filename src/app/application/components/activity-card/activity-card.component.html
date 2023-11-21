@@ -21,9 +21,9 @@
     <button
       (click)="onLike()"
       mat-button
-      [disabled]="!isAuthenticated || didLike"
+      [disabled]="!isAuthenticated || didLike || isLoadingLike"
     >
-      LIKE
+      {{ isLoadingLike ? "loading..." : "LIKE" }}
       <mat-icon [ngClass]="{ 'been-liked': didLike }">favorite</mat-icon>
     </button>
     <span class="ms-auto badge bg-danger"

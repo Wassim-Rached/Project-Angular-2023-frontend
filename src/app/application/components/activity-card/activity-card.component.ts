@@ -12,6 +12,7 @@ export class ActivityCardComponent implements OnInit {
   @Input() activity!: Activity;
   isAuthenticated!: boolean;
   didLike: boolean = false;
+  isLoadingLike: boolean = false;
 
   constructor(
     private activityService: ActivityService,
@@ -32,12 +33,16 @@ export class ActivityCardComponent implements OnInit {
     if (this.didLike) return;
     if (!this.isAuthenticated) return;
 
+    this.isLoadingLike = true;
     this.activityService.setLiked(this.activity.id!).subscribe({
       next: (response) => {
         this.activity.number_of_likes! += 1;
         this.didLike = true;
+        this.isLoadingLike = false;
       },
-      error: (error) => {},
+      error: (error) => {
+        this.isLoadingLike = false;
+      },
     });
   }
 }
