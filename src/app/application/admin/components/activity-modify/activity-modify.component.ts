@@ -64,7 +64,23 @@ export class ActivityModifyComponent implements OnInit {
 
   onSubmit() {
     const data = this.form.value;
+
+    // if (data.photo) {
+    //   const photoFormData = new FormData();
+    //   photoFormData.append('photo', data.photo);
+    //   // update the photo
+    //   this.activityService
+    //     .updateActivity(this.activityId, photoFormData as Activity)
+    //     .subscribe({
+    //       next: (data) => {
+    //         console.log({ photo: data });
+    //       },
+    //     });
+    // }
+
+    // delete the photo
     delete data.photo;
+
     this.activityService.updateActivity(this.activityId, data).subscribe({
       next: (data) => {
         this.resetForm();
@@ -80,4 +96,13 @@ export class ActivityModifyComponent implements OnInit {
   public get isFree() {
     return this.form.get('is_free')?.value ?? false;
   }
+
+  // onFileChange(event: any) {
+  //   const file = event.target.files[0];
+  //   this.form.patchValue({
+  //     photo: file,
+  //   });
+  //   this.form.get('photo')?.updateValueAndValidity();
+  //   console.log(this.form.get('photo'));
+  // }
 }

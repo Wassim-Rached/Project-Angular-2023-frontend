@@ -30,15 +30,6 @@
     ></textarea>
   </div>
   <div>
-    <label for="photo" class="form-label">Photo:</label>
-    <input
-      type="file"
-      id="photo"
-      formControlName="photo"
-      class="form-control"
-    />
-  </div>
-  <div>
     <label for="is_free" class="form-label">Is Free:</label>
     <input
       type="checkbox"
@@ -66,9 +57,17 @@
     />
   </div>
   <div>
+    <label for="photo" class="form-label">Photo:</label>
+    <input
+      type="file"
+      id="photo"
+      formControlName="photo"
+      class="form-control"
+    />
+  </div>
+  <div>
     <label class="form-label" for="date">Date:</label>
     <input class="form-control" type="date" id="date" formControlName="date" />
-
-    <button type="submit" class="btn btn-primary mt-3">Modify</button>
   </div>
+  <button type="submit" class="btn btn-primary mt-3">Modify</button>
 </form>
