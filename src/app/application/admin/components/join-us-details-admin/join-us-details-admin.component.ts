@@ -10,15 +10,35 @@ import { AccountService } from 'src/app/application/services/account.service';
 })
 export class JoinUsDetailsAdminComponent implements OnInit {
   joinForm?: JoinUs;
+  joinId?: string;
   constructor(
     private accountService: AccountService,
     private activatedRoute: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    const joinId = this.activatedRoute.snapshot.params['id'];
-    this.accountService.getJoinFormById(joinId).subscribe({
+    this.joinId = this.activatedRoute.snapshot.params['joinUsId'];
+    this.accountService.getJoinFormById(this.joinId!).subscribe({
       next: (joinForm) => {
         this.joinForm = joinForm;
+      },
+    });
+  }
+
+  Accept() {
+    this.accountService.acceptJoiningForm(this.joinId!).subscribe({
+      next: (status) => {
+        if (this.joinForm) {
+          this.joinForm.status = 'accepted';
+        }
+      },
+    });
+  }
+  Reject() {
+    this.accountService.rejectJoiningForm(this.joinId!).subscribe({
+      next: (status) => {
+        if (this.joinForm) {
+          this.joinForm.status = 'rejected';
+        }
       },
     });
   }
