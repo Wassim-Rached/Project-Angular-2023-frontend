@@ -72,7 +72,7 @@
             *ngFor="let account of activity.registred_accounts"
           >
             <span
-              [routerLink]="['profile', account.id]"
+              [routerLink]="['/profile', account.id]"
               class="profile-img-container"
             >
               <img [src]="account.photo_url" [alt]="account.user?.username" />
