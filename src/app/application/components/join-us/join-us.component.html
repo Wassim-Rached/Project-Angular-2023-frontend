@@ -7,8 +7,8 @@
     <form *ngIf="!join" [formGroup]="Form" class="container " (ngSubmit)="JoinClub()">
         <div>
             <label for="find" class="form-label ">How did you Find Us! </label>
-            <textarea name="find" id="" cols="30" rows="5" class="form-control " formControlName="findUs"></textarea>
-            <div *ngIf="haveRequiredError('findUs')" class=" alert alert-danger ">
+            <textarea name="find" id="" cols="30" rows="5" class="form-control " formControlName="how_found_us"></textarea>
+            <div *ngIf="haveRequiredError('how_found_us')" class=" alert alert-danger ">
                  this field can't be blank
             </div>
         </div>
@@ -30,8 +30,8 @@
         </div>
 
         <div>
-            <label for="">Recieve Emails </label>
-            <input type="checkbox"  formControlName="recieveEmails">
+            <label for="" class="form-label ">Recieve Emails </label>
+            <input type="checkbox"  formControlName="receive_emails" >
         </div>
         <button type="submit" class="btn btn-success btn-lg" [disabled]="Form.invalid">Join Now</button>
     </form>
