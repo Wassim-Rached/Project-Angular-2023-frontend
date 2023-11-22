@@ -25,10 +25,10 @@ export class JoinUsComponent implements OnInit {
     });
 
     this.Form = this.fb.nonNullable.group({
-      findUs: ['', Validators.required],
+      how_found_us: ['', Validators.required],
       goals: ['', Validators.required],
       reasons: ['', Validators.required],
-      recieveEmails: [true],
+      receive_emails: [true],
     });
   }
   public haveRequiredError(field: string) {
@@ -40,7 +40,10 @@ export class JoinUsComponent implements OnInit {
 
   public JoinClub() {
     this.accountService.joinClub(this.Form.value).subscribe({
-      next: (data) => alert('Successfully joined club'),
+      next: (data) => {
+        console.log(data);
+        alert('Successfully joined club');
+      },
       error: () => alert('Failed to join club'),
     });
   }
