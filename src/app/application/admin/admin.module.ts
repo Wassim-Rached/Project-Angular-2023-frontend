@@ -21,6 +21,9 @@ import { ActivityModifyComponent } from './components/activity-modify/activity-m
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { GreetingAdminComponent } from './components/greeting-admin/greeting-admin.component';
 import { SharedModuleModule } from 'src/app/shared-module/shared-module.module';
+import { JoiningListAdminComponent } from './components/joining-list-admin/joining-list-admin.component';
+import { JoinUsMangmentComponent } from './components/join-us-mangment/join-us-mangment.component';
+import { JoinUsDetailsAdminComponent } from './components/join-us-details-admin/join-us-details-admin.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { SharedModuleModule } from 'src/app/shared-module/shared-module.module';
     // other components
     SideBarComponent,
     GreetingAdminComponent,
+    JoiningListAdminComponent,
+    JoinUsMangmentComponent,
+    JoinUsDetailsAdminComponent,
   ],
   imports: [
     CommonModule,

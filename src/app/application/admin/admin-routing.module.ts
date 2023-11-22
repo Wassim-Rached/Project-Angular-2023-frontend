@@ -8,6 +8,9 @@ import { ActivityCreateAdminComponent } from './components/activity-create-admin
 import { RegistrationManagmentComponent } from './components/registration-managment/registration-managment.component';
 import { RegistrationsListComponent } from './components/registrations-list/registrations-list.component';
 import { ActivityModifyComponent } from './components/activity-modify/activity-modify.component';
+import { JoiningListAdminComponent } from './components/joining-list-admin/joining-list-admin.component';
+import { JoinUsMangmentComponent } from './components/join-us-mangment/join-us-mangment.component';
+import { JoinUsDetailsAdminComponent } from './components/join-us-details-admin/join-us-details-admin.component';
 
 const routes: Routes = [
   {
@@ -50,6 +53,24 @@ const routes: Routes = [
             path: 'list',
             title: 'registration list',
             component: RegistrationsListComponent,
+          },
+        ],
+      },
+      {
+        path: 'join-us',
+        title: 'joining registrations',
+        component: JoinUsMangmentComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            title: 'joining registration form',
+            component: JoiningListAdminComponent,
+          },
+          {
+            path: 'list/:joinUsId',
+            title: 'details of registrations',
+            component: JoinUsDetailsAdminComponent,
           },
         ],
       },
