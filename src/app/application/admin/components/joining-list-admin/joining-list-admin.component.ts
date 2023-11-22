@@ -14,6 +14,7 @@ export class JoiningListAdminComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.getAllJoiningForms().subscribe({
       next: (data) => {
+        console.log(data);
         this.joiningForms = data;
       },
     });
