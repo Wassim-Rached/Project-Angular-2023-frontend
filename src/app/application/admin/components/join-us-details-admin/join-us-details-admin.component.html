@@ -1,0 +1,35 @@
+<div class="container">
+
+    <div>
+        <img [src]="joinForm?.account?.photo_url" alt="">
+</div>
+<div>
+    <span>Username : </span>
+    <p>  
+    {{joinForm?.account?.user?.username}} 
+     </p>
+</div>
+<div> 
+    <span>How {{joinForm?.account?.user?.first_name}} found us :</span> 
+    <p> {{joinForm?.how_found_us}}</p>
+    
+</div>
+<div>
+   <span>Goals : </span>
+    <p>{{joinForm?.goals}}</p>
+</div>
+<div>
+    <span>Reasons : </span>
+    <p>{{joinForm?.reasons}}</p>
+</div>
+
+<div>
+    <span>Status : </span>
+    <p>{{joinForm?.status}}</p>
+</div>
+
+</div>
+
+
+<button (click)="Accept()" class="btn btn-success m-1  " [disabled]="joinForm?.status=='accepted'" >Accept</button>
+<button (click)="Reject()" class="btn btn-danger m-1 " [disabled]="joinForm?.status=='rejected'">Reject</button>

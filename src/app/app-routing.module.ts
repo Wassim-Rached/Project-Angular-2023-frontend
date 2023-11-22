@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './application/components/home/home.component';
 import { ActivityListComponent } from './application/components/activity-list/activity-list.component';
 import { ActivityOverViewComponent } from './application/components/activity-over-view/activity-over-view.component';
-import { ActivitiesPageComponent } from './application/components/activities-page/activities-page.component';
 import { Error404Component } from './application/components/error404/error404.component';
 import { AccountPageComponent } from './application/components/account-page/account-page.component';
 import { SignInComponent } from './application/components/sign-in/sign-in.component';
@@ -25,20 +24,14 @@ const routes: Routes = [
   {
     path: 'activities',
     title: 'activities',
-    component: ActivitiesPageComponent,
-    children: [
-      {
-        path: '',
-        title: 'activities',
-        component: ActivityListComponent,
-      },
-      {
-        path: ':id',
-        title: 'activity',
-        component: ActivityOverViewComponent,
-      },
-    ],
+    component: ActivityListComponent,
   },
+  {
+    path: 'activities/:id',
+    title: 'activity',
+    component: ActivityOverViewComponent,
+  },
+
   { path: 'join-us', title: 'join us', component: JoinUsComponent },
   {
     path: 'profile/:profileId',
@@ -52,7 +45,12 @@ const routes: Routes = [
     canActivate: [isUnauthenticatedGuard],
     component: SignInComponent,
   },
-  { path: 'signup', title: 'signup', component: SignUpComponent },
+  {
+    path: 'signup',
+    title: 'signup',
+    component: SignUpComponent,
+    canActivate: [isUnauthenticatedGuard],
+  },
   { path: '**', title: 'NOT FOUND 404! ', component: Error404Component },
 ];
 

@@ -1,4 +1,5 @@
-<form [formGroup]="form" class="container" (ngSubmit)="onSubmit()">
+<div *ngIf="!form">wait lil nigga</div>
+<form *ngIf="form" [formGroup]="form" class="container" (ngSubmit)="onSubmit()">
   <div>
     <label for="title" class="form-label">Title:</label>
     <input
@@ -23,7 +24,6 @@
   <div>
     <label for="description" class="form-label">Description:</label>
     <textarea
-      rows="5"
       id="description"
       formControlName="description"
       class="form-control"
@@ -56,7 +56,7 @@
       formControlName="maxParticipants"
     />
   </div>
-  <div>
+  <!-- <div>
     <label for="photo" class="form-label">Photo:</label>
     <input
       type="file"
@@ -65,11 +65,10 @@
       formControlName="photo"
       class="form-control"
     />
-  </div>
+  </div> -->
   <div>
     <label class="form-label" for="date">Date:</label>
     <input class="form-control" type="date" id="date" formControlName="date" />
-
-    <button type="submit" class="btn btn-primary mt-3">create</button>
   </div>
+  <button type="submit" class="btn btn-primary mt-3">Modify</button>
 </form>

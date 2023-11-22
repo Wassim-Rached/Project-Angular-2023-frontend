@@ -1,1 +1,155 @@
-<p>sign-up works!</p>
+<div class="container mt-5">
+  <h1 class="text-center fs-1 highlight">Sign in</h1>
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()" class="form-signin">
+    <div
+      class="text-center text-danger d-flex align-items-center justify-content-center h-30px"
+    >
+      <span *ngIf="errorDescription">
+        {{ errorDescription }}
+      </span>
+    </div>
+
+    <div>
+      <label class="form-label" for="username">username</label>
+      <input
+        type="text"
+        id="username"
+        [ngClass]="{
+          'is-invalid': fieldHasError('username'),
+          'form-control': true
+        }"
+        formControlName="username"
+        placeholder="username"
+      />
+      <div *ngIf="fieldHasError('username')" class="invalid-feedback">
+        {{ getFieldErrorMessage("username") }}
+      </div>
+    </div>
+
+    <div>
+      <label class="form-label" for="email">email</label>
+      <input
+        type="email"
+        id="email"
+        [ngClass]="{
+          'is-invalid': fieldHasError('email'),
+          'form-control': true
+        }"
+        formControlName="email"
+        placeholder="email"
+      />
+      <div *ngIf="fieldHasError('username')" class="invalid-feedback">
+        {{ getFieldErrorMessage("username") }}
+      </div>
+    </div>
+
+    <div>
+      <label class="form-label" for="first_name">first name</label>
+      <input
+        type="text"
+        id="first_name"
+        [ngClass]="{
+          'is-invalid': fieldHasError('email'),
+          'form-control': true
+        }"
+        formControlName="first_name"
+        placeholder="first name"
+      />
+      <div *ngIf="fieldHasError('first_name')" class="invalid-feedback">
+        {{ getFieldErrorMessage("first_name") }}
+      </div>
+    </div>
+
+    <div>
+      <label class="form-label" for="last_name">last name</label>
+      <input
+        type="text"
+        id="last_name"
+        [ngClass]="{
+          'is-invalid': fieldHasError('last_name'),
+          'form-control': true
+        }"
+        formControlName="last_name"
+        placeholder="last_name"
+      />
+      <div *ngIf="fieldHasError('last_name')" class="invalid-feedback">
+        {{ getFieldErrorMessage("last_name") }}
+      </div>
+    </div>
+
+    <div>
+      <label class="form-label" for="phone_number">phone number</label>
+      <input
+        type="number"
+        id="phone_number"
+        [ngClass]="{
+          'is-invalid': fieldHasError('phone_number'),
+          'form-control': true
+        }"
+        formControlName="phone_number"
+        placeholder="phone number"
+      />
+      <div *ngIf="fieldHasError('phone_number')" class="invalid-feedback">
+        {{ getFieldErrorMessage("phone_number") }}
+      </div>
+    </div>
+
+    <div>
+      <label for="gender" class="form-label">gender</label>
+      <select
+        name="gender"
+        id="gender"
+        class="form-select"
+        formControlName="gender"
+      >
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="form-label" for="inputPassword">Password</label>
+      <input
+        type="password"
+        id="inputPassword"
+        [ngClass]="{
+          'is-invalid': fieldHasError('password'),
+          'form-control': true
+        }"
+        formControlName="password"
+        placeholder="Password"
+        required
+      />
+      <div *ngIf="fieldHasError('password')" class="invalid-feedback">
+        {{ getFieldErrorMessage("password") }}
+      </div>
+    </div>
+
+    <!-- <div>
+      <label for="photo" class="form-label">profile photo</label>
+      <input
+        type="file"
+        (change)="onFileChange($event)"
+        name="photo"
+        id="photo"
+        [ngClass]="{
+          'is-invalid': fieldHasError('photo'),
+          'form-control': true
+        }"
+        class="form-control"
+        formControlName="photo"
+      />
+      <div *ngIf="fieldHasError('photo')">
+        {{ getFieldErrorMessage("photo") }}
+      </div>
+    </div> -->
+
+    <button
+      class="mt-4 btn btn-primary"
+      [disabled]="isSubmitting"
+      type="submit"
+    >
+      Sign up
+    </button>
+  </form>
+</div>

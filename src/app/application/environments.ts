@@ -4,5 +4,6 @@ export const environment = {
   DEFAULT_REDIRECT_AFTER_LOGIN: '/',
   DEFAULT_REDIRECT_AFTER_LOGOUT: '/',
   DEFAULT_REDIRECT_FORBIDDEN: '/',
+  DEFAULT_REDIRECT_AFTER_ACTIVITY_UPDATE: '/dashboard/activities',
   ACCESS_TOKEN_NAME: 'x-accessToken',
 };

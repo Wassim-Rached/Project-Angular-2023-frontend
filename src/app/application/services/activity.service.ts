@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Activity } from '../classes/activity';
 import { Observable } from 'rxjs';
@@ -6,6 +6,7 @@ import { Categorie } from '../classes/categorie';
 import { Registration } from '../classes/registration';
 import { Status } from '../classes/join-us';
 import { environment } from '../environments';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,25 +14,25 @@ import { environment } from '../environments';
 export class ActivityService {
   private readonly URL = environment['BASE_API_URL'] + 'activities/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  public getAllActivities(): Observable<Activity[]> {
-    return this.http.get<Activity[]>(this.URL);
+  public getAllActivities(params?: HttpParams): Observable<Activity[]> {
+    return this.http.get<Activity[]>(this.URL, { params: params });
   }
 
   public getActivityById(activityId: string): Observable<Activity> {
-    return this.http.get<Activity>(this.URL + 'activity/' + activityId);
+    return this.http.get<Activity>(this.URL + activityId);
   }
 
   public createActivity(activity: Activity): Observable<Activity> {
     return this.http.post<Activity>(this.URL, activity);
   }
 
-  public updateActivity(id: number, activity: Activity): Observable<Activity> {
+  public updateActivity(id: string, activity: Activity): Observable<Activity> {
     return this.http.patch<Activity>(this.URL + id, activity);
   }
 
-  public deleteActivity(id: number) {
+  public deleteActivityById(id: string) {
     return this.http.delete(this.URL + id);
   }
 
@@ -49,14 +50,14 @@ export class ActivityService {
 
   public getActivityRegistrations(
     activityId: string
-  ): Observable<Registration> {
-    return this.http.get<Registration>(
+  ): Observable<Registration[]> {
+    return this.http.get<Registration[]>(
       this.URL + activityId + '/registrations'
     );
   }
 
-  public registerToActivity(activityId: string) {
-    return this.http.post(this.URL + '/registrations', {
+  public registerToActivity(activityId: string): Observable<Registration> {
+    return this.http.post<Registration>(this.URL + 'registrations/', {
       activity: activityId,
     });
   }
@@ -67,7 +68,7 @@ export class ActivityService {
 
   public acceptRegistration(registerationId: string): Observable<Status> {
     return this.http.post<Status>(
-      this.URL + registerationId + '/registrations/accept',
+      this.URL + 'registrations/' + registerationId + '/accept/',
       {}
     );
   }
@@ -81,7 +82,7 @@ export class ActivityService {
 
   public payRegistration(registerationId: string): Observable<Status> {
     return this.http.post<Status>(
-      this.URL + registerationId + '/registrations/pay',
+      this.URL + registerationId + '/registrations/pay ',
       {}
     );
   }
@@ -93,7 +94,19 @@ export class ActivityService {
     );
   }
 
-  public toggleLike(activityId: string): Observable<Status> {
-    return this.http.post<Status>(this.URL + activityId, {});
+  public didLike(activityId: string): Observable<{ did_like: boolean }> {
+    return this.http.get<{ did_like: boolean }>(
+      this.URL + activityId + '/did_like/'
+    );
+  }
+
+  public setLiked(activityId: string): Observable<Status> {
+    return this.http.post<Status>(this.URL + activityId + '/like/', {});
+  }
+
+  public redirectAfterUpdate() {
+    this.router.navigate([
+      environment['DEFAULT_REDIRECT_AFTER_ACTIVITY_UPDATE'],
+    ]);
   }
 }

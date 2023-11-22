@@ -14,6 +14,17 @@ export class AccountService {
 
   constructor(private http: HttpClient) {}
 
+  public createAccount(account: Account): Observable<Account> {
+    return this.http.post<Account>(this.URL, account);
+  }
+
+  public updateAccount(
+    accountId: string,
+    account: Account
+  ): Observable<Account> {
+    return this.http.patch<Account>(this.URL + accountId, account);
+  }
+
   public getAccountById(accountId: string): Observable<Account> {
     return this.http.get<Account>(this.URL + accountId);
   }
@@ -26,12 +37,21 @@ export class AccountService {
     return this.http.delete(this.URL + accountId);
   }
 
+  public changePassword(
+    accountId: string,
+    old_password: string,
+    new_password: string
+  ): Observable<any> {
+    const body = { old_password, new_password };
+    return this.http.post(this.URL + accountId + '/change_password/', body);
+  }
+
   public getAllJoiningForms(): Observable<JoinUs[]> {
     return this.http.get<JoinUs[]>(this.URL + 'join_us');
   }
 
   public joinClub(joinUs: JoinUs): Observable<JoinUs> {
-    return this.http.post(this.URL + 'join_us', joinUs);
+    return this.http.post(this.URL + 'join_us/', joinUs);
   }
 
   public deleteJoiningForm(joinUsId: string) {
@@ -39,10 +59,19 @@ export class AccountService {
   }
 
   public acceptJoiningForm(joinUsId: string): Observable<Status> {
-    return this.http.post<Status>(this.URL + joinUsId + '/accept', {});
+    return this.http.post<Status>(
+      this.URL + 'join_us/' + joinUsId + '/accept/',
+      {}
+    );
   }
 
   public rejectJoiningForm(joinUsId: string): Observable<Status> {
-    return this.http.post<Status>(this.URL + joinUsId + '/reject', {});
+    return this.http.post<Status>(
+      this.URL + 'join_us/' + joinUsId + '/reject/',
+      {}
+    );
+  }
+  public getJoinFormById(joinUsId: string): Observable<JoinUs> {
+    return this.http.get<JoinUs>(this.URL + 'join_us/' + joinUsId);
   }
 }

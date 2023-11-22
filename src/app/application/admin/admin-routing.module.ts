@@ -3,11 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { GreetingAdminComponent } from './components/greeting-admin/greeting-admin.component';
 import { ActivityManagmentComponent } from './components/activity-managment/activity-managment.component';
-import { ActivityDetailsComponent } from './components/activity-details/activity-details.component';
 import { ActivityListAdminComponent } from './components/activity-list-admin/activity-list-admin.component';
 import { ActivityCreateAdminComponent } from './components/activity-create-admin/activity-create-admin.component';
 import { RegistrationManagmentComponent } from './components/registration-managment/registration-managment.component';
 import { RegistrationsListComponent } from './components/registrations-list/registrations-list.component';
+import { ActivityModifyComponent } from './components/activity-modify/activity-modify.component';
+import { JoiningListAdminComponent } from './components/joining-list-admin/joining-list-admin.component';
+import { JoinUsMangmentComponent } from './components/join-us-mangment/join-us-mangment.component';
+import { JoinUsDetailsAdminComponent } from './components/join-us-details-admin/join-us-details-admin.component';
 
 const routes: Routes = [
   {
@@ -29,14 +32,14 @@ const routes: Routes = [
             component: ActivityListAdminComponent,
           },
           {
+            path: 'list/:activityId',
+            title: 'update activity',
+            component: ActivityModifyComponent,
+          },
+          {
             path: 'create',
             title: 'activity create',
             component: ActivityCreateAdminComponent,
-          },
-          {
-            path: ':activityId',
-            title: 'activity details',
-            component: ActivityDetailsComponent,
           },
         ],
       },
@@ -50,6 +53,24 @@ const routes: Routes = [
             path: 'list',
             title: 'registration list',
             component: RegistrationsListComponent,
+          },
+        ],
+      },
+      {
+        path: 'join-us',
+        title: 'joining registrations',
+        component: JoinUsMangmentComponent,
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          {
+            path: 'list',
+            title: 'joining registration form',
+            component: JoiningListAdminComponent,
+          },
+          {
+            path: 'list/:joinUsId',
+            title: 'details of registrations',
+            component: JoinUsDetailsAdminComponent,
           },
         ],
       },
