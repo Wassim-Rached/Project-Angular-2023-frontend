@@ -56,15 +56,16 @@
       formControlName="maxParticipants"
     />
   </div>
-  <div>
+  <!-- <div>
     <label for="photo" class="form-label">Photo:</label>
     <input
       type="file"
       id="photo"
+      (change)="onFileChange($event)"
       formControlName="photo"
       class="form-control"
     />
-  </div>
+  </div> -->
   <div>
     <label class="form-label" for="date">Date:</label>
     <input class="form-control" type="date" id="date" formControlName="date" />

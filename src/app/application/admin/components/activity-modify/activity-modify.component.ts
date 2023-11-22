@@ -52,7 +52,7 @@ export class ActivityModifyComponent implements OnInit {
   initForm() {
     this.form = this.fb.nonNullable.group({
       title: [this.activity.title],
-      photo: [null],
+      // photo: [null],
       is_free: [this.activity.is_free],
       price: [this.activity.price],
       maxParticipants: [this.activity.maxParticipants],
@@ -65,9 +65,10 @@ export class ActivityModifyComponent implements OnInit {
   onSubmit() {
     const data = this.form.value;
 
+    // const photoFormData = new FormData();
+    // photoFormData.append('photo', data.photo);
+
     // if (data.photo) {
-    //   const photoFormData = new FormData();
-    //   photoFormData.append('photo', data.photo);
     //   // update the photo
     //   this.activityService
     //     .updateActivity(this.activityId, photoFormData as Activity)
@@ -79,7 +80,7 @@ export class ActivityModifyComponent implements OnInit {
     // }
 
     // delete the photo
-    delete data.photo;
+    // delete data.photo;
 
     this.activityService.updateActivity(this.activityId, data).subscribe({
       next: (data) => {
@@ -98,11 +99,9 @@ export class ActivityModifyComponent implements OnInit {
   }
 
   // onFileChange(event: any) {
-  //   const file = event.target.files[0];
-  //   this.form.patchValue({
-  //     photo: file,
-  //   });
-  //   this.form.get('photo')?.updateValueAndValidity();
-  //   console.log(this.form.get('photo'));
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     this.form.get('photo')?.setValue(file);
+  //   }
   // }
 }
