@@ -51,7 +51,7 @@ export class AccountService {
   }
 
   public joinClub(joinUs: JoinUs): Observable<JoinUs> {
-    return this.http.post(this.URL + 'join_us', joinUs);
+    return this.http.post(this.URL + 'join_us/', joinUs);
   }
 
   public deleteJoiningForm(joinUsId: string) {
@@ -59,10 +59,19 @@ export class AccountService {
   }
 
   public acceptJoiningForm(joinUsId: string): Observable<Status> {
-    return this.http.post<Status>(this.URL + joinUsId + '/accept', {});
+    return this.http.post<Status>(
+      this.URL + 'join_us/' + joinUsId + '/accept/',
+      {}
+    );
   }
 
   public rejectJoiningForm(joinUsId: string): Observable<Status> {
-    return this.http.post<Status>(this.URL + joinUsId + '/reject', {});
+    return this.http.post<Status>(
+      this.URL + 'join_us/' + joinUsId + '/reject/',
+      {}
+    );
+  }
+  public getJoinFormById(joinUsId: string): Observable<JoinUs> {
+    return this.http.get<JoinUs>(this.URL + 'join_us/' + joinUsId);
   }
 }
