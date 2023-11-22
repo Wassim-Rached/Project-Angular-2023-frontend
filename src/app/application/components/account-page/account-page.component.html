@@ -1,9 +1,26 @@
-<app-profile *ngIf="account" [account]="account"></app-profile>
-<div class="container" *ngIf="isOwner">
-  <div>
-    <app-change-password [profileId]="profileId"></app-change-password>
+<div *ngIf="isLoadingPage; else page">loading...</div>
+
+<ng-template #page>
+  <div *ngIf="account; else notFound">
+    <app-profile [account]="account"></app-profile>
+
+    <div class="container" *ngIf="isOwner">
+      <div>
+        <app-change-password [profileId]="profileId"></app-change-password>
+      </div>
+      <div class="mt-4">
+        <button class="btn btn-danger" (click)="onDelete()">
+          Delete Account
+        </button>
+      </div>
+    </div>
   </div>
-  <div class="mt-4">
-    <button class="btn btn-danger" (click)="onDelete()">Delete Account</button>
-  </div>
-</div>
+
+  <ng-template #notFound>
+    <div class="container">
+      <div class="alert alert-danger text-uppercase mt-5">
+        account not found
+      </div>
+    </div>
+  </ng-template>
+</ng-template>

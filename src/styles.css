@@ -78,3 +78,7 @@ a:hover {
 .profile-img-container img {
   width: 100%;
 }
+
+.p-spacing {
+  line-height: 35px;
+}
