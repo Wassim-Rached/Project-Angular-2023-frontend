@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
-import { Account } from '../../classes/account';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -29,73 +28,73 @@ export class SignUpComponent implements OnInit {
       phone_number: [''],
       first_name: [''],
       last_name: [''],
-      photo: [null],
+      // photo: [null],
     });
   }
 
   onSubmit() {
     const data = this.Form.value;
-    const formData = new FormData();
+    // const formData = new FormData();
 
-    formData.append('photo', data.photo);
-    console.log(formData);
+    // formData.append('photo', data.photo);
+    // console.log(formData);
 
     // delete data.photo;
 
-    // const account = { user: data };
+    const account = { user: data };
 
-    // this.isSubmitting = true;
-    // this.errorDescription = '';
+    this.isSubmitting = true;
+    this.errorDescription = '';
 
-    // // create the account
-    // this.accountService.createAccount(account).subscribe({
-    //   next: (response) => {
-    //     // sign in the user
-    //     const accountId = response.id;
-    //     this.authService.signin(data.username, data.password).subscribe({
-    //       next: (response) => {
-    //         // authentificate the user
-    //         this.authService.authentificate(response);
-    //         // update the photo
-    //         this.accountService
-    //           .updateAccount(accountId!, formData as Account)
-    //           .subscribe({
-    //             next: (response) => {
-    //               this.isSubmitting = false;
-    //               this.Form.reset();
-    //               this.authService.redirectAfterSignin();
-    //             },
-    //             error: (error) => {
-    //               // error with the photo update
-    //               this.isSubmitting = false;
-    //               console.error(error);
-    //             },
-    //           });
-    //       },
-    //       error(error) {
-    //         // error with the authentification
-    //         console.error(error);
-    //       },
-    //     });
-    //   },
-    //   error: (error) => {
-    //     // enable the submit button
-    //     this.isSubmitting = false;
+    // create the account
+    this.accountService.createAccount(account).subscribe({
+      next: (response) => {
+        // sign in the user
+        const accountId = response.id;
+        this.authService.signin(data.username, data.password).subscribe({
+          next: (response) => {
+            // authentificate the user
+            this.authService.authentificate(response);
+            // update the photo
+            // this.accountService
+            //   .updateAccount(accountId!, formData as Account)
+            //   .subscribe({
+            //     next: (response) => {
+            //       this.isSubmitting = false;
+            //       this.Form.reset();
+            //       this.authService.redirectAfterSignin();
+            //     },
+            //     error: (error) => {
+            //       // error with the photo update
+            //       this.isSubmitting = false;
+            //       console.error(error);
+            //     },
+            //   });
+          },
+          error(error) {
+            // error with the authentification
+            console.error(error);
+          },
+        });
+      },
+      error: (error) => {
+        // enable the submit button
+        this.isSubmitting = false;
 
-    //     // handle the errors
-    //     if (error.status === 400) {
-    //       // for validation errors
-    //       this.handleFormErrors(error.error);
-    //       this.errorDescription = '';
-    //     } else if (error.status === 401) {
-    //       // for unauthorized errors
-    //       this.errorDescription = 'Invalid credentials';
-    //     } else {
-    //       // for unexpected errors
-    //       this.errorDescription = 'Unexpected error';
-    //     }
-    //   },
-    // });
+        // handle the errors
+        if (error.status === 400) {
+          // for validation errors
+          this.handleFormErrors(error.error);
+          this.errorDescription = '';
+        } else if (error.status === 401) {
+          // for unauthorized errors
+          this.errorDescription = 'Invalid credentials';
+        } else {
+          // for unexpected errors
+          this.errorDescription = 'Unexpected error';
+        }
+      },
+    });
   }
 
   private handleFormErrors(errors: any): void {
@@ -116,11 +115,11 @@ export class SignUpComponent implements OnInit {
     return false;
   }
 
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      console.log(this.Form?.get('photo'));
-      // this.Form?.get('photo')?.setValue(file);
-    }
-  }
+  // onFileChange(event: any) {
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     console.log(file);
+  //     this.Form.get('photo')?.setValue(file);
+  //   }
+  // }
 }

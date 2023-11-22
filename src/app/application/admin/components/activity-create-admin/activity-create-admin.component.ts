@@ -53,12 +53,12 @@ export class ActivityCreateAdminComponent implements OnInit {
     this.activityService.createActivity(data).subscribe({
       next: (data) => {
         this.resetForm();
-        alert('activity created successfully');
         this.activityService
           .updateActivity(data.id!, photoFormData as Activity)
           .subscribe({
             next: (data) => {
               console.log(data);
+              alert('activity created successfully');
             },
           });
       },
@@ -75,7 +75,6 @@ export class ActivityCreateAdminComponent implements OnInit {
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      console.log(file);
       this.form.get('photo')?.setValue(file);
     }
   }
