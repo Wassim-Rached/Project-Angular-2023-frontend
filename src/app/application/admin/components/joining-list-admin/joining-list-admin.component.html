@@ -1,83 +1,115 @@
-<h1>Joining  Forms </h1>
-
 <div>
-    <!-- <form class="container" [formGroup]="Form" (ngSubmit)="onSubmit()">
-      <div>
+  <form class="container mb-5" [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col">
         <select
           class="form-select"
-          name="activityId"
-          id="activityId"
-          formControlName="activityId"
+          name="status"
+          id="status"
+          formControlName="status"
         >
-          <option *ngFor="let joiningForm of joiningForms" [value]="registation.id">
-            {{ activity.title }}
-          </option>
+          <option value="pending">Pending</option>
+          <option value="accepted">Accepted</option>
+          <option value="rejected">Rejected</option>
         </select>
-        <div class="row p-3">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
       </div>
-    </form> -->
-    <div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Photo</th>
-            <th scope="col">username</th>
-            <th scope="col">email</th>
-            <th scope="col">Accept</th>
-            <th scope="col">Reject</th>
-            <th scope="col">Details</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let joiningForm of joiningForms">
-            <th scope="row">
-              <img
-                [src]="joiningForm.account?.photo_url"
-                alt=""
-                width="40"
-                height="40"
-              />
-            </th>
-            <td>
-              {{ joiningForm.account?.user?.username! | userNameFormater }}
-            </td>
-            <td>
-              {{ joiningForm?.account?.user?.email }}
-            </td>
-           
-            <td>
-              <button
-                class="btn btn-success "
-                [disabled]="joiningForm.status == 'accepted'"
-                (click)="Accept(joiningForm.id!)"
-              >
-                Accept
-              </button>
-            </td>
-            <td>
-              <button
-                class="btn btn-danger "
-                [disabled]="joiningForm.status=='rejected'"
-                (click)="Reject(joiningForm.id!)"
-              >
-               Reject
-              </button>
-            </td>
-            <td>
-              <button
-                class="btn btn-warning "
-               [routerLink]="joiningForm.id"
-               
-              >
-              Details
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="col">
+        <select
+          class="form-select"
+          name="ordering"
+          id="ordering"
+          formControlName="ordering"
+        >
+          <option value="-created_at">Newest</option>
+          <option value="created_at">Oldest</option>
+        </select>
+      </div>
+      <div class="col-1">
+        <button type="submit" [disabled]="isSubmitting" class="btn btn-primary">
+          Submit
+        </button>
+      </div>
     </div>
+  </form>
+  <div>
+    <div *ngIf="isSubmitting; else dataTable">loading...</div>
+    <ng-template #dataTable>
+      <div
+        *ngIf="joiningForms.length === 0; else table"
+        class="alert alert-warning"
+        role="alert"
+      >
+        No joining form found!
+      </div>
+      <ng-template #table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Photo</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Status</th>
+              <th scope="col">Accept</th>
+              <th scope="col">Reject</th>
+              <th scope="col">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let joiningForm of joiningForms">
+              <th scope="row">
+                <img
+                  [src]="joiningForm.account?.photo_url"
+                  alt=""
+                  width="40"
+                  height="40"
+                />
+              </th>
+              <td>
+                <a [routerLink]="['/profile', joiningForm.account?.id]">
+                  {{ joiningForm.account?.user?.username! | userNameFormater }}
+                </a>
+              </td>
+              <td>
+                {{ joiningForm?.account?.user?.email }}
+              </td>
+              <td>
+                <span
+                  class="badge p-2"
+                  [ngClass]="{
+                'bg-success': isAccepted(joiningForm!.status!),
+                'bg-danger': isRejected(joiningForm!.status!),
+                'bg-warning': isPending(joiningForm!.status!),
+              }"
+                  >{{ joiningForm?.status }}</span
+                >
+              </td>
+              <td>
+                <button
+                  class="btn btn-outline-success"
+                  [disabled]="joiningForm.status == 'accepted'"
+                  (click)="Accept(joiningForm.id!)"
+                >
+                  Accept
+                </button>
+              </td>
+              <td>
+                <button
+                  class="btn btn-outline-danger"
+                  [disabled]="joiningForm.status == 'rejected'"
+                  (click)="Reject(joiningForm.id!)"
+                >
+                  Reject
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-warning" [routerLink]="joiningForm.id">
+                  Details
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </ng-template>
   </div>
-  
+</div>

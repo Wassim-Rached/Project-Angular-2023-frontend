@@ -10,6 +10,31 @@ import { ActivityService } from 'src/app/application/services/activity.service';
   styleUrls: ['./activity-list-admin.component.css'],
 })
 export class ActivityListAdminComponent implements OnInit {
+  activities: Activity[] = [];
+  Form!: FormGroup;
+  isSubmitting = false;
+
+  constructor(
+    private activityService: ActivityService,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    // initialize the form
+    this.Form = this.fb.nonNullable.group({
+      title__icontains: [''],
+      ordering: ['created_at'],
+    });
+
+    // query the activities
+    this.queryActivities();
+  }
+
+  onSubmit() {
+    const { title__icontains, ordering } = this.Form.value;
+    this.queryActivities(ordering, title__icontains);
+  }
+
   onDelete(id: string) {
     const isUserSure = window.confirm(
       'are you sure about deleting this activity ?'
@@ -23,40 +48,29 @@ export class ActivityListAdminComponent implements OnInit {
       },
     });
   }
-  activities: Activity[] = [];
-  Form!: FormGroup;
-  isSubmitting = false;
 
-  constructor(
-    private activityService: ActivityService,
-    private fb: FormBuilder
-  ) {}
-
-  onSubmit() {
-    const { title__icontains, ordering } = this.Form.value;
-    this.queryActivities(ordering, title__icontains);
-  }
-
-  ngOnInit(): void {
-    this.Form = this.fb.nonNullable.group({
-      title__icontains: [''],
-      ordering: ['created_at'],
-    });
-    this.queryActivities('created_at', '');
-  }
-
-  queryActivities(ordering: string, title__icontains: string) {
+  queryActivities(
+    ordering: string = 'created_at',
+    title__icontains: string = ''
+  ) {
+    // set the loading submit state to true
     this.isSubmitting = true;
+
+    // set the params
     const params = new HttpParams()
       .set('title__icontains', title__icontains)
       .set('ordering', ordering);
+
+    // get the activities
     this.activityService.getAllActivities(params).subscribe({
       next: (activities) => {
+        // set the activities
         this.activities = activities;
+        // set the loading submit state to false
         this.isSubmitting = false;
       },
-      error: (err) => {
-        console.log(err);
+      error: (error) => {
+        // set the loading submit state to false
         this.isSubmitting = false;
       },
     });

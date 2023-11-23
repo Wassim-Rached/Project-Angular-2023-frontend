@@ -56,6 +56,10 @@ export class ActivityService {
     );
   }
 
+  public getAllMyActivityRegistrations(): Observable<Registration[]> {
+    return this.http.get<Registration[]>(this.URL + 'registrations/mine');
+  }
+
   public registerToActivity(activityId: string): Observable<Registration> {
     return this.http.post<Registration>(this.URL + 'registrations/', {
       activity: activityId,
@@ -75,21 +79,21 @@ export class ActivityService {
 
   public rejectRegistration(registerationId: string): Observable<Status> {
     return this.http.post<Status>(
-      this.URL + registerationId + '/registrations/reject',
+      this.URL + 'registrations/' + registerationId + '/reject/',
       {}
     );
   }
 
   public payRegistration(registerationId: string): Observable<Status> {
     return this.http.post<Status>(
-      this.URL + registerationId + '/registrations/pay ',
+      this.URL + 'registrations/' + registerationId + '/pay/',
       {}
     );
   }
 
   public unpayRegistration(registerationId: string): Observable<Status> {
     return this.http.post<Status>(
-      this.URL + registerationId + '/registrations/unpay',
+      this.URL + 'registrations/' + registerationId + '/unpay/',
       {}
     );
   }

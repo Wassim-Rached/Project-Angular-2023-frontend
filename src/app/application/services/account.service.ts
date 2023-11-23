@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -46,8 +46,8 @@ export class AccountService {
     return this.http.post(this.URL + accountId + '/change_password/', body);
   }
 
-  public getAllJoiningForms(): Observable<JoinUs[]> {
-    return this.http.get<JoinUs[]>(this.URL + 'join_us');
+  public getAllJoiningForms(params?: HttpParams): Observable<JoinUs[]> {
+    return this.http.get<JoinUs[]>(this.URL + 'join_us', { params });
   }
 
   public joinClub(joinUs: JoinUs): Observable<JoinUs> {

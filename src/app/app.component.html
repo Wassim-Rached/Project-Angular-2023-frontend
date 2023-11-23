@@ -1,8 +1,8 @@
-<div id="loader" *ngIf="!backendUp">
-</div>
-  <div id="main-container" *ngIf="backendUp">
+<app-main-loader *ngIf="!backendUp; else page"></app-main-loader>
+<ng-template #page>
+  <div id="main-container">
     <app-navbar></app-navbar>
     <router-outlet></router-outlet>
   </div>
   <app-footer></app-footer>
-  
+</ng-template>

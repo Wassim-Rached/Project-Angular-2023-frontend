@@ -1,68 +1,131 @@
-<div>
-  <form class="container" [formGroup]="Form" (ngSubmit)="onSubmit()">
-    <div>
-      <select
-        class="form-select"
-        name="activityId"
-        id="activityId"
-        formControlName="activityId"
-      >
-        <option *ngFor="let activity of activities" [value]="activity.id">
-          {{ activity.title }}
-        </option>
-      </select>
-      <div class="row p-3">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </div>
-  </form>
+<div *ngIf="isPageLoading; else page">loading...</div>
+
+<ng-template #page>
   <div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Photo</th>
-          <th scope="col">Name</th>
-          <th scope="col">email</th>
-          <th scope="col">Paid</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let registration of registrations">
-          <th scope="row">
-            <img
-              [src]="registration.account?.photo_url"
-              alt=""
-              width="40"
-              height="40"
-            />
-          </th>
-          <td>
-            {{ registration.account?.user?.username! | userNameFormater }}
-          </td>
-          <td>
-            {{ registration.account?.user?.email }}
-          </td>
-          <td>
-            <button
-              class="btn btn-primary"
-              [disabled]="registration.is_payed"
-              (click)="onPay(registration.id!)"
-            >
-              Paid
-            </button>
-          </td>
-          <td>
-            <button
-              class="btn btn-danger"
-              [disabled]="registration.status == 'accepted'"
-              (click)="onAccept(registration.id!)"
-            >
-              Accepted
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <form class="container mb-5" [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-11">
+          <select
+            class="form-select"
+            name="activityId"
+            id="activityId"
+            formControlName="activityId"
+          >
+            <option *ngFor="let activity of activities" [value]="activity.id">
+              {{ activity.title }}
+            </option>
+          </select>
+        </div>
+        <div class="col-1">
+          <button
+            type="submit"
+            [disabled]="isSubmitting"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div *ngIf="isSubmitting; else dataTable">loading...</div>
+      <ng-template #dataTable>
+        <div
+          *ngIf="registrations.length === 0; else table"
+          class="alert alert-warning"
+          role="alert"
+        >
+          No registrations found!
+        </div>
+        <ng-template #table>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>email</th>
+                <th>Paiment</th>
+                <th colspan="2">Actions</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let registration of registrations">
+                <th scope="row">
+                  <img
+                    [src]="registration.account?.photo_url"
+                    alt=""
+                    width="40"
+                    height="40"
+                  />
+                </th>
+                <td>
+                  {{ registration.account?.user?.username! | userNameFormater }}
+                </td>
+                <td>
+                  {{ registration.account?.user?.email }}
+                </td>
+                <td>
+                  <div
+                    *ngIf="currentActivityIsFree(); else PaidButtons"
+                    class="text-success"
+                    disabled
+                  >
+                    Free
+                  </div>
+                  <ng-template #PaidButtons>
+                    <button
+                      *ngIf="!registration.is_payed; else alreadyPaied"
+                      class="btn btn-primary"
+                      (click)="onPay(registration.id!)"
+                    >
+                      Pay
+                    </button>
+                    <ng-template #alreadyPaied>
+                      <button
+                        class="btn btn-outline-primary"
+                        (click)="onUnpay(registration.id!)"
+                      >
+                        Unpay
+                      </button>
+                    </ng-template>
+                  </ng-template>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-outline-danger"
+                    [disabled]="isRejected(registration.status!)"
+                    (click)="onReject(registration.id!)"
+                  >
+                    Reject
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-outline-success"
+                    [disabled]="isAccepted(registration.status!)"
+                    (click)="onAccept(registration.id!)"
+                  >
+                    Accept
+                  </button>
+                </td>
+                <td>
+                  <span
+                    class="badge p-2"
+                    [ngClass]="{
+                'bg-success': isAccepted(registration.status!),
+                'bg-danger': isRejected(registration.status!),
+                'bg-warning': isPending(registration.status!),
+              }"
+                  >
+                    {{ registration.status }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ng-template>
+    </div>
   </div>
-</div>
+</ng-template>

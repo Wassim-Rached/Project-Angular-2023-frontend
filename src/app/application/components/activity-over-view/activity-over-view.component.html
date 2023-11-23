@@ -32,19 +32,19 @@
             </div>
           </div>
           <div>
-            <span class="ms-auto badge bg-danger">
-              {{ activity.number_of_likes }} Likes
-            </span>
             <button
               (click)="onLike()"
               mat-button
-              [disabled]="!isAuthenticated || didLike"
+              [disabled]="!isAuthenticated || didLike || isLoadingLike"
             >
-              LIKE
+              {{ isLoadingLike ? "loading..." : "LIKE" }}
               <mat-icon [ngClass]="{ 'been-liked': didLike }"
                 >favorite</mat-icon
               >
             </button>
+            <span class="ms-auto badge bg-danger"
+              >{{ activity.number_of_likes }} Likes</span
+            >
           </div>
         </div>
         <div class="m-5">
@@ -54,9 +54,15 @@
           <button
             class="btn btn-success btn-lg"
             (click)="onRegister(activity.id!)"
-            [disabled]="didRegister"
+            [disabled]="didRegister || !isAuthenticated || isRegisterBtnLoading"
           >
-            Register now
+            {{
+              didRegister
+                ? "Registered"
+                : isRegisterBtnLoading
+                ? "loading..."
+                : "Register now"
+            }}
           </button>
         </div>
       </div>
@@ -72,7 +78,7 @@
             *ngFor="let account of activity.registred_accounts"
           >
             <span
-              [routerLink]="['profile', account.id]"
+              [routerLink]="['/profile', account.id]"
               class="profile-img-container"
             >
               <img [src]="account.photo_url" [alt]="account.user?.username" />
