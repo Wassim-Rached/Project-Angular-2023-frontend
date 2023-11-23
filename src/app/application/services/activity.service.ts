@@ -56,6 +56,10 @@ export class ActivityService {
     );
   }
 
+  public getAllMyActivityRegistrations(): Observable<Registration[]> {
+    return this.http.get<Registration[]>(this.URL + 'registrations/mine');
+  }
+
   public registerToActivity(activityId: string): Observable<Registration> {
     return this.http.post<Registration>(this.URL + 'registrations/', {
       activity: activityId,
