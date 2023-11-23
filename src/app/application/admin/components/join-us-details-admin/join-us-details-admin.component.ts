@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { JoinUs } from 'src/app/application/classes/join-us';
+import { JoinUs, Status } from 'src/app/application/classes/join-us';
 import { AccountService } from 'src/app/application/services/account.service';
 
 @Component({
@@ -11,15 +11,30 @@ import { AccountService } from 'src/app/application/services/account.service';
 export class JoinUsDetailsAdminComponent implements OnInit {
   joinForm?: JoinUs;
   joinId?: string;
+  // loading states
+  isPageLoading: boolean = false;
+
   constructor(
     private accountService: AccountService,
     private activatedRoute: ActivatedRoute
   ) {}
   ngOnInit(): void {
+    // set loading state to true
+    this.isPageLoading = true;
+
+    // get activity id from route
     this.joinId = this.activatedRoute.snapshot.params['joinUsId'];
+
+    // get the joinUs form by id
     this.accountService.getJoinFormById(this.joinId!).subscribe({
       next: (joinForm) => {
         this.joinForm = joinForm;
+        // set loading state to false
+        this.isPageLoading = false;
+      },
+      error: (error) => {
+        // set loading state to false
+        this.isPageLoading = false;
       },
     });
   }
@@ -41,5 +56,17 @@ export class JoinUsDetailsAdminComponent implements OnInit {
         }
       },
     });
+  }
+
+  public isAccepted(status: Status) {
+    return status === 'accepted';
+  }
+
+  public isPending(status: Status) {
+    return status === 'pending';
+  }
+
+  public isRejected(status: Status) {
+    return status === 'rejected';
   }
 }
