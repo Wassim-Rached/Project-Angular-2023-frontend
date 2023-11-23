@@ -29,7 +29,10 @@ export class ActivityOverViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // set loading state to true
     this.isPageLoading = true;
+
+    // get activity id from route
     const activityId = this.activatedRoute.snapshot.params['id'];
 
     this.isAuthenticated = this.authService.isAuthenticated();
