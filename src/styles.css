@@ -82,3 +82,17 @@ a:hover {
 .p-spacing {
   line-height: 35px;
 }
+
+.mw-500px {
+  max-width: 500px;
+}
+
+.non-nav-height {
+  max-height: calc(100vh - 64px);
+  overflow: scroll;
+}
+
+.active-nav-link {
+  color: #fff;
+  font-weight: bold;
+}
