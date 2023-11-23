@@ -11,10 +11,13 @@ import { AccountService } from '../../services/account.service';
   styleUrls: ['./activity-over-view.component.css'],
 })
 export class ActivityOverViewComponent implements OnInit {
-  isAuthenticated: any;
+  activity?: Activity;
+  isAuthenticated: boolean = false;
+  // data states
   didLike: boolean = false;
   didRegister: boolean = false;
-  activity?: Activity;
+  // loading states
+  isLoadingLike: boolean = false;
   isPageLoading = false;
   isRegisterBtnLoading = false;
 
@@ -44,14 +47,23 @@ export class ActivityOverViewComponent implements OnInit {
           )
         );
 
-        // Check if user did like activity
-        this.activityService.didLike(activityId).subscribe({
-          next: (response) => {
-            console.log(response);
-            this.didLike = response.did_like;
-            this.isPageLoading = false;
-          },
-        });
+        // only if user is authenticated
+        if (this.isAuthenticated) {
+          // Check if user did like activity
+          this.activityService.didLike(activityId).subscribe({
+            next: (response) => {
+              this.didLike = response.did_like;
+              this.isPageLoading = false;
+            },
+            error: (error) => {
+              this.isPageLoading = false;
+            },
+          });
+        } else {
+          // if user is not authenticated
+          // stop loading page
+          this.isPageLoading = false;
+        }
       },
       error: (error) => {
         this.isPageLoading = false;
@@ -69,30 +81,31 @@ export class ActivityOverViewComponent implements OnInit {
         this.accountService.getMyAccount().subscribe({
           next: (account) => {
             this.activity?.registred_accounts?.push(account);
-            alert('Registration done !');
             this.isRegisterBtnLoading = false;
+            this.didRegister = true;
           },
         });
       },
       error: (error) => {
-        alert('Error while registering to activity');
         this.isRegisterBtnLoading = false;
       },
     });
   }
 
-  onLike() {
+  public onLike() {
     if (this.didLike) return;
     if (!this.isAuthenticated) return;
 
+    this.isLoadingLike = true;
     this.activityService.setLiked(this.activity!.id!).subscribe({
       next: (response) => {
-        if (this.activity && this.activity.number_of_likes) {
-          this.activity.number_of_likes += 1;
-        }
+        this.activity!.number_of_likes! += 1;
         this.didLike = true;
+        this.isLoadingLike = false;
       },
-      error: (error) => {},
+      error: (error) => {
+        this.isLoadingLike = false;
+      },
     });
   }
 }
