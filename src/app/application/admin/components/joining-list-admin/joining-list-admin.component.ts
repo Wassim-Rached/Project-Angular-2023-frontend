@@ -34,6 +34,8 @@ export class JoiningListAdminComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.isSubmitting) return;
+
     const { status, ordering } = this.Form.value;
 
     // set the loading submit state to true
