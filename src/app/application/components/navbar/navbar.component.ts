@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  public userAccount?: Account;
-  public isAdmin = false;
+  userAccount?: Account;
+  isAdmin = false;
+  isNavbarLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -20,6 +21,9 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // set the loading state to true
+    this.isNavbarLoading = true;
+
     // handle loading the current account
     this.loadCurrentAccount();
 
@@ -46,10 +50,13 @@ export class NavbarComponent implements OnInit {
         this.authService.setAccountId(account.id!);
         // get the admin status
         this.isAdmin = this.authService.isAdmin();
+        // set the loading state to false
+        if (this.isNavbarLoading) this.isNavbarLoading = false;
       },
       error: (error) => {
         // set the user account to undefined
         this.userAccount = undefined;
+        if (this.isNavbarLoading) this.isNavbarLoading = false;
       },
     });
   }
