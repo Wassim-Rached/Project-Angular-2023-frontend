@@ -16,6 +16,7 @@ export class RegistrationsListComponent implements OnInit {
   activities: Activity[] = [];
   activityId?: string;
   // loading states
+  isSubmitting = false;
   isPageLoading = false;
 
   constructor(
@@ -24,7 +25,15 @@ export class RegistrationsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //
+    // set the loading page state to true
+    this.isPageLoading = true;
+
+    // Init form
+    this.Form = this.fb.nonNullable.group({
+      activityId: [''],
+    });
+
+    // query the activities
     this.activityService.getAllActivities().subscribe({
       next: (activities) => {
         this.activities = activities;
@@ -32,21 +41,35 @@ export class RegistrationsListComponent implements OnInit {
           this.Form.patchValue({ activityId: activities[0].id });
           this.onSubmit();
         }
+        // set the loading page state to false
+        this.isPageLoading = false;
       },
-    });
-
-    // Init form
-    this.Form = this.fb.nonNullable.group({
-      activityId: [''],
+      error: (error) => {
+        // set the loading page state to false
+        this.isPageLoading = false;
+      },
     });
   }
 
   onSubmit() {
+    // get the activity id
     const { activityId } = this.Form.value;
+
+    // set the submitting state to true
+    this.isSubmitting = true;
     this.activityService.getActivityRegistrations(activityId).subscribe({
       next: (registrations) => {
+        // set the registrations
+        // and the activity id
         this.registrations = registrations;
         this.activityId = activityId;
+
+        // set the submitting state to false
+        this.isSubmitting = false;
+      },
+      error: (error) => {
+        // set the submitting state to false
+        this.isSubmitting = false;
       },
     });
   }
