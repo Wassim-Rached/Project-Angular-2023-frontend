@@ -11,6 +11,7 @@ import { JoinUsComponent } from './application/components/join-us/join-us.compon
 import { DevTeamComponent } from './application/components/dev-team/dev-team.component';
 import { isAdminGuard } from './application/guards/is-admin.guard';
 import { isUnauthenticatedGuard } from './application/guards/is-unauthenticated.guard';
+import { AboutUsComponent } from './application/components/about-us/about-us.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routes: Routes = [
   },
 
   { path: 'join-us', title: 'join us', component: JoinUsComponent },
+  { path: 'about-us', title: 'about us', component: AboutUsComponent },
   {
     path: 'profile/:profileId',
     title: 'profile',
