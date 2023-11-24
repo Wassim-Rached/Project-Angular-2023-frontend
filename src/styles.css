@@ -60,6 +60,14 @@ a:hover {
   border: 1px solid #ccc;
 }
 
+.guest-user-bg {
+  background-image: url("assets/default/Guest-user.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: 1px solid #ccc;
+}
+
 .non-navheight {
   height: calc(100vh - 64px);
 }
@@ -95,4 +103,47 @@ a:hover {
 .active-nav-link {
   color: #fff;
   font-weight: bold;
+}
+
+.w-200px {
+  width: 200px;
+}
+
+.h-10px {
+  height: 10px;
+}
+
+.w-30px {
+  width: 30px;
+}
+
+.h-300px {
+  height: 300px;
+}
+
+.w-300px {
+  width: 300px;
+}
+
+.loading-animation {
+  animation: loading 1.5s infinite;
+}
+
+/* animation for loading opacity changes */
+@keyframes loading {
+  0% {
+    opacity: 0.7;
+  }
+  25% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.7;
+  }
 }

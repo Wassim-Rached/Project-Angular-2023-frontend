@@ -1,0 +1,75 @@
+<div *ngIf="isSubmitting; else registrations">loading...</div>
+
+<ng-template #registrations>
+  <div class="container mt-5">
+    <!-- if the result is empty -->
+    <div
+      *ngIf="activityRegistrations.length === 0; else resultData"
+      class="col-12 p-5"
+    >
+      <div class="alert alert-warning" role="alert">
+        you have no activity registrations
+      </div>
+    </div>
+
+    <!-- show the result -->
+    <ng-template #resultData>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">photo</th>
+            <th scope="col">Title</th>
+            <th scope="col">payment</th>
+            <th scope="col">status</th>
+            <th scope="col">date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let registration of activityRegistrations">
+            <td>
+              <img
+                width="40"
+                height="40"
+                [src]="registration.activity?.photo_url"
+                alt="activity photo"
+                class="img-fluid"
+              />
+            </td>
+            <td>{{ registration.activity?.title }}</td>
+            <td
+              [ngClass]="
+                registration.activity?.is_free
+                  ? 'text-success'
+                  : registration.is_payed
+                  ? 'text-info'
+                  : 'text-danger'
+              "
+            >
+              {{
+                registration.activity?.is_free
+                  ? "Free"
+                  : registration.is_payed
+                  ? "Paid"
+                  : "unPaid"
+              }}
+            </td>
+
+            <td>
+              <span
+                class="badge p-2"
+                [ngClass]="{
+        'bg-success': isAccepted(registration.status!),
+        'bg-danger': isRejected(registration.status!),
+        'bg-warning': isPending(registration.status!),
+      }"
+              >
+                {{ registration.status }}
+              </span>
+            </td>
+            <td>{{ registration.activity?.date | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </div>
+</ng-template>

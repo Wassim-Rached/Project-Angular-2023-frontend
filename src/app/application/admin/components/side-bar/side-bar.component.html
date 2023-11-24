@@ -1,12 +1,12 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="w-300px non-navheight shadow-lg">
   <mat-sidenav-content>
     <h1 class="text-center p-3">
       <a routerLink="./">Admin Dashboard</a>
     </h1>
-    <ul class="border border-1 fs-6 text-uppercase d-flex flex-column gap-3">
+    <ul class="fs-6 text-uppercase d-flex flex-column gap-4">
       <li>
-        <strong> activity</strong>
-        <ul>
+        <strong>activity</strong>
+        <ul class="d-flex mt-2 flex-column gap-2 text-muted">
           <li>
             <a routerLinkActive="active-nav-link" routerLink="activities/list">
               list</a
@@ -24,7 +24,7 @@
       </li>
       <li>
         <strong>registration</strong>
-        <ul>
+        <ul class="mt-2 text-muted">
           <li>
             <a
               routerLinkActive="active-nav-link"
@@ -36,13 +36,11 @@
       </li>
       <li>
         <strong>Joining forms</strong>
-        <ul>
+        <ul class="mt-2 text-muted">
           <li>
-            <a
-            routerLinkActive="active-nav-link"
-            routerLink="join-us/list"
-            >list</a
-          >
+            <a routerLinkActive="active-nav-link" routerLink="join-us/list"
+              >list</a
+            >
           </li>
         </ul>
       </li>

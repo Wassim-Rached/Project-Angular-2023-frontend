@@ -8,6 +8,7 @@
           id="status"
           formControlName="status"
         >
+          <option value="">All</option>
           <option value="pending">Pending</option>
           <option value="accepted">Accepted</option>
           <option value="rejected">Rejected</option>
@@ -24,11 +25,13 @@
           <option value="created_at">Oldest</option>
         </select>
       </div>
-      <div class="col-1">
-        <button type="submit" [disabled]="isSubmitting" class="btn btn-primary">
-          Submit
-        </button>
-      </div>
+      <button
+        type="submit"
+        [disabled]="isSubmitting"
+        class="col-1 btn btn-primary"
+      >
+        {{ isSubmitting ? "Loading..." : "Search" }}
+      </button>
     </div>
   </form>
   <div>

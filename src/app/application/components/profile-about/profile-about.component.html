@@ -1,0 +1,54 @@
+<div class="container p-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title">Firstname</h3>
+          <p class="card-text text-muted">{{ account.user!.first_name }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title">Lastname</h3>
+          <p class="card-text text-muted">{{ account.user!.last_name }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title">Email</h3>
+          <p class="card-text text-muted">{{ account.user!.email }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title">Phone Number</h3>
+          <p class="card-text text-muted">{{ account.user!.phone_number }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title">Gender</h3>
+          <p class="card-text text-muted">
+            {{ account.user!.gender === "M" ? "Male" : "Female" }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title">Joined At</h3>
+          <p class="card-text text-muted">{{ account.created_at | date }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,15 +4,23 @@
   <div *ngIf="account; else notFound">
     <app-profile [account]="account"></app-profile>
 
-    <div class="container" *ngIf="isOwner">
-      <div>
-        <app-change-password [profileId]="profileId"></app-change-password>
-      </div>
-      <div class="mt-4">
-        <button class="btn btn-danger" (click)="onDelete()">
-          Delete Account
-        </button>
-      </div>
+    <div class="container mt-5">
+      <mat-tab-group>
+        <mat-tab label="About">
+          <app-profile-about [account]="account"></app-profile-about>
+        </mat-tab>
+        <ng-container *ngIf="isOwner">
+          <mat-tab label="Registrations">
+            <app-profile-registrations></app-profile-registrations>
+          </mat-tab>
+          <mat-tab label="Change Password">
+            <app-change-password></app-change-password>
+          </mat-tab>
+          <mat-tab label="Delete Account">
+            <app-profile-delete></app-profile-delete>
+          </mat-tab>
+        </ng-container>
+      </mat-tab-group>
     </div>
   </div>
 
@@ -24,5 +32,3 @@
     </div>
   </ng-template>
 </ng-template>
-
-{{ activityRegistrations | json }}
