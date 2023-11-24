@@ -36,6 +36,7 @@ import { ProfileRegistrationsComponent } from './application/components/profile-
 import { Error404Component } from './application/components/error404/error404.component';
 import { SharedModuleModule } from './shared-module/shared-module.module';
 import { ProfileDeleteComponent } from './application/components/profile-delete/profile-delete.component';
+import { ProfileAboutComponent } from './application/components/profile-about/profile-about.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ProfileDeleteComponent } from './application/components/profile-delete/
     // registration based components
     ProfileRegistrationsComponent,
     ProfileDeleteComponent,
+    ProfileAboutComponent,
     // error based components
     Error404Component,
   ],

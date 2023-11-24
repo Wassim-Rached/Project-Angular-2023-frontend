@@ -6,6 +6,9 @@
 
     <div class="container mt-5" *ngIf="isOwner">
       <mat-tab-group>
+        <mat-tab label="About">
+          <app-profile-about [account]="account"></app-profile-about>
+        </mat-tab>
         <mat-tab label="Registrations">
           <app-profile-registrations></app-profile-registrations>
         </mat-tab>
