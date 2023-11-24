@@ -5,12 +5,8 @@
     (ngSubmit)="onSubmit(loginForm)"
     class="form-signin"
   >
-    <div
-      class="text-center text-danger d-flex align-items-center justify-content-center h-30px"
-    >
-      <span *ngIf="errorDescription">
-        {{ errorDescription }}
-      </span>
+    <div *ngIf="errorDescription" class="alert alert-danger">
+      {{ errorDescription }}
     </div>
     <div class="form-label-group">
       <label class="form-label" for="inputUsername">Username</label>
