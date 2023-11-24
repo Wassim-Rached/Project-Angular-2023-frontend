@@ -4,7 +4,6 @@ import { Account } from '../../classes/account';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { ActivityService } from '../../services/activity.service';
-import { Registration } from '../../classes/registration';
 
 @Component({
   selector: 'app-account-page',
@@ -12,11 +11,11 @@ import { Registration } from '../../classes/registration';
   styleUrls: ['./account-page.component.css'],
 })
 export class AccountPageComponent implements OnInit {
-  isOwner: boolean = false;
   account!: Account;
   profileId!: string;
+  // loading states
+  isOwner: boolean = false;
   isLoadingPage = false;
-  activityRegistrations: Registration[] = [];
 
   constructor(
     private accountService: AccountService,
@@ -42,41 +41,11 @@ export class AccountPageComponent implements OnInit {
         // check if the current account is the owner of the profile
         this.isOwner = currentAccountId === account.id;
         // set the loading page to false
-        if (this.isOwner) {
-          this.activityService.getAllMyActivityRegistrations().subscribe({
-            next: (activityRegistrations) => {
-              // set the activity registrations
-              this.activityRegistrations = activityRegistrations;
-              // set the loading page to false
-              this.isLoadingPage = false;
-            },
-            error: (error) => {
-              // set the loading page to false
-              this.isLoadingPage = false;
-            },
-          });
-        } else {
-          // set the loading page to false
-          this.isLoadingPage = false;
-        }
+        this.isLoadingPage = false;
       },
       error: (error) => {
         // set the loading page to false
         this.isLoadingPage = false;
-      },
-    });
-  }
-
-  onDelete() {
-    const confirmDelete = confirm(
-      'Are you sure you want to delete your account?'
-    );
-
-    if (!confirmDelete) return;
-
-    this.accountService.deleteAccountById(this.account.id!).subscribe({
-      next: (data) => {
-        this.authService.logout();
       },
     });
   }
