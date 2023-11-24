@@ -18,8 +18,8 @@
           <option value="-likes_count">Most Liked</option>
         </select>
       </div>
-      <button class="btn btn-primary col-1" [disabled]="isSubmitting">
-        Search
+      <button class="col-1 btn btn-primary" [disabled]="isSubmitting">
+        {{ isSubmitting ? "Loading..." : "Search" }}
       </button>
     </div>
   </form>

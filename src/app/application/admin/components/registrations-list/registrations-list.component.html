@@ -16,15 +16,13 @@
             </option>
           </select>
         </div>
-        <div class="col-1">
-          <button
-            type="submit"
-            [disabled]="isSubmitting"
-            class="btn btn-primary"
-          >
-            Submit
-          </button>
-        </div>
+        <button
+          type="submit"
+          [disabled]="isSubmitting"
+          class="col-1 btn btn-primary"
+        >
+          {{ isSubmitting ? "Loading..." : "Search" }}
+        </button>
       </div>
     </form>
     <div>
