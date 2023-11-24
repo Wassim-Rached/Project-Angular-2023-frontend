@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
+import { Account } from '../../classes/account';
+import { MessageText } from '../../types';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +12,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignUpComponent implements OnInit {
   Form!: FormGroup;
-  errorDescription: string = '';
+  message?: MessageText;
+  //
   isSubmitting: boolean = false;
 
   constructor(
@@ -28,23 +31,24 @@ export class SignUpComponent implements OnInit {
       phone_number: [''],
       first_name: [''],
       last_name: [''],
-      // photo: [null],
+      photo: [null],
     });
   }
 
   onSubmit() {
-    const data = this.Form.value;
-    // const formData = new FormData();
-
-    // formData.append('photo', data.photo);
-    // console.log(formData);
-
-    // delete data.photo;
-
-    const account = { user: data };
-
+    // disable the submit button
     this.isSubmitting = true;
-    this.errorDescription = '';
+
+    // get the form data
+    const data = this.Form.value;
+
+    // create the formData for the photo
+    const formData = new FormData();
+    formData.append('photo', data.photo);
+    delete data.photo;
+
+    // create the account object
+    const account = { user: data };
 
     // create the account
     this.accountService.createAccount(account).subscribe({
@@ -56,20 +60,28 @@ export class SignUpComponent implements OnInit {
             // authentificate the user
             this.authService.authentificate(response);
             // update the photo
-            // this.accountService
-            //   .updateAccount(accountId!, formData as Account)
-            //   .subscribe({
-            //     next: (response) => {
-            //       this.isSubmitting = false;
-            //       this.Form.reset();
-            //       this.authService.redirectAfterSignin();
-            //     },
-            //     error: (error) => {
-            //       // error with the photo update
-            //       this.isSubmitting = false;
-            //       console.error(error);
-            //     },
-            //   });
+            this.accountService
+              .updateAccount(accountId!, formData as Account)
+              .subscribe({
+                next: (response) => {
+                  this.isSubmitting = false;
+                  this.Form.reset();
+                  this.message = {
+                    text: 'Your account has been created',
+                    status: 'success',
+                  };
+                  // this.authService.redirectAfterSignin();
+                },
+                error: (error) => {
+                  // error with the photo update
+                  this.isSubmitting = false;
+                  console.error(error);
+                  this.message = {
+                    text: 'Your account has been created but the photo has not been updated',
+                    status: 'warning',
+                  };
+                },
+              });
           },
           error(error) {
             // error with the authentification
@@ -85,13 +97,22 @@ export class SignUpComponent implements OnInit {
         if (error.status === 400) {
           // for validation errors
           this.handleFormErrors(error.error);
-          this.errorDescription = '';
+          this.message = {
+            text: 'Please correct the errors',
+            status: 'error',
+          };
         } else if (error.status === 401) {
           // for unauthorized errors
-          this.errorDescription = 'Invalid credentials';
+          this.message = {
+            text: error.error.message,
+            status: 'error',
+          };
         } else {
           // for unexpected errors
-          this.errorDescription = 'Unexpected error';
+          this.message = {
+            text: 'Something went wrong, please try again later',
+            status: 'error',
+          };
         }
       },
     });
@@ -115,11 +136,10 @@ export class SignUpComponent implements OnInit {
     return false;
   }
 
-  // onFileChange(event: any) {
-  //   if (event.target.files.length > 0) {
-  //     const file = event.target.files[0];
-  //     console.log(file);
-  //     this.Form.get('photo')?.setValue(file);
-  //   }
-  // }
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.Form.get('photo')?.setValue(file);
+    }
+  }
 }

@@ -1,14 +1,7 @@
 <div class="container mt-5">
   <h1 class="text-center fs-1 highlight">Sign in</h1>
   <form [formGroup]="Form" (ngSubmit)="onSubmit()" class="form-signin">
-    <div
-      class="text-center text-danger d-flex align-items-center justify-content-center h-30px"
-    >
-      <span *ngIf="errorDescription">
-        {{ errorDescription }}
-      </span>
-    </div>
-
+    <app-message-text *ngIf="message" [message]="message"></app-message-text>
     <div>
       <label class="form-label" for="username">username</label>
       <input
@@ -125,7 +118,7 @@
       </div>
     </div>
 
-    <!-- <div>
+    <div>
       <label for="photo" class="form-label">profile photo</label>
       <input
         type="file"
@@ -137,19 +130,18 @@
           'form-control': true
         }"
         class="form-control"
-        formControlName="photo"
       />
       <div *ngIf="fieldHasError('photo')">
         {{ getFieldErrorMessage("photo") }}
       </div>
-    </div> -->
+    </div>
 
     <button
       class="mt-4 btn btn-primary"
       [disabled]="isSubmitting"
       type="submit"
     >
-      Sign up
+      {{ isSubmitting ? "Loading..." : "Sign up" }}
     </button>
   </form>
 </div>
