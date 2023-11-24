@@ -1,9 +1,3 @@
-mat-sidenav-container {
-  background: #dadada;
-  width: 300px;
-  height: calc(100vh - 64px);
-}
-
 .active-nav-link {
   color: rgb(21, 143, 74);
 }
