@@ -43,8 +43,6 @@ export class JoinUsComponent implements OnInit {
         this.isPageLoading = false;
       },
       error: () => {
-        console.log({ join: this.join });
-        console.log({ auth: this.isAuthenticated });
         this.isPageLoading = false;
       },
     });
