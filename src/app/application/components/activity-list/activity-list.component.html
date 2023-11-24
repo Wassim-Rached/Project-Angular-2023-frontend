@@ -13,10 +13,26 @@
       <button [disabled]="isSubmitting" class="btn btn-primary">search</button>
     </div>
   </form>
-  <div *ngIf="isSubmitting">loading...</div>
-  <div *ngIf="!isSubmitting" class="row">
-    <div *ngFor="let activity of activities" class="mb-6 mt-4 col-md-6">
-      <app-activity-card [activity]="activity"></app-activity-card>
-    </div>
+  <div class="row">
+    <ng-container *ngIf="isSubmitting; else searchResult">
+      <!-- load 3 skeletons template for cards -->
+      <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
+      </app-activity-card-skeleton>
+
+      <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
+      </app-activity-card-skeleton>
+
+      <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
+      </app-activity-card-skeleton>
+
+      <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
+      </app-activity-card-skeleton>
+    </ng-container>
+    <ng-template #searchResult>
+      <!-- show the result -->
+      <div *ngFor="let activity of activities" class="mb-6 mt-4 col-md-6">
+        <app-activity-card [activity]="activity"></app-activity-card>
+      </div>
+    </ng-template>
   </div>
 </div>
