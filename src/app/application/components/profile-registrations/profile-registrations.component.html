@@ -1,0 +1,5 @@
+<div *ngIf="isSubmitting; else registrations">loading...</div>
+
+<ng-template #registrations>
+  {{ activityRegistrations | json }}
+</ng-template>
