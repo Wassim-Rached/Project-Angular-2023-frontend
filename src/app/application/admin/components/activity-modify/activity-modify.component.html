@@ -70,8 +70,9 @@
         type="file"
         id="photo"
         (change)="onFileChange($event)"
-        formControlName="photo"
-        class="form-control"
+        [ngClass]="{
+          'form-control': true
+        }"
       />
     </div>
     <div>

@@ -93,14 +93,7 @@ export class ActivityModifyComponent implements OnInit {
       // update the photo
       this.activityService
         .updateActivity(this.activityId, photoFormData as Activity)
-        .subscribe({
-          next: (updatedActivityPhoto) => {
-            console.log({ updatedActivityPhoto });
-          },
-          error: (error) => {
-            console.error(error);
-          },
-        });
+        .subscribe({});
     }
 
     // delete the photo
