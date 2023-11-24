@@ -1,38 +1,70 @@
-<div class="mb-5 container">
-  <h1 class="fs-10 text-center highlight p-5">Activities</h1>
+<div *ngIf="isPageLoading; else page">loading...</div>
 
-  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
-    <div class="input-group mb-3">
-      <span class="input-group-text">Search</span>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="search for an activity by title..."
-        formControlName="title__icontains"
-      />
-      <button [disabled]="isSubmitting" class="btn btn-primary">search</button>
-    </div>
-  </form>
-  <div class="row">
-    <ng-container *ngIf="isSubmitting; else searchResult">
-      <!-- load 3 skeletons template for cards -->
-      <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
-      </app-activity-card-skeleton>
+<ng-template #page>
+  <div class="mb-5 container">
+    <h1 class="fs-10 text-center highlight p-5">Activities</h1>
 
-      <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
-      </app-activity-card-skeleton>
-
-      <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
-      </app-activity-card-skeleton>
-
-      <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
-      </app-activity-card-skeleton>
-    </ng-container>
-    <ng-template #searchResult>
-      <!-- show the result -->
-      <div *ngFor="let activity of activities" class="mb-6 mt-4 col-md-6">
-        <app-activity-card [activity]="activity"></app-activity-card>
+    <form class="container" [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="row mb-4">
+        <div class="col input-group">
+          <span class="input-group-text">Search</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="search for an activity by title..."
+            formControlName="title__icontains"
+          />
+        </div>
+        <div class="col-3">
+          <div class="input-group">
+            <span class="input-group-text">Category</span>
+            <select class="form-select" formControlName="categories__name">
+              <option value="">All</option>
+              <option
+                *ngFor="let category of categories"
+                [value]="category.name"
+              >
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <button class="col-1 btn btn-primary" [disabled]="isSubmitting">
+          search
+        </button>
       </div>
-    </ng-template>
+    </form>
+    <div class="row">
+      <ng-container *ngIf="isSubmitting; else searchResult">
+        <!-- load 3 skeletons template for cards -->
+        <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
+        </app-activity-card-skeleton>
+
+        <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
+        </app-activity-card-skeleton>
+
+        <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
+        </app-activity-card-skeleton>
+
+        <app-activity-card-skeleton class="mb-6 mt-4 col-md-6">
+        </app-activity-card-skeleton>
+      </ng-container>
+
+      <ng-template #searchResult>
+        <!-- if the result is empty -->
+        <div *ngIf="activities.length === 0; else resultData" class="col-12">
+          <div class="alert alert-warning" role="alert">
+            No activities found
+          </div>
+        </div>
+
+        <!-- show the result -->
+        <ng-template #resultData>
+          <div *ngFor="let activity of activities" class="mb-6 mt-4 col-md-6">
+            <app-activity-card [activity]="activity"></app-activity-card>
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
   </div>
-</div>
+</ng-template>
