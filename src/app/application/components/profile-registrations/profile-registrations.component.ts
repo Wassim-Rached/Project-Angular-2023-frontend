@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Registration } from '../../classes/registration';
 import { ActivityService } from '../../services/activity.service';
+import { Status } from '../../classes/join-us';
 
 @Component({
   selector: 'app-profile-registrations',
@@ -27,5 +28,17 @@ export class ProfileRegistrationsComponent implements OnInit {
         this.isSubmitting = false;
       },
     });
+  }
+
+  public isAccepted(status: Status) {
+    return status === 'accepted';
+  }
+
+  public isPending(status: Status) {
+    return status === 'pending';
+  }
+
+  public isRejected(status: Status) {
+    return status === 'rejected';
   }
 }
