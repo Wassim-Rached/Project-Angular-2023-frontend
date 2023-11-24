@@ -25,7 +25,7 @@ export class JoiningListAdminComponent implements OnInit {
 
     // init the form
     this.Form = this.fb.group({
-      status: ['pending'],
+      status: [''],
       ordering: ['-created_at'],
     });
 
