@@ -1,11 +1,24 @@
-<form [formGroup]="form" class="container" (ngSubmit)="onSubmit()">
+<form
+  [formGroup]="Form"
+  class="container d-flex flex-column gap-2"
+  (ngSubmit)="onSubmit()"
+>
+  <app-message-text *ngIf="message" [message]="message"></app-message-text>
   <div>
     <label for="title" class="form-label">Title:</label>
     <input
       type="text"
       id="title"
       formControlName="title"
-      class="form-control"
+      [ngClass]="{
+        'is-invalid': fieldHasAnyError('title'),
+        'form-control': true
+      }"
+    />
+    <app-input-error-message *ngIf="haveRequiredError('title')" />
+    <app-input-error-message
+      *ngIf="fieldHasError('title')"
+      [message]="getFieldServerErrorMessage('title')"
     />
   </div>
   <div class="form-group">
@@ -19,6 +32,11 @@
       name="items"
       formControlName="categories"
     ></ng-select>
+    <app-input-error-message *ngIf="haveRequiredError('categories')" />
+    <app-input-error-message
+      *ngIf="fieldHasError('categories')"
+      [message]="getFieldServerErrorMessage('categories')"
+    />
   </div>
   <div>
     <label for="description" class="form-label">Description:</label>
@@ -26,8 +44,16 @@
       rows="5"
       id="description"
       formControlName="description"
-      class="form-control"
+      [ngClass]="{
+        'is-invalid': fieldHasAnyError('description'),
+        'form-control': true
+      }"
     ></textarea>
+    <app-input-error-message *ngIf="haveRequiredError('description')" />
+    <app-input-error-message
+      *ngIf="fieldHasError('description')"
+      [message]="getFieldServerErrorMessage('description')"
+    />
   </div>
   <div>
     <label for="is_free" class="form-label">Is Free:</label>
@@ -35,25 +61,41 @@
       type="checkbox"
       id="is_free"
       formControlName="is_free"
-      class="form-input"
+      class="form-check"
     />
   </div>
   <div *ngIf="!isFree">
     <label class="form-label" for="price">Price:</label>
     <input
-      class="form-control"
+      [ngClass]="{
+        'is-invalid': fieldHasAnyError('price'),
+        'form-control': true
+      }"
       type="text"
       id="price"
       formControlName="price"
+    />
+    <app-input-error-message *ngIf="haveRequiredError('price')" />
+    <app-input-error-message
+      *ngIf="fieldHasError('price')"
+      [message]="getFieldServerErrorMessage('price')"
     />
   </div>
   <div>
     <label class="form-label" for="maxParticipants">Max Participants:</label>
     <input
-      class="form-control"
-      type="text"
+      [ngClass]="{
+        'is-invalid': fieldHasAnyError('maxParticipants'),
+        'form-control': true
+      }"
+      type="number"
       id="maxParticipants"
       formControlName="maxParticipants"
+    />
+    <app-input-error-message *ngIf="haveRequiredError('maxParticipants')" />
+    <app-input-error-message
+      *ngIf="fieldHasError('maxParticipants')"
+      [message]="getFieldServerErrorMessage('maxParticipants')"
     />
   </div>
   <div>
@@ -63,13 +105,39 @@
       id="photo"
       (change)="onFileChange($event)"
       formControlName="photo"
-      class="form-control"
+      [ngClass]="{
+        'is-invalid': fieldHasAnyError('photo'),
+        'form-control': true
+      }"
+    />
+    <app-input-error-message *ngIf="haveRequiredError('photo')" />
+    <app-input-error-message
+      *ngIf="fieldHasError('photo')"
+      [message]="getFieldServerErrorMessage('photo')"
     />
   </div>
   <div>
     <label class="form-label" for="date">Date:</label>
-    <input class="form-control" type="date" id="date" formControlName="date" />
-
-    <button type="submit" class="btn btn-primary mt-3">create</button>
+    <input
+      [ngClass]="{
+        'is-invalid': fieldHasAnyError('date'),
+        'form-control': true
+      }"
+      type="date"
+      id="date"
+      formControlName="date"
+    />
+    <app-input-error-message *ngIf="haveRequiredError('date')" />
+    <app-input-error-message
+      *ngIf="fieldHasError('date')"
+      [message]="getFieldServerErrorMessage('date')"
+    />
   </div>
+  <button
+    [disabled]="isSubmitting || Form.invalid"
+    type="submit"
+    class="btn btn-primary mt-3"
+  >
+    {{ isSubmitting ? "Loading..." : "Submit" }}
+  </button>
 </form>
