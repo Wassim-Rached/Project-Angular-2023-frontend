@@ -61,7 +61,11 @@
                   />
                 </th>
                 <td>
-                  {{ registration.account?.user?.username! | userNameFormater }}
+                  <a [routerLink]="['/profile', registration.account?.id]">
+                    {{
+                      registration.account?.user?.username! | userNameFormater
+                    }}
+                  </a>
                 </td>
                 <td>
                   {{ registration.account?.user?.email }}
