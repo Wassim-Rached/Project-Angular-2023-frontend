@@ -147,3 +147,10 @@ a:hover {
     opacity: 0.7;
   }
 }
+
+.bg-team-memebers {
+  background-image: url("assets/club-members.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
