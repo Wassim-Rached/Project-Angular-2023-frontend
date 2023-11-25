@@ -33,7 +33,7 @@ a:hover {
 }
 
 .highlight {
-  color: rgb(21, 143, 74);
+  color: #0b8c0c;
 }
 
 .fs-10 {
@@ -153,4 +153,8 @@ a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+.fs-small {
+  font-size: 0.8rem;
 }
