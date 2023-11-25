@@ -1,4 +1,6 @@
-<div *ngIf="isSubmitting; else registrations">loading...</div>
+<div *ngIf="isSubmitting; else registrations">
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
 
 <ng-template #registrations>
   <div class="container">
