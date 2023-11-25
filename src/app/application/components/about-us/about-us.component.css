@@ -1,0 +1,16 @@
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h2 svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--secondary-color);
+}
+
+p {
+  border-left: 1px solid var(--secondary-color);
+  padding-left: 10px;
+}
