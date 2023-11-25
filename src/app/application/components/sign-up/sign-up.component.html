@@ -8,15 +8,17 @@
         type="text"
         id="username"
         [ngClass]="{
-          'is-invalid': fieldHasError('username'),
+          'is-invalid': fieldHasAnyError('username'),
           'form-control': true
         }"
         formControlName="username"
         placeholder="username"
       />
-      <div *ngIf="fieldHasError('username')" class="invalid-feedback">
-        {{ getFieldErrorMessage("username") }}
-      </div>
+      <app-input-error-message *ngIf="haveRequiredError('username')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('username')"
+        [message]="getFieldServerErrorMessage('username')"
+      />
     </div>
 
     <div>
@@ -25,15 +27,17 @@
         type="email"
         id="email"
         [ngClass]="{
-          'is-invalid': fieldHasError('email'),
+          'is-invalid': fieldHasAnyError('email'),
           'form-control': true
         }"
         formControlName="email"
         placeholder="email"
       />
-      <div *ngIf="fieldHasError('username')" class="invalid-feedback">
-        {{ getFieldErrorMessage("username") }}
-      </div>
+      <app-input-error-message *ngIf="haveRequiredError('email')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('email')"
+        [message]="getFieldServerErrorMessage('email')"
+      />
     </div>
 
     <div>
@@ -42,15 +46,17 @@
         type="text"
         id="first_name"
         [ngClass]="{
-          'is-invalid': fieldHasError('email'),
+          'is-invalid': fieldHasAnyError('email'),
           'form-control': true
         }"
         formControlName="first_name"
         placeholder="first name"
       />
-      <div *ngIf="fieldHasError('first_name')" class="invalid-feedback">
-        {{ getFieldErrorMessage("first_name") }}
-      </div>
+      <app-input-error-message *ngIf="haveRequiredError('first_name')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('first_name')"
+        [message]="getFieldServerErrorMessage('first_name')"
+      />
     </div>
 
     <div>
@@ -59,15 +65,17 @@
         type="text"
         id="last_name"
         [ngClass]="{
-          'is-invalid': fieldHasError('last_name'),
+          'is-invalid': fieldHasAnyError('last_name'),
           'form-control': true
         }"
         formControlName="last_name"
         placeholder="last_name"
       />
-      <div *ngIf="fieldHasError('last_name')" class="invalid-feedback">
-        {{ getFieldErrorMessage("last_name") }}
-      </div>
+      <app-input-error-message *ngIf="haveRequiredError('last_name')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('last_name')"
+        [message]="getFieldServerErrorMessage('last_name')"
+      />
     </div>
 
     <div>
@@ -76,15 +84,17 @@
         type="number"
         id="phone_number"
         [ngClass]="{
-          'is-invalid': fieldHasError('phone_number'),
+          'is-invalid': fieldHasAnyError('phone_number'),
           'form-control': true
         }"
         formControlName="phone_number"
         placeholder="phone number"
       />
-      <div *ngIf="fieldHasError('phone_number')" class="invalid-feedback">
-        {{ getFieldErrorMessage("phone_number") }}
-      </div>
+      <app-input-error-message *ngIf="haveRequiredError('phone_number')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('phone_number')"
+        [message]="getFieldServerErrorMessage('phone_number')"
+      />
     </div>
 
     <div>
@@ -106,42 +116,31 @@
         type="password"
         id="inputPassword"
         [ngClass]="{
-          'is-invalid': fieldHasError('password'),
+          'is-invalid': fieldHasAnyError('password'),
           'form-control': true
         }"
         formControlName="password"
         placeholder="Password"
         required
       />
-      <div *ngIf="fieldHasError('password')" class="invalid-feedback">
-        {{ getFieldErrorMessage("password") }}
-      </div>
-    </div>
-
-    <div>
-      <label for="photo" class="form-label">profile photo</label>
-      <input
-        type="file"
-        (change)="onFileChange($event)"
-        name="photo"
-        id="photo"
-        [ngClass]="{
-          'is-invalid': fieldHasError('photo'),
-          'form-control': true
-        }"
-        class="form-control"
+      <app-input-error-message *ngIf="haveRequiredError('password')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('password')"
+        [message]="getFieldServerErrorMessage('password')"
       />
-      <div *ngIf="fieldHasError('photo')">
-        {{ getFieldErrorMessage("photo") }}
-      </div>
     </div>
-
-    <button
-      class="mt-4 btn btn-primary"
-      [disabled]="isSubmitting"
-      type="submit"
-    >
-      {{ isSubmitting ? "Loading..." : "Sign up" }}
-    </button>
+    <div class="text-muted mt-3">
+      Already have an account?
+      <a routerLink="/signin" class="text-primary">Sign in</a>
+    </div>
+    <div>
+      <button
+        class="mt-4 btn btn-primary"
+        [disabled]="isSubmitting || Form.invalid"
+        type="submit"
+      >
+        {{ isSubmitting ? "Loading..." : "Sign up" }}
+      </button>
+    </div>
   </form>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Account } from '../../classes/account';
@@ -24,14 +24,13 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.Form = this.fb.group({
-      username: [''],
-      email: [''],
-      password: [''],
-      gender: ['M'],
-      phone_number: [''],
-      first_name: [''],
-      last_name: [''],
-      photo: [null],
+      username: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      gender: ['M', Validators.required],
+      phone_number: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
     });
   }
 
@@ -42,46 +41,18 @@ export class SignUpComponent implements OnInit {
     // get the form data
     const data = this.Form.value;
 
-    // create the formData for the photo
-    const formData = new FormData();
-    formData.append('photo', data.photo);
-    delete data.photo;
-
     // create the account object
-    const account = { user: data };
+    const account = { user: data } as Account;
 
     // create the account
     this.accountService.createAccount(account).subscribe({
       next: (response) => {
         // sign in the user
-        const accountId = response.id;
         this.authService.signin(data.username, data.password).subscribe({
-          next: (response) => {
+          next: (token) => {
             // authentificate the user
-            this.authService.authentificate(response);
-            // update the photo
-            this.accountService
-              .updateAccount(accountId!, formData as Account)
-              .subscribe({
-                next: (response) => {
-                  this.isSubmitting = false;
-                  this.Form.reset();
-                  this.message = {
-                    text: 'Your account has been created',
-                    status: 'success',
-                  };
-                  // this.authService.redirectAfterSignin();
-                },
-                error: (error) => {
-                  // error with the photo update
-                  this.isSubmitting = false;
-                  console.error(error);
-                  this.message = {
-                    text: 'Your account has been created but the photo has not been updated',
-                    status: 'warning',
-                  };
-                },
-              });
+            this.authService.authentificate(token);
+            this.authService.redirectAfterSignin();
           },
           error(error) {
             // error with the authentification
@@ -96,7 +67,7 @@ export class SignUpComponent implements OnInit {
         // handle the errors
         if (error.status === 400) {
           // for validation errors
-          this.handleFormErrors(error.error);
+          this.handleFormErrors(error.error.user);
           this.message = {
             text: 'Please correct the errors',
             status: 'error',
@@ -118,28 +89,42 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+  // check if the field has certain error
+  public fieldHasError(field: string, error: string = 'serverError'): boolean {
+    const formFiled = this.Form.get(field);
+    if (!formFiled) return false;
+
+    return formFiled.hasError(error);
+  }
+
+  // check if the field has any error
+  public fieldHasAnyError(field: string): boolean {
+    const formFiled = this.Form.get(field);
+    if (!formFiled) return false;
+
+    return formFiled.invalid && (formFiled.touched || formFiled.dirty);
+  }
+
+  // check if the field has required error
+  public haveRequiredError(field: string) {
+    return (
+      this.Form.get(field)?.errors?.['required'] &&
+      this.Form.get(field)?.touched
+    );
+  }
+
+  // get the server error message
+  public getFieldServerErrorMessage(field: string): string {
+    return this.Form.get(field)?.errors?.['serverError'];
+  }
+
+  // set the errors from the backend
+  // on the form controls
   private handleFormErrors(errors: any): void {
-    // set the errors from the backend
-    // on the form controls
     for (const field in errors) {
       if (this.Form.get(field)) {
         this.Form.get(field)?.setErrors({ serverError: errors[field][0] });
       }
-    }
-  }
-
-  getFieldErrorMessage(field: string): string {
-    return '';
-  }
-
-  fieldHasError(field: string): boolean {
-    return false;
-  }
-
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.Form.get('photo')?.setValue(file);
     }
   }
 }
