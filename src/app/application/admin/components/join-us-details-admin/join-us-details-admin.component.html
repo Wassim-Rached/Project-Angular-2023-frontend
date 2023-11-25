@@ -2,7 +2,7 @@
 
 <ng-template #page>
   <ng-container *ngIf="joinForm; else notFound">
-    <div class="container mw-500px mt-5 mb-5 p-4 shadow-lg">
+    <div class="container mw-500px mb-5 p-4 shadow-lg">
       <div>
         <img
           [src]="joinForm.account?.photo_url"
@@ -48,16 +48,24 @@
         <button
           (click)="Accept()"
           class="btn btn-success"
-          [disabled]="isAccepted(joinForm.status!)"
+          [disabled]="isAccepted(joinForm.status!) || isSubmitting"
         >
-          Accept
+          {{
+            isSubmitting && !isAccepted(joinForm.status!)
+              ? "loading..."
+              : "Accept"
+          }}
         </button>
         <button
           (click)="Reject()"
           class="btn btn-danger"
-          [disabled]="isRejected(joinForm.status!)"
+          [disabled]="isRejected(joinForm.status!) || isSubmitting"
         >
-          Reject
+          {{
+            isSubmitting && !isRejected(joinForm.status!)
+              ? "loading..."
+              : "Reject"
+          }}
         </button>
       </div>
     </div>
