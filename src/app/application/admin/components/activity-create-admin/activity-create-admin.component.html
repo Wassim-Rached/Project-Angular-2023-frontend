@@ -132,11 +132,13 @@
       [message]="getFieldServerErrorMessage('date')"
     />
   </div>
-  <button
-    [disabled]="isSubmitting || Form.invalid"
-    type="submit"
-    class="btn btn-primary mt-3"
-  >
-    {{ isSubmitting ? "Loading..." : "Submit" }}
-  </button>
+  <div>
+    <button
+      [disabled]="isSubmitting || Form.invalid"
+      type="submit"
+      class="btn btn-primary mt-3"
+    >
+      {{ isSubmitting ? "Loading..." : "Submit" }}
+    </button>
+  </div>
 </form>
