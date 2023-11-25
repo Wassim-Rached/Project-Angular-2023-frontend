@@ -1,14 +1,18 @@
 <mat-toolbar id="toolbar-nav" color="primary">
-  <div *ngIf="isNavbarLoading; else navbarContent">loading...</div>
-  <ng-template #navbarContent>
-    <div class="left-nav">
-      <div class="logo-container">
-        <img src="assets/logo.png" alt="" />
-      </div>
-      <span routerLink="/" class="logo-text"
-        ><span class="eco">Eco</span>save</span
-      >
+  <div class="left-nav">
+    <div class="logo-container">
+      <img src="assets/logo.png" alt="club-logo" />
     </div>
+    <span routerLink="/" class="logo-text">
+      <span class="eco">Eco</span>
+      <span>save</span>
+    </span>
+  </div>
+  <!-- load this until data is ready -->
+  <div *ngIf="isNavbarLoading; else navbarDynamics">loading...</div>
+
+  <!-- only load this when the data is ready -->
+  <ng-template #navbarDynamics>
     <div class="middle-nav">
       <ul>
         <li>
@@ -16,39 +20,55 @@
             >About us</a
           >
         </li>
-        <li *ngIf="!isAdmin">
-          <a routerLinkActive="active-nav-link" routerLink="join-us">Join us</a>
-        </li>
-        <li>
-          <a routerLinkActive="active-nav-link" routerLink="activities"
-            >Activities</a
-          >
-        </li>
+        <ng-container *ngIf="!isAdmin; else AdminLinks">
+          <li>
+            <a routerLinkActive="active-nav-link" routerLink="join-us">
+              Join us
+            </a>
+          </li>
+          <li>
+            <a routerLinkActive="active-nav-link" routerLink="activities">
+              Activities
+            </a>
+          </li>
+        </ng-container>
+        <ng-template #AdminLinks>
+          <li>
+            <a routerLinkActive="active-nav-link" routerLink="dashboard">
+              Dashboard
+            </a>
+          </li>
+        </ng-template>
       </ul>
     </div>
     <div class="right-nav">
-      <button
-        *ngIf="!userAccount"
-        routerLink="signup"
-        class="btn btn-secondary"
-      >
-        sign up
-      </button>
-      <button *ngIf="!userAccount" routerLink="signin" class="btn btn-dark">
-        sign in
-      </button>
-      <button *ngIf="isAdmin" routerLink="dashboard" class="btn btn-info">
-        Dashboard
-      </button>
-      <button *ngIf="userAccount" (click)="onLogout()" class="btn btn-danger">
-        logout
-      </button>
-      <span
-        [routerLink]="['profile', userAccount.id]"
-        class="profile-img-container"
-        *ngIf="userAccount"
-        ><img [src]="userAccount.photo_url" [alt]="userAccount.user?.last_name"
-      /></span>
+      <ng-container *ngIf="!userAccount; else authenticatedContent">
+        <button
+          *ngIf="!userAccount"
+          routerLink="signup"
+          class="btn btn-secondary"
+        >
+          sign up
+        </button>
+        <button *ngIf="!userAccount" routerLink="signin" class="btn btn-dark">
+          sign in
+        </button>
+      </ng-container>
+      <ng-template #authenticatedContent>
+        <button *ngIf="userAccount" (click)="onLogout()" class="btn btn-danger">
+          logout
+        </button>
+        <span
+          [routerLink]="['profile', userAccount.id]"
+          class="profile-img-container"
+          *ngIf="userAccount"
+        >
+          <img
+            [src]="userAccount.photo_url"
+            [alt]="userAccount.user?.last_name"
+          />
+        </span>
+      </ng-template>
     </div>
   </ng-template>
 </mat-toolbar>
