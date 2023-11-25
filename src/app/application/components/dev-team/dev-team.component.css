@@ -1,4 +1,8 @@
-img{
-    height: 200px;
-    width: 200px;
+img {
+  height: 200px;
+  width: 200px;
+}
+
+.rounded-10px {
+  border-radius: 10px;
 }
