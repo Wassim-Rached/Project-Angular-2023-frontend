@@ -86,6 +86,8 @@ export class AuthService {
 
   // informations about the user
   public isAuthenticated(): boolean {
+    // the user is considered authenticated
+    // if he has an access token on local storage
     return this.getAcessToken() !== null;
   }
 

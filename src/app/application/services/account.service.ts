@@ -22,7 +22,7 @@ export class AccountService {
     accountId: string,
     account: Account
   ): Observable<Account> {
-    return this.http.patch<Account>(this.URL + accountId, account);
+    return this.http.patch<Account>(this.URL + accountId + '/', account);
   }
 
   public getAccountById(accountId: string): Observable<Account> {
