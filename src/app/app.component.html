@@ -1,4 +1,4 @@
-<app-main-loader *ngIf="!backendUp; else page"></app-main-loader>
+<app-main-loader *ngIf="!backendIsUp; else page"></app-main-loader>
 <ng-template #page>
   <div id="main-container">
     <app-navbar></app-navbar>

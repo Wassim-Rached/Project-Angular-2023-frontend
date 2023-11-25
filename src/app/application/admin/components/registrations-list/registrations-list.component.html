@@ -1,4 +1,6 @@
-<div *ngIf="isPageLoading; else page">loading...</div>
+<div *ngIf="isPageLoading; else page">
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
 
 <ng-template #page>
   <div>
@@ -26,7 +28,9 @@
       </div>
     </form>
     <div>
-      <div *ngIf="isSubmitting; else dataTable">loading...</div>
+      <div *ngIf="isSubmitting; else dataTable">
+        <mat-progress-bar mode="query"></mat-progress-bar>
+      </div>
       <ng-template #dataTable>
         <div
           *ngIf="registrations.length === 0; else table"

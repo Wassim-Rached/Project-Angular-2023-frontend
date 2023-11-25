@@ -1,34 +1,60 @@
-.loader {
-  width: 100px;
-  height: 40px;
-  --g: radial-gradient(
-      farthest-side,
-      white calc(95% - 3px),
-      #000 calc(100% - 3px) 98%,
-      white 101%
-    )
-    no-repeat;
-  background: var(--g), var(--g), var(--g);
-  background-size: 30px 30px;
-  animation: l9 1s infinite alternate;
+#loader {
+  background: var(--secondary-color);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-@keyframes l9 {
-  0% {
-    background-position: 0 50%, 50% 50%, 100% 50%;
-  }
-  20% {
-    background-position: 0 0, 50% 50%, 100% 50%;
-  }
-  40% {
-    background-position: 0 100%, 50% 0, 100% 50%;
-  }
-  60% {
-    background-position: 0 50%, 50% 100%, 100% 0;
-  }
-  80% {
-    background-position: 0 50%, 50% 50%, 100% 100%;
-  }
+
+#loader h1 {
+  font-size: 5rem;
+  color: #fff;
+}
+
+#tip {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-top: 20px;
+}
+
+/* from 'https://codepen.io/juergengenser/pen/dPoQpY' */
+#animation-container {
+  margin-top: 400px;
+}
+
+svg {
+  display: block;
+  width: 258px;
+  height: 258px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tree {
+  fill: var(--light-primary-color);
+}
+
+.circle-mask {
+  transform-origin: 50% 90%;
+  animation: scale 5s infinite ease-out;
+}
+
+@keyframes scale {
+  0%,
   100% {
-    background-position: 0 50%, 50% 50%, 100% 50%;
+    transform: scale(0);
+  }
+  7%,
+  90% {
+    transform: scale(0.4);
+  }
+  50% {
+    transform: scale(1);
   }
 }

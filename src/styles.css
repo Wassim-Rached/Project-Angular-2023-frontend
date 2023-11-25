@@ -7,6 +7,14 @@
 /* ng-select theme */
 @import "~@ng-select/ng-select/themes/material.theme.css";
 
+:root {
+  --primary-color: #309975;
+  --light-primary-color: #58b368;
+  --secondary-color: #454d66;
+  --third-color: #dad873;
+  --light-third-color: #efeeb4;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -15,6 +23,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
+  color: var(--secondary-color);
 }
 
 ul,
@@ -33,7 +42,7 @@ a:hover {
 }
 
 .highlight {
-  color: #0b8c0c;
+  color: var(--light-primary-color);
 }
 
 .fs-10 {

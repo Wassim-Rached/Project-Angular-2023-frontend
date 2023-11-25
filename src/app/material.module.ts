@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -16,6 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatCardModule,
     MatToolbarModule,
     MatTabsModule,
+    MatProgressBarModule,
   ],
   exports: [
     MatSidenavModule,
@@ -24,6 +26,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatCardModule,
     MatToolbarModule,
     MatTabsModule,
+    MatProgressBarModule,
   ],
 })
 export class MaterialModule {}

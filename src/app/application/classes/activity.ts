@@ -15,7 +15,7 @@ export class Activity {
     public is_free?: boolean,
     public price?: number,
     public description?: string,
-    public maxParticipants?: number,
+    public max_participants?: number,
     public registred_accounts?: Account[],
     public date?: string,
     created_at?: string,

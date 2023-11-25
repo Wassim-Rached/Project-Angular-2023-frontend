@@ -73,7 +73,7 @@ export class ActivityModifyComponent implements OnInit {
       photo: [null],
       is_free: [this.activity.is_free],
       price: [this.activity.price],
-      maxParticipants: [this.activity.maxParticipants],
+      max_participants: [this.activity.max_participants],
       date: [this.activity.date],
       description: [this.activity.description],
       categories: [this.activity.categories],
