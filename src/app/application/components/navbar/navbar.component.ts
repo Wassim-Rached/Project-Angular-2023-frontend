@@ -37,6 +37,9 @@ export class NavbarComponent implements OnInit {
   }
 
   public loadCurrentAccount(): void {
+    // if the user account is already set
+    if (this.userAccount && this.authService.isAuthenticated()) return;
+
     // if the user is not authenticated
     if (!this.authService.isAuthenticated()) {
       // set the user account to undefined
