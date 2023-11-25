@@ -13,11 +13,13 @@ export class JoinUsDetailsAdminComponent implements OnInit {
   joinId?: string;
   // loading states
   isPageLoading: boolean = false;
+  isSubmitting: boolean = false;
 
   constructor(
     private accountService: AccountService,
     private activatedRoute: ActivatedRoute
   ) {}
+
   ngOnInit(): void {
     // set loading state to true
     this.isPageLoading = true;
@@ -40,20 +42,39 @@ export class JoinUsDetailsAdminComponent implements OnInit {
   }
 
   Accept() {
+    // set loading state to true
+    this.isSubmitting = true;
+
+    // accept the join us form
     this.accountService.acceptJoiningForm(this.joinId!).subscribe({
       next: (status) => {
-        if (this.joinForm) {
-          this.joinForm.status = 'accepted';
-        }
+        // update the status
+        this.joinForm!.status = status;
+        // set loading state to false
+        this.isSubmitting = false;
+      },
+      error: (error) => {
+        // set loading state to false
+        this.isSubmitting = false;
       },
     });
   }
+
   Reject() {
+    // set loading state to true
+    this.isSubmitting = true;
+
+    // reject the join us form
     this.accountService.rejectJoiningForm(this.joinId!).subscribe({
       next: (status) => {
-        if (this.joinForm) {
-          this.joinForm.status = 'rejected';
-        }
+        // update the status
+        this.joinForm!.status = status;
+        // set loading state to false
+        this.isSubmitting = false;
+      },
+      error: (error) => {
+        // set loading state to false
+        this.isSubmitting = false;
       },
     });
   }

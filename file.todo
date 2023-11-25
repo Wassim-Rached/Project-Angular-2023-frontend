@@ -1,13 +1,9 @@
 // add api functionality
 
-// TODO finish dev-team  component and about us (static)
-
-//validators for registration
-
 //loaders
-
-// TODO the signin for admin might need to redirect to /dashboard
 
 // max participants
 
-// join us make them members
+// TODO clear uneeeded methodes in services
+
+// TODO main page shouldnt reccoment joiing for members and admins
