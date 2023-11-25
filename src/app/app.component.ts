@@ -8,17 +8,25 @@ import { environment } from './application/environments';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  backendUp: boolean = false;
+  backendIsUp: boolean = false;
+
   constructor(private http: HttpClient) {}
+
   ngOnInit(): void {
     const URL = environment['BASE_API_URL'] + 'activities/';
 
+    // health check for backend
     this.http.get(URL).subscribe({
       next: (res) => {
-        this.backendUp = true;
+        // if it gets here, the backend is up
+        // setTimeout(() => {
+        // wait 2 seconds (just for the loading animation)
+        this.backendIsUp = true;
+        // }, 2000);
       },
       error: (Error) => {
-        console.log(Error);
+        // else, the backend is down
+        this.backendIsUp = false;
       },
     });
   }
