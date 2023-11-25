@@ -37,7 +37,11 @@
                 class="img-fluid"
               />
             </td>
-            <td>{{ registration.activity?.title }}</td>
+            <td>
+              <a [routerLink]="['/activities', registration.activity!.id]">
+                {{ registration.activity?.title }}
+              </a>
+            </td>
             <td
               [ngClass]="
                 registration.activity?.is_free
