@@ -46,16 +46,27 @@
         <button
           *ngIf="!userAccount"
           routerLink="signup"
-          class="btn btn-secondary"
+          id="btn-signup"
+          class="btn"
         >
           sign up
         </button>
-        <button *ngIf="!userAccount" routerLink="signin" class="btn btn-dark">
+        <button
+          *ngIf="!userAccount"
+          routerLink="signin"
+          id="btn-signin"
+          class="btn"
+        >
           sign in
         </button>
       </ng-container>
       <ng-template #authenticatedContent>
-        <button *ngIf="userAccount" (click)="onLogout()" class="btn btn-danger">
+        <button
+          *ngIf="userAccount"
+          (click)="onLogout()"
+          id="btn-logout"
+          class="btn"
+        >
           logout
         </button>
         <span
