@@ -111,4 +111,11 @@ export class ActivityOverViewComponent implements OnInit {
       },
     });
   }
+
+  public get activityIsFull(): boolean {
+    return (
+      this.activity!.max_participants! >=
+      this.activity!.registred_accounts!.length
+    );
+  }
 }
