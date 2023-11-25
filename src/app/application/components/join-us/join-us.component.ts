@@ -3,6 +3,7 @@ import { AccountService } from '../../services/account.service';
 import { JoinUs } from '../../classes/join-us';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { MessageText } from '../../types';
 
 @Component({
   selector: 'app-join-us',
@@ -12,8 +13,11 @@ import { AuthService } from '../../services/auth.service';
 export class JoinUsComponent implements OnInit {
   Form!: FormGroup;
   join?: JoinUs;
+  message?: MessageText;
   isAuthenticated: boolean = false;
+  // loading states
   isPageLoading = false;
+  isSubmitting = false;
 
   constructor(
     private accountService: AccountService,
@@ -39,6 +43,10 @@ export class JoinUsComponent implements OnInit {
     // Get join us form
     this.accountService.getAllJoiningForms().subscribe({
       next: (data) => {
+        // the non admin will only get his own form
+        // the admin will get all forms
+        // either way the data will be an array of one element
+        // and the first element will be the user's form
         this.join = data[0];
         this.isPageLoading = false;
       },
@@ -48,20 +56,35 @@ export class JoinUsComponent implements OnInit {
     });
   }
 
-  public haveRequiredError(field: string) {
-    return (
-      this.Form.get(field)?.errors?.['required'] &&
-      this.Form.get(field)?.touched
-    );
-  }
+  public onSubmit() {
+    // Set button loading to true
+    this.isSubmitting = true;
 
-  public JoinClub() {
+    // send the request
     this.accountService.joinClub(this.Form.value).subscribe({
       next: (data) => {
-        console.log(data);
-        alert('Successfully joined club');
+        // Set message text
+        this.message = {
+          status: 'success',
+          text: 'Your request has been sent successfully',
+        };
+        // Set button loading to false
+        this.isSubmitting = false;
+
+        // Set join us form after 3 seconds
+        setTimeout(() => {
+          this.join = data;
+        }, 3000);
       },
-      error: () => alert('Failed to join club'),
+      error: (error) => {
+        // Set message text
+        this.message = {
+          status: 'error',
+          text: 'Something went wrong, please try again later',
+        };
+        // Set button loading to false
+        this.isSubmitting = false;
+      },
     });
   }
 
@@ -75,5 +98,35 @@ export class JoinUsComponent implements OnInit {
 
   public isRejected() {
     return this.join?.status === 'rejected';
+  }
+
+  // check if the field has required error
+  public haveRequiredError(field: string) {
+    return (
+      this.Form.get(field)?.errors?.['required'] &&
+      this.Form.get(field)?.touched
+    );
+  }
+
+  // check if the field has certain error
+  public fieldHasError(field: string, error: string = 'serverError'): boolean {
+    const formFiled = this.Form.get(field);
+    if (!formFiled) return false;
+
+    return formFiled.hasError(error);
+  }
+
+  // check if the field has any error
+  public fieldHasAnyError(field: string): boolean {
+    const formFiled = this.Form.get(field);
+
+    if (!formFiled) return false;
+
+    return formFiled.invalid && (formFiled.touched || formFiled.dirty);
+  }
+
+  // get the server error message
+  public getFieldServerErrorMessage(field: string): string {
+    return this.Form.get(field)?.errors?.['serverError'];
   }
 }

@@ -29,69 +29,88 @@
     <form
       *ngIf="!join; else alreadyJoined"
       [formGroup]="Form"
-      class="container"
-      (ngSubmit)="JoinClub()"
+      class="container d-flex flex-column gap-3"
+      (ngSubmit)="onSubmit()"
     >
+      <app-message-text *ngIf="message" [message]="message"></app-message-text>
       <div>
         <label for="find" class="form-label">How did you Find Us! </label>
         <textarea
           name="find"
-          id=""
           cols="30"
-          rows="5"
-          class="form-control"
+          rows="3"
           formControlName="how_found_us"
+          [ngClass]="{
+            'is-invalid': fieldHasAnyError('how_found_us'),
+            'form-control': true
+          }"
         ></textarea>
-        <div
-          *ngIf="haveRequiredError('how_found_us')"
-          class="alert alert-danger"
-        >
-          this field can't be blank
-        </div>
+        <app-input-error-message *ngIf="haveRequiredError('how_found_us')" />
+        <app-input-error-message
+          *ngIf="fieldHasError('how_found_us')"
+          [message]="getFieldServerErrorMessage('how_found_us')"
+        />
       </div>
 
       <div>
-        <label for="reasons" class="form-label">what's Your Reasons? </label>
+        <label for="reasons" class="form-label">what are Your Reasons? </label>
         <textarea
           name="reasons"
-          id=""
           cols="30"
-          rows="5"
+          rows="3"
           formControlName="reasons"
-          class="form-control"
+          [ngClass]="{
+            'is-invalid': fieldHasAnyError('reasons'),
+            'form-control': true
+          }"
         ></textarea>
-        <div *ngIf="haveRequiredError('reasons')" class="alert alert-danger">
-          this field can't be blank
-        </div>
+        <app-input-error-message *ngIf="haveRequiredError('reasons')" />
+        <app-input-error-message
+          *ngIf="fieldHasError('reasons')"
+          [message]="getFieldServerErrorMessage('reasons')"
+        />
       </div>
       <div>
         <label for="goals" class="form-label"
-          >What's your Goals for Joinging our Club ?
+          >What are your Goals for Joinging our Club ?
         </label>
         <textarea
           name="goals"
-          id=""
           cols="30"
-          rows="5"
+          rows="3"
           formControlName="goals"
-          class="form-control"
+          [ngClass]="{
+            'is-invalid': fieldHasAnyError('goals'),
+            'form-control': true
+          }"
         ></textarea>
-        <div *ngIf="haveRequiredError('goals')" class="alert alert-danger">
-          this field can't be blank
-        </div>
+        <app-input-error-message *ngIf="haveRequiredError('goals')" />
+        <app-input-error-message
+          *ngIf="fieldHasError('goals')"
+          [message]="getFieldServerErrorMessage('goals')"
+        />
       </div>
 
       <div>
-        <label for="" class="form-label">Recieve Emails </label>
-        <input type="checkbox" formControlName="receive_emails" />
+        <label for="receive_emails" class="form-check-label"
+          >Recieve Emails
+        </label>
+        <input
+          type="checkbox"
+          name="receive_emails"
+          class="form-check-input"
+          formControlName="receive_emails"
+        />
       </div>
-      <button
-        type="submit"
-        class="btn btn-success btn-lg"
-        [disabled]="Form.invalid"
-      >
-        Join Now
-      </button>
+      <div>
+        <button
+          type="submit"
+          class="btn btn-success btn-lg"
+          [disabled]="isSubmitting || Form.invalid"
+        >
+          {{ isSubmitting ? "Loading..." : "Join Now" }}
+        </button>
+      </div>
     </form>
     <ng-template #alreadyJoined>
       <div

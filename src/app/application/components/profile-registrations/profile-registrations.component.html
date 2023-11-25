@@ -1,7 +1,7 @@
 <div *ngIf="isSubmitting; else registrations">loading...</div>
 
 <ng-template #registrations>
-  <div class="container mt-5">
+  <div class="container">
     <!-- if the result is empty -->
     <div
       *ngIf="activityRegistrations.length === 0; else resultData"
@@ -14,7 +14,7 @@
 
     <!-- show the result -->
     <ng-template #resultData>
-      <table class="table">
+      <table class="table mt-5">
         <thead>
           <tr>
             <th scope="col">photo</th>
