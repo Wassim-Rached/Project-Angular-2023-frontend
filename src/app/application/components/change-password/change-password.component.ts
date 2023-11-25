@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MessageText } from '../../types';
 
 @Component({
   selector: 'app-change-password',
@@ -16,6 +17,7 @@ import {
 export class ChangePasswordComponent implements OnInit {
   profileId!: string;
   Form!: FormGroup;
+  message?: MessageText;
   // loading states
   isSubmitting: boolean = false;
 
@@ -56,7 +58,10 @@ export class ChangePasswordComponent implements OnInit {
           this.isSubmitting = false;
 
           // show success message
-          alert('Password changed successfully');
+          this.message = {
+            status: 'success',
+            text: 'Password changed successfully',
+          };
           // reset the form
           this.Form.reset();
         },
