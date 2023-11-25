@@ -1,63 +1,74 @@
 <div *ngIf="isPageLoading; else page">loading...</div>
 
 <ng-template #page>
-  <div class="container mw-500px mt-5 mb-5 p-4 shadow-lg">
-    <div>
-      <img
-        [src]="joinForm?.account?.photo_url"
-        [alt]="joinForm?.account?.user?.username"
-        width="100%"
-      />
-    </div>
-    <div class="d-flex justify-content-between align-items-center pt-3 pb-3">
+  <ng-container *ngIf="joinForm; else notFound">
+    <div class="container mw-500px mt-5 mb-5 p-4 shadow-lg">
       <div>
-        <span class="text-uppercase text-primary">
-          {{ joinForm?.account?.user?.username! | userNameFormater }}
-        </span>
+        <img
+          [src]="joinForm.account?.photo_url"
+          [alt]="joinForm.account?.user?.username"
+          width="100%"
+        />
       </div>
-      <div>
-        <span
-          class="badge p-2"
-          [ngClass]="{
+      <div class="d-flex justify-content-between align-items-center pt-3 pb-3">
+        <div>
+          <span class="text-uppercase text-primary">
+            {{ joinForm.account?.user?.username! | userNameFormater }}
+          </span>
+        </div>
+        <div>
+          <span
+            class="badge p-2"
+            [ngClass]="{
       'bg-success': isAccepted(joinForm!.status!),
       'bg-danger': isRejected(joinForm!.status!),
       'bg-warning': isPending(joinForm!.status!),
     }"
-          >{{ joinForm?.status }}</span
+            >{{ joinForm.status }}</span
+          >
+        </div>
+      </div>
+      <div class="d-flex gap-3 flex-column">
+        <div>
+          <span class="text-uppercase"
+            >How {{ joinForm.account?.user?.first_name }} found us :</span
+          >
+          <p class="ps-4 p-spacing text-muted">{{ joinForm.how_found_us }}</p>
+        </div>
+        <div>
+          <span class="text-uppercase">Goals : </span>
+          <p class="ps-4 p-spacing text-muted">{{ joinForm.goals }}</p>
+        </div>
+        <div>
+          <span class="text-uppercase">Reasons : </span>
+          <p class="ps-4 p-spacing text-muted">{{ joinForm.reasons }}</p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-evenly align-content-center">
+        <button
+          (click)="Accept()"
+          class="btn btn-success"
+          [disabled]="isAccepted(joinForm.status!)"
         >
-      </div>
-    </div>
-    <div class="d-flex gap-3 flex-column">
-      <div>
-        <span class="text-uppercase"
-          >How {{ joinForm?.account?.user?.first_name }} found us :</span
+          Accept
+        </button>
+        <button
+          (click)="Reject()"
+          class="btn btn-danger"
+          [disabled]="isRejected(joinForm.status!)"
         >
-        <p class="ps-4 p-spacing text-muted">{{ joinForm?.how_found_us }}</p>
-      </div>
-      <div>
-        <span class="text-uppercase">Goals : </span>
-        <p class="ps-4 p-spacing text-muted">{{ joinForm?.goals }}</p>
-      </div>
-      <div>
-        <span class="text-uppercase">Reasons : </span>
-        <p class="ps-4 p-spacing text-muted">{{ joinForm?.reasons }}</p>
+          Reject
+        </button>
       </div>
     </div>
-    <div class="d-flex justify-content-evenly align-content-center">
-      <button
-        (click)="Accept()"
-        class="btn btn-success"
-        [disabled]="isAccepted(joinForm?.status!)"
-      >
-        Accept
-      </button>
-      <button
-        (click)="Reject()"
-        class="btn btn-danger"
-        [disabled]="isRejected(joinForm?.status!)"
-      >
-        Reject
-      </button>
+  </ng-container>
+
+  <!-- if the joinForm not found -->
+  <ng-template #notFound>
+    <div class="container">
+      <div class="alert alert-danger text-uppercase mt-5">
+        Sorry, the join form not found
+      </div>
     </div>
-  </div>
+  </ng-template>
 </ng-template>
