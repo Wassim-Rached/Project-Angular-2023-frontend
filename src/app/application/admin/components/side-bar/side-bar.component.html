@@ -1,9 +1,11 @@
 <mat-sidenav-container class="w-300px non-navheight shadow-lg">
   <mat-sidenav-content>
-    <h1 class="text-center p-3">
+    <div
+      class="d-flex justify-content-center align-items-center p-4 shadow mb-5 fs-6 fw-bold"
+    >
       <a routerLink="./">Admin Dashboard</a>
-    </h1>
-    <ul class="fs-6 text-uppercase d-flex flex-column gap-4">
+    </div>
+    <ul class="fs-6 text-uppercase d-flex flex-column gap-2">
       <li>
         <strong>activity</strong>
         <ul class="d-flex mt-2 flex-column gap-2 text-muted">
@@ -22,6 +24,7 @@
           </li>
         </ul>
       </li>
+      <hr />
       <li>
         <strong>registration</strong>
         <ul class="mt-2 text-muted">
@@ -34,6 +37,7 @@
           </li>
         </ul>
       </li>
+      <hr />
       <li>
         <strong>Joining forms</strong>
         <ul class="mt-2 text-muted">
