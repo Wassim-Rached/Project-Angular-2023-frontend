@@ -1,8 +1,17 @@
-h1{
-    font-weight: bold;
-    text-align: center;
-    color: green;
+h1 {
+  font-weight: bold;
+  text-align: center;
+  color: var(--primary-color);
 }
-p{
-    text-align: center  ;
+
+#tip {
+  color: var(--secondary-color);
+}
+
+p {
+  text-align: center;
+}
+
+h3 {
+  color: var(--light-primary-color);
 }
