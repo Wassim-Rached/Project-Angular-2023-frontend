@@ -104,7 +104,6 @@
       type="file"
       id="photo"
       (change)="onFileChange($event)"
-      formControlName="photo"
       [ngClass]="{
         'is-invalid': fieldHasAnyError('photo'),
         'form-control': true
@@ -133,11 +132,13 @@
       [message]="getFieldServerErrorMessage('date')"
     />
   </div>
-  <button
-    [disabled]="isSubmitting || Form.invalid"
-    type="submit"
-    class="btn btn-primary mt-3"
-  >
-    {{ isSubmitting ? "Loading..." : "Submit" }}
-  </button>
+  <div>
+    <button
+      [disabled]="isSubmitting || Form.invalid"
+      type="submit"
+      class="btn btn-primary mt-3"
+    >
+      {{ isSubmitting ? "Loading..." : "Submit" }}
+    </button>
+  </div>
 </form>

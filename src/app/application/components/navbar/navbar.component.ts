@@ -21,9 +21,6 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // set the loading state to true
-    this.isNavbarLoading = true;
-
     // handle loading the current account
     this.loadCurrentAccount();
 
@@ -40,6 +37,22 @@ export class NavbarComponent implements OnInit {
   }
 
   public loadCurrentAccount(): void {
+    // if the user is not authenticated
+    if (!this.authService.isAuthenticated()) {
+      // set the user account to undefined
+      this.userAccount = undefined;
+      // set the admin status to false
+      this.isAdmin = false;
+      // set the loading state to false
+      this.isNavbarLoading = false;
+      // return
+      return;
+    }
+
+    // set the loading state to true
+    this.isNavbarLoading = true;
+
+    // get the current account
     this.accountService.getMyAccount().subscribe({
       next: (account) => {
         // set the user account
@@ -56,6 +69,7 @@ export class NavbarComponent implements OnInit {
       error: (error) => {
         // set the user account to undefined
         this.userAccount = undefined;
+        // set the loading state to false
         if (this.isNavbarLoading) this.isNavbarLoading = false;
       },
     });
@@ -64,6 +78,8 @@ export class NavbarComponent implements OnInit {
   onLogout(): void {
     // logout the user
     this.authService.logout();
+    // reset the user account
+    this.userAccount = undefined;
     // reset the admin status
     this.isAdmin = this.authService.isAdmin();
   }

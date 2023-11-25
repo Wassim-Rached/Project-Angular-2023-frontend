@@ -1,20 +1,14 @@
 <div class="container mt-5">
   <h1 class="text-center fs-1 highlight">Sign in</h1>
-  <form
-    [formGroup]="loginForm"
-    (ngSubmit)="onSubmit(loginForm)"
-    class="form-signin"
-  >
-    <div *ngIf="errorDescription" class="alert alert-danger">
-      {{ errorDescription }}
-    </div>
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()" class="form-signin">
+    <app-message-text *ngIf="message" [message]="message"></app-message-text>
     <div class="form-label-group">
       <label class="form-label" for="inputUsername">Username</label>
       <input
         type="text"
         id="inputUsername"
         [ngClass]="{
-          'is-invalid': fieldHasError('username'),
+          'is-invalid': fieldHasAnyError('username'),
           'form-control': true
         }"
         formControlName="username"
@@ -22,9 +16,11 @@
         required
         autofocus
       />
-      <div *ngIf="fieldHasError('username')" class="invalid-feedback">
-        {{ getFieldErrorMessage("username") }}
-      </div>
+      <app-input-error-message *ngIf="haveRequiredError('username')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('username')"
+        [message]="getFieldServerErrorMessage('username')"
+      />
     </div>
 
     <div class="form-label-group">
@@ -33,24 +29,31 @@
         type="password"
         id="inputPassword"
         [ngClass]="{
-          'is-invalid': fieldHasError('password'),
+          'is-invalid': fieldHasAnyError('password'),
           'form-control': true
         }"
         formControlName="password"
         placeholder="Password"
         required
       />
-      <div *ngIf="fieldHasError('password')" class="invalid-feedback">
-        {{ getFieldErrorMessage("password") }}
-      </div>
+      <app-input-error-message *ngIf="haveRequiredError('password')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('password')"
+        [message]="getFieldServerErrorMessage('password')"
+      />
     </div>
-
-    <button
-      class="mt-4 btn btn-primary"
-      [disabled]="isSubmitting"
-      type="submit"
-    >
-      Sign in
-    </button>
+    <div class="text-muted mt-3">
+      Don't have an account?
+      <a routerLink="/signup" class="text-primary">Sign up</a>
+    </div>
+    <div>
+      <button
+        class="mt-4 btn btn-primary"
+        [disabled]="isSubmitting || Form.invalid"
+        type="submit"
+      >
+        {{ isSubmitting ? "Loading..." : "Sign in" }}
+      </button>
+    </div>
   </form>
 </div>

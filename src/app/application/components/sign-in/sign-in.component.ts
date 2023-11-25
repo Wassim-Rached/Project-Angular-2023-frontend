@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MessageText } from '../../types';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,23 +9,24 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./sign-in.component.css'],
 })
 export class SignInComponent implements OnInit {
-  errorDescription?: string;
-  loginForm!: FormGroup;
+  Form!: FormGroup;
+  message?: MessageText;
+  // loading states
   isSubmitting: boolean = false;
 
   constructor(private authService: AuthService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
+    this.Form = this.fb.group({
       username: [''],
       password: [''],
     });
   }
 
-  onSubmit(form: FormGroup): void {
+  onSubmit(): void {
     // disable the submit button
     this.isSubmitting = true;
-    const { username, password } = form.value;
+    const { username, password } = this.Form.value;
 
     this.authService.signin(username, password).subscribe({
       next: (token) => {
@@ -41,13 +43,18 @@ export class SignInComponent implements OnInit {
         if (error.status === 400) {
           // for validation errors
           this.handleFormErrors(error.error);
-          this.errorDescription = '';
         } else if (error.status === 401) {
           // for unauthorized errors
-          this.errorDescription = 'Invalid credentials';
+          this.message = {
+            text: 'Username or password is incorrect',
+            status: 'error',
+          };
         } else {
           // for unexpected errors
-          this.errorDescription = 'Unexpected error';
+          this.message = {
+            text: 'Something went wrong, please try again later',
+            status: 'error',
+          };
         }
       },
     });
@@ -57,17 +64,38 @@ export class SignInComponent implements OnInit {
     // set the errors from the backend
     // on the form controls
     for (const field in errors) {
-      if (this.loginForm.get(field)) {
-        this.loginForm.get(field)?.setErrors({ serverError: errors[field][0] });
+      if (this.Form.get(field)) {
+        this.Form.get(field)?.setErrors({ serverError: errors[field][0] });
       }
     }
   }
 
-  public fieldHasError(field: string): boolean {
-    return this.loginForm.get(field)?.hasError('serverError') ?? true;
+  // check if the field has certain error
+  public fieldHasError(field: string, error: string = 'serverError'): boolean {
+    const formFiled = this.Form.get(field);
+    if (!formFiled) return false;
+
+    return formFiled.hasError(error);
   }
 
-  public getFieldErrorMessage(field: string): string {
-    return this.loginForm.get(field)?.errors?.['serverError'];
+  // check if the field has any error
+  public fieldHasAnyError(field: string): boolean {
+    const formFiled = this.Form.get(field);
+    if (!formFiled) return false;
+
+    return formFiled.invalid && (formFiled.touched || formFiled.dirty);
+  }
+
+  // check if the field has required error
+  public haveRequiredError(field: string) {
+    return (
+      this.Form.get(field)?.errors?.['required'] &&
+      this.Form.get(field)?.touched
+    );
+  }
+
+  // get the server error message
+  public getFieldServerErrorMessage(field: string): string {
+    return this.Form.get(field)?.errors?.['serverError'];
   }
 }
