@@ -1,7 +1,23 @@
 <div
   class="container vh-100 d-flex flex-column align-items-center justify-content-center gap-5"
 >
-  <h1 class="fs-10"><span class="highlight">Eco</span>Save</h1>
-  <p class="fs-3 font-middle-weak">Welcome to our club</p>
-  <button class="btn btn-lg btn-success" routerLink="/join-us">join us</button>
+  <h1 style="font-size: 7rem"><span class="highlight">Eco</span>Save</h1>
+  <p class="fs-3 font-middle-weak">
+    Welcome {{ isMemberOrAdmin ? "back" : "to our club" }}
+  </p>
+  <button
+    *ngIf="!isMemberOrAdmin"
+    class="btn btn-lg btn-success"
+    routerLink="/join-us"
+  >
+    join us
+  </button>
+  <button
+    *ngIf="isAdmin"
+    style="background-color: var(--secondary-color)"
+    class="btn btn-lg text-white"
+    routerLink="/dashboard"
+  >
+    Go To Dashboard
+  </button>
 </div>

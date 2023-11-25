@@ -1,3 +1,7 @@
+mat-sidenav-container {
+  color: var(--secondary-color);
+}
+
 .active-nav-link {
-  color: rgb(21, 143, 74);
+  color: #000;
 }

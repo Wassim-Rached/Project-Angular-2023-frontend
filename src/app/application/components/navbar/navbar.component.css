@@ -1,7 +1,8 @@
-#toolbar-nav {
-  color: #ececec;
+mat-toolbar {
+  color: #fff;
   display: flex;
   justify-content: space-between;
+  background-color: var(--primary-color);
 }
 
 .left-nav {
@@ -64,4 +65,55 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+#btn-logout {
+  background-color: var(--third-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: 0.3s ease-in-out;
+}
+
+#btn-logout:hover {
+  background-color: var(--secondary-color);
+  color: var(--third-color);
+  transition: 0.3s ease-in-out;
+}
+
+#btn-signup {
+  background-color: var(--light-third-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: 0.3s ease-in-out;
+}
+
+#btn-signup:hover {
+  background-color: var(--secondary-color);
+  color: var(--light-third-color);
+  transition: 0.3s ease-in-out;
+}
+
+#btn-signin {
+  background-color: var(--third-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: 0.3s ease-in-out;
+}
+
+#btn-signin:hover {
+  background-color: var(--secondary-color);
+  color: var(--third-color);
+  transition: 0.3s ease-in-out;
 }

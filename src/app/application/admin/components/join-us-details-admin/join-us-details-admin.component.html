@@ -1,4 +1,6 @@
-<div *ngIf="isPageLoading; else page">loading...</div>
+<div *ngIf="isPageLoading; else page">
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
 
 <ng-template #page>
   <ng-container *ngIf="joinForm; else notFound">

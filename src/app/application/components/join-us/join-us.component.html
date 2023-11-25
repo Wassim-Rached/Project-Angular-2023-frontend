@@ -1,10 +1,12 @@
-<div *ngIf="isPageLoading; else page">loading...</div>
+<div *ngIf="isPageLoading; else page">
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
 
 <ng-template #page>
   <div class="mt-5 mb-4">
     <h1 class="fs-2">Join Us !</h1>
-    <p class="fst-italic">
-      <strong>We are looking for new members to join our team!</strong>
+    <p id="tip" class="fst-italic">
+      We are looking for new members to join our team!
     </p>
   </div>
 
@@ -128,21 +130,19 @@
         </span>
 
         <div class="p-3">
-          <h3 class="fs-4 text-uppercase text-primary">how you found us ?</h3>
+          <h3 class="fs-4 text-uppercase">how you found us ?</h3>
           <p class="ps-4 p-spacing text-start fw-light">
             {{ join?.how_found_us }}
           </p>
         </div>
         <div class="p-3">
-          <h3 class="fs-4 text-uppercase text-primary">What are your goals</h3>
+          <h3 class="fs-4 text-uppercase">What are your goals</h3>
           <p class="ps-4 p-spacing text-start fw-light">
             {{ join?.goals }}
           </p>
         </div>
         <div class="p-3">
-          <h3 class="fs-4 text-uppercase text-primary">
-            reasons for joining the club
-          </h3>
+          <h3 class="fs-4 text-uppercase">reasons for joining the club</h3>
           <p class="ps-4 p-spacing text-start fw-light">
             {{ join?.reasons }}
           </p>

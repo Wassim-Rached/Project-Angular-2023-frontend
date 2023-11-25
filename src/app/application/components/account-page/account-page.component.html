@@ -1,4 +1,6 @@
-<div *ngIf="isLoadingPage; else page">loading...</div>
+<div *ngIf="isLoadingPage; else page">
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
 
 <ng-template #page>
   <div *ngIf="account; else notFound">

@@ -35,7 +35,9 @@
     </div>
   </form>
   <div>
-    <div *ngIf="isSubmitting; else dataTable">loading...</div>
+    <div *ngIf="isSubmitting; else dataTable">
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </div>
     <ng-template #dataTable>
       <div
         *ngIf="joiningForms.length === 0; else table"

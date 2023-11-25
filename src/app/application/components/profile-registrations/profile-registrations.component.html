@@ -1,4 +1,6 @@
-<div *ngIf="isSubmitting; else registrations">loading...</div>
+<div *ngIf="isSubmitting; else registrations">
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
 
 <ng-template #registrations>
   <div class="container">
@@ -35,7 +37,11 @@
                 class="img-fluid"
               />
             </td>
-            <td>{{ registration.activity?.title }}</td>
+            <td>
+              <a [routerLink]="['/activities', registration.activity!.id]">
+                {{ registration.activity?.title }}
+              </a>
+            </td>
             <td
               [ngClass]="
                 registration.activity?.is_free
