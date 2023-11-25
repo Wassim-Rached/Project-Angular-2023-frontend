@@ -41,9 +41,12 @@ export class AccountService {
     accountId: string,
     old_password: string,
     new_password: string
-  ): Observable<any> {
+  ): Observable<string> {
     const body = { old_password, new_password };
-    return this.http.post(this.URL + accountId + '/change_password/', body);
+    return this.http.post<string>(
+      this.URL + accountId + '/change_password/',
+      body
+    );
   }
 
   public getAllJoiningForms(params?: HttpParams): Observable<JoinUs[]> {
@@ -51,7 +54,7 @@ export class AccountService {
   }
 
   public joinClub(joinUs: JoinUs): Observable<JoinUs> {
-    return this.http.post(this.URL + 'join_us/', joinUs);
+    return this.http.post<JoinUs>(this.URL + 'join_us/', joinUs);
   }
 
   public deleteJoiningForm(joinUsId: string) {
