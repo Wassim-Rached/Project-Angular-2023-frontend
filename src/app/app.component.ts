@@ -19,10 +19,10 @@ export class AppComponent implements OnInit {
     this.http.get(URL).subscribe({
       next: (res) => {
         // if it gets here, the backend is up
-        // setTimeout(() => {
-        // wait 2 seconds (just for the loading animation)
-        this.backendIsUp = true;
-        // }, 2000);
+        setTimeout(() => {
+          // wait 2 seconds (just for the loading animation)
+          this.backendIsUp = true;
+        }, 3000);
       },
       error: (Error) => {
         // else, the backend is down
