@@ -17,12 +17,19 @@
         </div>
         <div>
           <img [src]="activity.photo_url" width="100%" alt="" />
-          <h1
-            style="color: var(--secondary-color)"
-            class="fs-4 p-3 fs-2 fw-bold"
-          >
-            {{ activity.title }}
-          </h1>
+          <div class="d-flex justify-content-between align-items-center">
+            <h1
+              style="color: var(--secondary-color)"
+              class="fs-4 p-3 fs-2 fw-bold"
+            >
+              {{ activity.title }}
+            </h1>
+            <span
+              style="background-color: var(--secondary-color)"
+              class="badge text-white p-2 fs-6 me-2"
+              >{{ activity.date | date }}</span
+            >
+          </div>
         </div>
         <div class="d-flex mt-4 justify-content-between align-items-center">
           <div>
