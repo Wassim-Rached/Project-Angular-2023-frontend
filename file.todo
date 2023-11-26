@@ -1,18 +1,5 @@
-// TODO add related api functionality
+// after project validation TODO's
 
-// TODO functionality de front-office ?
+// TODO redirectAfterLogout should be in the AuthService.logout() ?
 
-// TODO the redirect for admin login should be to the /dashboard
-
-// TODO Affichage correct de tous les champs de l’activité tels que exigés ?
-
-// TODO rafraîchissement de l’affichage de la liste des activités suite à la mise à jour ?
-
-// TODO change-password should be on /dashboard ?
-
-// TODO functionality de back-office ?
-
-// TODO des concepts d’Angular non étudiés ?
-
-// TODO clear uneeeded methodes in services
-
+// TODO add pagination
