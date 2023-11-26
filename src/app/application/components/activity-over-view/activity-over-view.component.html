@@ -3,10 +3,7 @@
 </div>
 
 <ng-template #page>
-  <div class="container">
-    <div *ngIf="!activity">activity not found !</div>
-  </div>
-  <div class="container p-4" *ngIf="activity">
+  <div class="container p-4" *ngIf="activity; else notFound">
     <div class="row justify-content-between">
       <div class="col-8 shadow-lg p-0">
         <div
@@ -122,4 +119,13 @@
       </div>
     </div>
   </div>
+
+  <!-- if the activity not found -->
+  <ng-template #notFound>
+    <div class="container">
+      <div class="alert alert-danger text-uppercase mt-5">
+        Sorry, the activity is not found
+      </div>
+    </div>
+  </ng-template>
 </ng-template>
