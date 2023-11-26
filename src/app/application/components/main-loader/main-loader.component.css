@@ -16,9 +16,7 @@
 }
 
 #tip {
-  font-size: 1.5rem;
-  color: #fff;
-  margin-top: 20px;
+  color: var(--third-color);
 }
 
 /* from 'https://codepen.io/juergengenser/pen/dPoQpY' */
