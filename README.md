@@ -25,7 +25,7 @@ To use the frontend locally, follow these steps:
 2. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/ecosave-frontend.git
+   git clone https://github.com/Wassim-Rached/Project-Angular-2023-frontend
    ```
 
 3. **Navigate to the project directory:**
