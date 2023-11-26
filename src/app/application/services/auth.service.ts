@@ -38,7 +38,11 @@ export class AuthService {
 
   // redirections handling
   public redirectAfterSignin() {
-    this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGIN']]);
+    if (this.isAdmin()) {
+      this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGIN_ADMIN']]);
+    } else {
+      this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGIN']]);
+    }
   }
 
   public redirectAfterLogout() {
