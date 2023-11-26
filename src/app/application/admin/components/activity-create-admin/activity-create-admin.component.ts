@@ -29,7 +29,7 @@ export class ActivityCreateAdminComponent implements OnInit {
       photo: [null, Validators.required],
       is_free: [true, Validators.required],
       price: [0, Validators.required],
-      maxParticipants: [null],
+      max_participants: [null],
       date: ['', Validators.required],
       description: ['', Validators.required],
       categories: [null, Validators.required],
