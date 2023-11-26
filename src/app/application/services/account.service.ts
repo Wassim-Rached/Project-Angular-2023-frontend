@@ -14,6 +14,7 @@ export class AccountService {
 
   constructor(private http: HttpClient) {}
 
+  // account management
   public createAccount(account: Account): Observable<Account> {
     return this.http.post<Account>(this.URL, account);
   }
@@ -42,15 +43,15 @@ export class AccountService {
     old_password: string,
     new_password: string
   ): Observable<string> {
-    const body = { old_password, new_password };
-    return this.http.post<string>(
-      this.URL + accountId + '/change_password/',
-      body
-    );
+    return this.http.post<string>(this.URL + accountId + '/change_password/', {
+      old_password,
+      new_password,
+    });
   }
 
+  // joining form management
   public getAllJoiningForms(params?: HttpParams): Observable<JoinUs[]> {
-    return this.http.get<JoinUs[]>(this.URL + 'join_us', { params });
+    return this.http.get<JoinUs[]>(this.URL + 'join_us/', { params });
   }
 
   public joinClub(joinUs: JoinUs): Observable<JoinUs> {
@@ -74,7 +75,8 @@ export class AccountService {
       {}
     );
   }
-  public getJoinFormById(joinUsId: string): Observable<JoinUs> {
+
+  public getJoiningFormById(joinUsId: string): Observable<JoinUs> {
     return this.http.get<JoinUs>(this.URL + 'join_us/' + joinUsId);
   }
 }

@@ -12,7 +12,7 @@
           <app-profile-about [account]="account"></app-profile-about>
         </mat-tab>
         <ng-container *ngIf="isOwner">
-          <mat-tab label="Registrations">
+          <mat-tab label="Registrations" *ngIf="!isAdmin">
             <app-profile-registrations></app-profile-registrations>
           </mat-tab>
           <mat-tab label="Change Password">

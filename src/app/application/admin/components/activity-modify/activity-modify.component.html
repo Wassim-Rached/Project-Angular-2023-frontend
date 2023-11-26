@@ -3,146 +3,161 @@
 </div>
 
 <ng-template #page>
-  <form
-    *ngIf="Form"
-    [formGroup]="Form"
-    class="container"
-    (ngSubmit)="onSubmit()"
-  >
-    <app-message-text *ngIf="message" [message]="message"></app-message-text>
-    <div>
-      <label for="title" class="form-label">Title:</label>
-      <input
-        type="text"
-        id="title"
-        formControlName="title"
-        [ngClass]="{
-          'is-invalid': fieldHasAnyError('title'),
-          'form-control': true
-        }"
-      />
-      <app-input-error-message *ngIf="haveRequiredError('title')" />
-      <app-input-error-message
-        *ngIf="fieldHasError('title')"
-        [message]="getFieldServerErrorMessage('title')"
-      />
-    </div>
-    <div class="form-group">
-      <ng-select
-        [items]="allCategories"
-        [addTag]="true"
-        [addTagText]="'Add new categorie'"
-        bindLabel="name"
-        [multiple]="true"
-        placeholder="Select or add  categories"
-        name="items"
-        formControlName="categories"
-      ></ng-select>
-      <app-input-error-message *ngIf="haveRequiredError('categories')" />
-      <app-input-error-message
-        *ngIf="fieldHasError('categories')"
-        [message]="getFieldServerErrorMessage('categories')"
-      />
-    </div>
-    <div>
-      <label for="description" class="form-label">Description:</label>
-      <textarea
-        id="description"
-        formControlName="description"
-        [ngClass]="{
-          'is-invalid': fieldHasAnyError('description'),
-          'form-control': true
-        }"
-      ></textarea>
-      <app-input-error-message *ngIf="haveRequiredError('description')" />
-      <app-input-error-message
-        *ngIf="fieldHasError('description')"
-        [message]="getFieldServerErrorMessage('description')"
-      />
-    </div>
-    <div>
-      <label for="is_free" class="form-label">Is Free:</label>
-      <input
-        type="checkbox"
-        id="is_free"
-        formControlName="is_free"
-        class="form-input"
-      />
-    </div>
-    <div *ngIf="!isFree">
-      <label class="form-label" for="price">Price:</label>
-      <input
-        [ngClass]="{
-          'is-invalid': fieldHasAnyError('price'),
-          'form-control': true
-        }"
-        type="text"
-        id="price"
-        formControlName="price"
-      />
-      <app-input-error-message *ngIf="haveRequiredError('price')" />
-      <app-input-error-message
-        *ngIf="fieldHasError('price')"
-        [message]="getFieldServerErrorMessage('price')"
-      />
-    </div>
-    <div>
-      <label class="form-label" for="max_participants">Max Participants:</label>
-      <input
-        [ngClass]="{
-          'is-invalid': fieldHasAnyError('max_participants'),
-          'form-control': true
-        }"
-        type="number"
-        id="max_participants"
-        formControlName="max_participants"
-      />
-      <app-input-error-message *ngIf="haveRequiredError('max_participants')" />
-      <app-input-error-message
-        *ngIf="fieldHasError('max_participants')"
-        [message]="getFieldServerErrorMessage('max_participants')"
-      />
-    </div>
-    <div>
-      <label for="photo" class="form-label">Photo:</label>
-      <input
-        type="file"
-        id="photo"
-        (change)="onFileChange($event)"
-        [ngClass]="{
-          'form-control': true,
-          'is-invalid': fieldHasAnyError('photo')
-        }"
-      />
-      <app-input-error-message *ngIf="haveRequiredError('photo')" />
-      <app-input-error-message
-        *ngIf="fieldHasError('photo')"
-        [message]="getFieldServerErrorMessage('photo')"
-      />
-    </div>
-    <div>
-      <label class="form-label" for="date">Date:</label>
-      <input
-        [ngClass]="{
-          'is-invalid': fieldHasAnyError('date'),
-          'form-control': true
-        }"
-        type="date"
-        id="date"
-        formControlName="date"
-      />
-      <app-input-error-message *ngIf="haveRequiredError('date')" />
-      <app-input-error-message
-        *ngIf="fieldHasError('date')"
-        [message]="getFieldServerErrorMessage('date')"
-      />
-    </div>
-    <button
-      type="submit"
-      class="btn btn-primary mt-3"
-      [disabled]="isSubmitting || Form.invalid"
+  <ng-container *ngIf="activity; else notFound">
+    <form
+      *ngIf="Form"
+      [formGroup]="Form"
+      class="container"
+      (ngSubmit)="onSubmit()"
     >
-      {{ isSubmitting ? "Loading..." : "Modify" }}
-    </button>
-  </form>
+      <app-message-text *ngIf="message" [message]="message"></app-message-text>
+      <div>
+        <label for="title" class="form-label">Title:</label>
+        <input
+          type="text"
+          id="title"
+          formControlName="title"
+          [ngClass]="{
+            'is-invalid': fieldHasAnyError('title'),
+            'form-control': true
+          }"
+        />
+        <app-input-error-message *ngIf="haveRequiredError('title')" />
+        <app-input-error-message
+          *ngIf="fieldHasError('title')"
+          [message]="getFieldServerErrorMessage('title')"
+        />
+      </div>
+      <div class="form-group">
+        <ng-select
+          [items]="allCategories"
+          [addTag]="true"
+          [addTagText]="'Add new categorie'"
+          bindLabel="name"
+          [multiple]="true"
+          placeholder="Select or add  categories"
+          name="items"
+          formControlName="categories"
+        ></ng-select>
+        <app-input-error-message *ngIf="haveRequiredError('categories')" />
+        <app-input-error-message
+          *ngIf="fieldHasError('categories')"
+          [message]="getFieldServerErrorMessage('categories')"
+        />
+      </div>
+      <div>
+        <label for="description" class="form-label">Description:</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          [ngClass]="{
+            'is-invalid': fieldHasAnyError('description'),
+            'form-control': true
+          }"
+        ></textarea>
+        <app-input-error-message *ngIf="haveRequiredError('description')" />
+        <app-input-error-message
+          *ngIf="fieldHasError('description')"
+          [message]="getFieldServerErrorMessage('description')"
+        />
+      </div>
+      <div>
+        <label for="is_free" class="form-label">Is Free:</label>
+        <input
+          type="checkbox"
+          id="is_free"
+          formControlName="is_free"
+          class="form-input"
+        />
+      </div>
+      <div *ngIf="!isFree">
+        <label class="form-label" for="price">Price:</label>
+        <input
+          [ngClass]="{
+            'is-invalid': fieldHasAnyError('price'),
+            'form-control': true
+          }"
+          type="text"
+          id="price"
+          formControlName="price"
+        />
+        <app-input-error-message *ngIf="haveRequiredError('price')" />
+        <app-input-error-message
+          *ngIf="fieldHasError('price')"
+          [message]="getFieldServerErrorMessage('price')"
+        />
+      </div>
+      <div>
+        <label class="form-label" for="max_participants"
+          >Max Participants:</label
+        >
+        <input
+          [ngClass]="{
+            'is-invalid': fieldHasAnyError('max_participants'),
+            'form-control': true
+          }"
+          type="number"
+          id="max_participants"
+          formControlName="max_participants"
+        />
+        <app-input-error-message
+          *ngIf="haveRequiredError('max_participants')"
+        />
+        <app-input-error-message
+          *ngIf="fieldHasError('max_participants')"
+          [message]="getFieldServerErrorMessage('max_participants')"
+        />
+      </div>
+      <div>
+        <label for="photo" class="form-label">Photo:</label>
+        <input
+          type="file"
+          id="photo"
+          (change)="onFileChange($event)"
+          [ngClass]="{
+            'form-control': true,
+            'is-invalid': fieldHasAnyError('photo')
+          }"
+        />
+        <app-input-error-message *ngIf="haveRequiredError('photo')" />
+        <app-input-error-message
+          *ngIf="fieldHasError('photo')"
+          [message]="getFieldServerErrorMessage('photo')"
+        />
+      </div>
+      <div>
+        <label class="form-label" for="date">Date:</label>
+        <input
+          [ngClass]="{
+            'is-invalid': fieldHasAnyError('date'),
+            'form-control': true
+          }"
+          type="date"
+          id="date"
+          formControlName="date"
+        />
+        <app-input-error-message *ngIf="haveRequiredError('date')" />
+        <app-input-error-message
+          *ngIf="fieldHasError('date')"
+          [message]="getFieldServerErrorMessage('date')"
+        />
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary mt-3"
+        [disabled]="isSubmitting || Form.invalid"
+      >
+        {{ isSubmitting ? "Loading..." : "Modify" }}
+      </button>
+    </form>
+  </ng-container>
+
+  <!-- if the joinForm not found -->
+  <ng-template #notFound>
+    <div class="container">
+      <div class="alert alert-danger text-uppercase mt-5">
+        Sorry, activity not found
+      </div>
+    </div>
+  </ng-template>
 </ng-template>

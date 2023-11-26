@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AdminRoutingModule } from './admin-routing.module';
+
 // custom modules
 import { MaterialModule } from 'src/app/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+
 // dashboard component
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 // register components

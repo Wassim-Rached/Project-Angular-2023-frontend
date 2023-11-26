@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessageText } from '../../types';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,7 +15,11 @@ export class SignInComponent implements OnInit {
   // loading states
   isSubmitting: boolean = false;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  constructor(
+    private authService: AuthService,
+    private accountService: AccountService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.Form = this.fb.group({
@@ -32,8 +37,33 @@ export class SignInComponent implements OnInit {
       next: (token) => {
         // authentificate the user
         this.authService.authentificate(token);
-        // then redirect him
-        this.authService.redirectAfterSignin();
+
+        // load the current account
+        this.accountService.getMyAccount().subscribe({
+          next: (account) => {
+            // set the user role
+            this.authService.setRole(account.role);
+            // set the user account id
+            this.authService.setAccountId(account.id!);
+            // redirect the user
+            this.authService.redirectAfterSignin();
+            // enable the submit button
+            this.isSubmitting = false;
+          },
+          error: (error) => {
+            // enable the submit button
+            this.isSubmitting = false;
+
+            // remove the token (might be expired or invalid)
+            this.authService.unauthentificate();
+
+            // handle the errors
+            this.message = {
+              text: "Account couldn't be loaded, please try again later",
+              status: 'error',
+            };
+          },
+        });
       },
       error: (error) => {
         // enable the submit button

@@ -38,7 +38,11 @@ export class AuthService {
 
   // redirections handling
   public redirectAfterSignin() {
-    this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGIN']]);
+    if (this.isAdmin()) {
+      this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGIN_ADMIN']]);
+    } else {
+      this.router.navigate([environment['DEFAULT_REDIRECT_AFTER_LOGIN']]);
+    }
   }
 
   public redirectAfterLogout() {
@@ -59,7 +63,7 @@ export class AuthService {
   }
 
   // Role handling
-  public setRole(role?: string) {
+  public setRole(role?: Role) {
     localStorage.setItem('role', role ?? 'user');
   }
 

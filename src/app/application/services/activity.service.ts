@@ -16,6 +16,7 @@ export class ActivityService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  // activities management
   public getAllActivities(params?: HttpParams): Observable<Activity[]> {
     return this.http.get<Activity[]>(this.URL, { params: params });
   }
@@ -36,6 +37,7 @@ export class ActivityService {
     return this.http.delete(this.URL + id);
   }
 
+  // categories management
   public getAllCategories(): Observable<Categorie[]> {
     return this.http.get<Categorie[]>(this.URL + 'categories');
   }
@@ -44,6 +46,7 @@ export class ActivityService {
     return this.http.post<Categorie>(this.URL, category);
   }
 
+  // registrations management
   public getAllRegistrations(): Observable<Registration[]> {
     return this.http.get<Registration[]>(this.URL + 'registrations');
   }
@@ -64,10 +67,6 @@ export class ActivityService {
     return this.http.post<Registration>(this.URL + 'registrations/', {
       activity: activityId,
     });
-  }
-
-  public unregisterFromActivity() {
-    return this.http.delete(this.URL + '/registrations');
   }
 
   public acceptRegistration(registerationId: string): Observable<Status> {
@@ -98,6 +97,7 @@ export class ActivityService {
     );
   }
 
+  // likes management
   public didLike(activityId: string): Observable<{ did_like: boolean }> {
     return this.http.get<{ did_like: boolean }>(
       this.URL + activityId + '/did_like/'
@@ -106,11 +106,5 @@ export class ActivityService {
 
   public setLiked(activityId: string): Observable<Status> {
     return this.http.post<Status>(this.URL + activityId + '/like/', {});
-  }
-
-  public redirectAfterUpdate() {
-    this.router.navigate([
-      environment['DEFAULT_REDIRECT_AFTER_ACTIVITY_UPDATE'],
-    ]);
   }
 }

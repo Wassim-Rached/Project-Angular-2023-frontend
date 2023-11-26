@@ -11,10 +11,11 @@ import { ActivityService } from '../../services/activity.service';
   styleUrls: ['./account-page.component.css'],
 })
 export class AccountPageComponent implements OnInit {
-  account!: Account;
+  account?: Account;
   profileId!: string;
-  // loading states
+  isAdmin?: boolean;
   isOwner: boolean = false;
+  // loading states
   isLoadingPage = false;
 
   constructor(
@@ -38,6 +39,8 @@ export class AccountPageComponent implements OnInit {
         this.account = account;
         // get the current account id
         const currentAccountId = this.authService.getAccountId();
+        // check if the current account is admin
+        this.isAdmin = this.authService.isAdmin();
         // check if the current account is the owner of the profile
         this.isOwner = currentAccountId === account.id;
         // set the loading page to false

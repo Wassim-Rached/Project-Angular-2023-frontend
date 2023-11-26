@@ -112,8 +112,6 @@ export class ActivityModifyComponent implements OnInit {
 
         // set submitting state
         this.isSubmitting = false;
-
-        // this.activityService.redirectAfterUpdate();
       },
       error: (error) => {
         // set message error

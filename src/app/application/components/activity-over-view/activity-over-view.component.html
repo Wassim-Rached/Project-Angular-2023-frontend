@@ -3,10 +3,7 @@
 </div>
 
 <ng-template #page>
-  <div class="container">
-    <div *ngIf="!activity">activity not found !</div>
-  </div>
-  <div class="container p-4" *ngIf="activity">
+  <div class="container p-4" *ngIf="activity; else notFound">
     <div class="row justify-content-between">
       <div class="col-8 shadow-lg p-0">
         <div
@@ -17,12 +14,19 @@
         </div>
         <div>
           <img [src]="activity.photo_url" width="100%" alt="" />
-          <h1
-            style="color: var(--secondary-color)"
-            class="fs-4 p-3 fs-2 fw-bold"
-          >
-            {{ activity.title }}
-          </h1>
+          <div class="d-flex justify-content-between align-items-center">
+            <h1
+              style="color: var(--secondary-color)"
+              class="fs-4 p-3 fs-2 fw-bold"
+            >
+              {{ activity.title }}
+            </h1>
+            <span
+              style="background-color: var(--secondary-color)"
+              class="badge text-white p-2 fs-6 me-2"
+              >{{ activity.date | date }}</span
+            >
+          </div>
         </div>
         <div class="d-flex mt-4 justify-content-between align-items-center">
           <div>
@@ -37,7 +41,9 @@
             <button
               (click)="onLike()"
               mat-button
-              [disabled]="!isAuthenticated || didLike || isLoadingLike"
+              [disabled]="
+                !isAuthenticated || didLike || isLoadingLike || isAdmin
+              "
             >
               {{ isLoadingLike ? "loading..." : "LIKE" }}
               <mat-icon [ngClass]="{ 'been-liked': didLike }"
@@ -52,7 +58,7 @@
         <div class="m-5">
           <p class="fs-6 p-spacing">{{ activity.description }}</p>
         </div>
-        <div class="ps-4 pb-4">
+        <div class="ps-4 pb-4" *ngIf="!isAdmin">
           <button
             class="btn btn-lg"
             (click)="onRegister(activity.id!)"
@@ -79,19 +85,13 @@
       <div class="col-3 shadow p-0 m-0">
         <div
           style="background-color: var(--secondary-color)"
-          class="text-white p-3 d-flex align-items-center"
-          [ngClass]="
-            activity.max_participants
-              ? 'justify-content-between'
-              : 'justify-content-center'
-          "
+          class="text-white p-3 d-flex align-items-center justify-content-between"
         >
           <span class="fs-5">REGISTRATIONS </span>
-          <span *ngIf="activity.max_participants">
+          <span>
+            {{ activity.registred_accounts!.length }}
             {{
-              activity.registred_accounts?.length +
-                "/" +
-                activity.max_participants
+              activity.max_participants ? "/" + activity.max_participants : ""
             }}
           </span>
         </div>
@@ -115,4 +115,13 @@
       </div>
     </div>
   </div>
+
+  <!-- if the activity not found -->
+  <ng-template #notFound>
+    <div class="container">
+      <div class="alert alert-danger text-uppercase mt-5">
+        Sorry, the activity is not found
+      </div>
+    </div>
+  </ng-template>
 </ng-template>
