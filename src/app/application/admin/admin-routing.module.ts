@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+// Main routes
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { GreetingAdminComponent } from './components/greeting-admin/greeting-admin.component';
+// Activity routes
 import { ActivityManagmentComponent } from './components/activity-managment/activity-managment.component';
 import { ActivityListAdminComponent } from './components/activity-list-admin/activity-list-admin.component';
 import { ActivityCreateAdminComponent } from './components/activity-create-admin/activity-create-admin.component';
+import { ActivityModifyComponent } from './components/activity-modify/activity-modify.component';
+// Registration routes
 import { RegistrationManagmentComponent } from './components/registration-managment/registration-managment.component';
 import { RegistrationsListComponent } from './components/registrations-list/registrations-list.component';
-import { ActivityModifyComponent } from './components/activity-modify/activity-modify.component';
+// Joining routes
 import { JoiningListAdminComponent } from './components/joining-list-admin/joining-list-admin.component';
 import { JoinUsMangmentComponent } from './components/join-us-mangment/join-us-mangment.component';
 import { JoinUsDetailsAdminComponent } from './components/join-us-details-admin/join-us-details-admin.component';
@@ -18,8 +23,10 @@ const routes: Routes = [
     title: 'dashboard',
     component: DashboardComponent,
     children: [
+      // Main routes
       { path: '', redirectTo: 'greeting', pathMatch: 'full' },
       { path: 'greeting', title: 'welcome', component: GreetingAdminComponent },
+      // Activity routes
       {
         path: 'activities',
         title: 'activities',
@@ -43,6 +50,7 @@ const routes: Routes = [
           },
         ],
       },
+      // Registration routes
       {
         path: 'registrations',
         title: 'registrations',
@@ -56,6 +64,7 @@ const routes: Routes = [
           },
         ],
       },
+      // Joining routes
       {
         path: 'join-us',
         title: 'joining registrations',

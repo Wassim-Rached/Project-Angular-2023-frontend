@@ -5,9 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+
 // custom modules
 import { MaterialModule } from './material.module';
 import { AuthInterceptor } from './application/services/auth-interceptor.service';
+
 // application based components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './application/components/home/home.component';
