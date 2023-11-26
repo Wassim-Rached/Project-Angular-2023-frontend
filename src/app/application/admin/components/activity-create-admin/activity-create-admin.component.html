@@ -82,20 +82,20 @@
     />
   </div>
   <div>
-    <label class="form-label" for="maxParticipants">Max Participants:</label>
+    <label class="form-label" for="max_participants">Max Participants:</label>
     <input
       [ngClass]="{
-        'is-invalid': fieldHasAnyError('maxParticipants'),
+        'is-invalid': fieldHasAnyError('max_participants'),
         'form-control': true
       }"
       type="number"
-      id="maxParticipants"
-      formControlName="maxParticipants"
+      id="max_participants"
+      formControlName="max_participants"
     />
-    <app-input-error-message *ngIf="haveRequiredError('maxParticipants')" />
+    <app-input-error-message *ngIf="haveRequiredError('max_participants')" />
     <app-input-error-message
-      *ngIf="fieldHasError('maxParticipants')"
-      [message]="getFieldServerErrorMessage('maxParticipants')"
+      *ngIf="fieldHasError('max_participants')"
+      [message]="getFieldServerErrorMessage('max_participants')"
     />
   </div>
   <div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Activity } from 'src/app/application/classes/activity';
 import { Categorie } from 'src/app/application/classes/categorie';
@@ -12,7 +12,7 @@ import { MessageText } from '../../../types';
   styleUrls: ['./activity-modify.component.css'],
 })
 export class ActivityModifyComponent implements OnInit {
-  form!: FormGroup;
+  Form!: FormGroup;
   activity!: Activity;
   activityId!: string;
   allCategories: Categorie[] = [];
@@ -64,19 +64,19 @@ export class ActivityModifyComponent implements OnInit {
   }
 
   resetForm() {
-    this.form.reset();
+    this.Form.reset();
   }
 
   initForm() {
-    this.form = this.fb.nonNullable.group({
-      title: [this.activity.title],
+    this.Form = this.fb.nonNullable.group({
+      title: [this.activity.title, Validators.required],
       photo: [null],
-      is_free: [this.activity.is_free],
+      is_free: [this.activity.is_free, Validators.required],
       price: [this.activity.price],
       max_participants: [this.activity.max_participants],
-      date: [this.activity.date],
-      description: [this.activity.description],
-      categories: [this.activity.categories],
+      date: [this.activity.date, Validators.required],
+      description: [this.activity.description, Validators.required],
+      categories: [this.activity.categories, Validators.required],
     });
   }
 
@@ -84,7 +84,7 @@ export class ActivityModifyComponent implements OnInit {
     // set submitting state
     this.isSubmitting = true;
 
-    const data = this.form.value;
+    const data = this.Form.value;
 
     const photoFormData = new FormData();
     photoFormData.append('photo', data.photo);
@@ -122,6 +122,10 @@ export class ActivityModifyComponent implements OnInit {
           status: 'error',
         };
 
+        // if the error is 400
+        // set the form errors
+        if (error.status === 400) this.handleFormErrors(error.error);
+
         // set submitting state
         this.isSubmitting = false;
       },
@@ -129,13 +133,53 @@ export class ActivityModifyComponent implements OnInit {
   }
 
   public get isFree() {
-    return this.form.get('is_free')?.value ?? false;
+    return this.Form.get('is_free')?.value ?? false;
   }
 
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.form.get('photo')?.setValue(file);
+      this.Form.get('photo')?.setValue(file);
+    }
+  }
+
+  // check if the field has required error
+  public haveRequiredError(field: string) {
+    return (
+      this.Form.get(field)?.errors?.['required'] &&
+      this.Form.get(field)?.touched
+    );
+  }
+
+  // check if the field has certain error
+  public fieldHasError(field: string, error: string = 'serverError'): boolean {
+    const formFiled = this.Form.get(field);
+    if (!formFiled) return false;
+
+    return formFiled.hasError(error);
+  }
+
+  // check if the field has any error
+  public fieldHasAnyError(field: string): boolean {
+    const formFiled = this.Form.get(field);
+
+    if (!formFiled) return false;
+
+    return formFiled.invalid && (formFiled.touched || formFiled.dirty);
+  }
+
+  // get the server error message
+  public getFieldServerErrorMessage(field: string): string {
+    return this.Form.get(field)?.errors?.['serverError'];
+  }
+
+  // set the errors from the backend
+  // on the form controls
+  private handleFormErrors(errors: any): void {
+    for (const field in errors) {
+      if (this.Form.get(field)) {
+        this.Form.get(field)?.setErrors({ serverError: errors[field][0] });
+      }
     }
   }
 }

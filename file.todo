@@ -1,3 +1,18 @@
-// add api functionality
+// TODO add related api functionality
+
+// TODO functionality de front-office ?
+
+// TODO the redirect for admin login should be to the /dashboard
+
+// TODO Affichage correct de tous les champs de l’activité tels que exigés ?
+
+// TODO rafraîchissement de l’affichage de la liste des activités suite à la mise à jour ?
+
+// TODO change-password should be on /dashboard ?
+
+// TODO functionality de back-office ?
+
+// TODO des concepts d’Angular non étudiés ?
 
 // TODO clear uneeeded methodes in services
+

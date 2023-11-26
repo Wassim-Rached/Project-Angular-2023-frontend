@@ -4,8 +4,8 @@
 
 <ng-template #page>
   <form
-    *ngIf="form"
-    [formGroup]="form"
+    *ngIf="Form"
+    [formGroup]="Form"
     class="container"
     (ngSubmit)="onSubmit()"
   >
@@ -16,7 +16,15 @@
         type="text"
         id="title"
         formControlName="title"
-        class="form-control"
+        [ngClass]="{
+          'is-invalid': fieldHasAnyError('title'),
+          'form-control': true
+        }"
+      />
+      <app-input-error-message *ngIf="haveRequiredError('title')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('title')"
+        [message]="getFieldServerErrorMessage('title')"
       />
     </div>
     <div class="form-group">
@@ -30,14 +38,27 @@
         name="items"
         formControlName="categories"
       ></ng-select>
+      <app-input-error-message *ngIf="haveRequiredError('categories')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('categories')"
+        [message]="getFieldServerErrorMessage('categories')"
+      />
     </div>
     <div>
       <label for="description" class="form-label">Description:</label>
       <textarea
         id="description"
         formControlName="description"
-        class="form-control"
+        [ngClass]="{
+          'is-invalid': fieldHasAnyError('description'),
+          'form-control': true
+        }"
       ></textarea>
+      <app-input-error-message *ngIf="haveRequiredError('description')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('description')"
+        [message]="getFieldServerErrorMessage('description')"
+      />
     </div>
     <div>
       <label for="is_free" class="form-label">Is Free:</label>
@@ -51,19 +72,35 @@
     <div *ngIf="!isFree">
       <label class="form-label" for="price">Price:</label>
       <input
-        class="form-control"
+        [ngClass]="{
+          'is-invalid': fieldHasAnyError('price'),
+          'form-control': true
+        }"
         type="text"
         id="price"
         formControlName="price"
+      />
+      <app-input-error-message *ngIf="haveRequiredError('price')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('price')"
+        [message]="getFieldServerErrorMessage('price')"
       />
     </div>
     <div>
       <label class="form-label" for="max_participants">Max Participants:</label>
       <input
-        class="form-control"
+        [ngClass]="{
+          'is-invalid': fieldHasAnyError('max_participants'),
+          'form-control': true
+        }"
         type="number"
         id="max_participants"
         formControlName="max_participants"
+      />
+      <app-input-error-message *ngIf="haveRequiredError('max_participants')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('max_participants')"
+        [message]="getFieldServerErrorMessage('max_participants')"
       />
     </div>
     <div>
@@ -73,25 +110,39 @@
         id="photo"
         (change)="onFileChange($event)"
         [ngClass]="{
-          'form-control': true
+          'form-control': true,
+          'is-invalid': fieldHasAnyError('photo')
         }"
+      />
+      <app-input-error-message *ngIf="haveRequiredError('photo')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('photo')"
+        [message]="getFieldServerErrorMessage('photo')"
       />
     </div>
     <div>
       <label class="form-label" for="date">Date:</label>
       <input
-        class="form-control"
+        [ngClass]="{
+          'is-invalid': fieldHasAnyError('date'),
+          'form-control': true
+        }"
         type="date"
         id="date"
         formControlName="date"
+      />
+      <app-input-error-message *ngIf="haveRequiredError('date')" />
+      <app-input-error-message
+        *ngIf="fieldHasError('date')"
+        [message]="getFieldServerErrorMessage('date')"
       />
     </div>
     <button
       type="submit"
       class="btn btn-primary mt-3"
-      [disabled]="isSubmitting"
+      [disabled]="isSubmitting || Form.invalid"
     >
-      {{ isSubmitting ? "Modifying..." : "Modify" }}
+      {{ isSubmitting ? "Loading..." : "Modify" }}
     </button>
   </form>
 </ng-template>
