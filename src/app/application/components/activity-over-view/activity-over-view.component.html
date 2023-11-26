@@ -83,19 +83,13 @@
       <div class="col-3 shadow p-0 m-0">
         <div
           style="background-color: var(--secondary-color)"
-          class="text-white p-3 d-flex align-items-center"
-          [ngClass]="
-            activity.max_participants
-              ? 'justify-content-between'
-              : 'justify-content-center'
-          "
+          class="text-white p-3 d-flex align-items-center justify-content-between"
         >
           <span class="fs-5">REGISTRATIONS </span>
-          <span *ngIf="activity.max_participants">
+          <span>
+            {{ activity.registred_accounts!.length }}
             {{
-              activity.registred_accounts?.length +
-                "/" +
-                activity.max_participants
+              activity.max_participants ? "/" + activity.max_participants : ""
             }}
           </span>
         </div>

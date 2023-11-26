@@ -114,8 +114,9 @@ export class ActivityOverViewComponent implements OnInit {
 
   public get activityIsFull(): boolean {
     return (
+      this.activity?.max_participants !== null &&
       this.activity!.registred_accounts!.length >=
-      this.activity!.max_participants!
+        this.activity!.max_participants!
     );
   }
 }
