@@ -23,21 +23,29 @@ To use the frontend locally, follow these steps:
 
 1. **Install Node.js and npm:** [Node.js Installation Guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 2. **Clone the repository:**
+
    ```bash
    git clone https://github.com/your-username/ecosave-frontend.git
    ```
+
 3. **Navigate to the project directory:**
+
    ```bash
       cd ecosave-frontend
    ```
+
 4. **Install dependencies:**
+
    ```bash
       npm install
    ```
+
 5. **Run the development server:**
+
    ```bash
       ng serve
    ```
+
 6. **Visit http://localhost:4200 in your browser to explore the EcoSave website.**
 
 # Additional Functionality
