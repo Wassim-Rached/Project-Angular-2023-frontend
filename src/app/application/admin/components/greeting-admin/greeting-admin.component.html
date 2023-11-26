@@ -1,6 +1,19 @@
-<div
-  id="greeting-admin"
-  class="container d-flex align-items-center justify-content-center non-navheight"
->
-  <h1 class="fs-1">Welcome back Admin</h1>
+<div *ngIf="isLoadingPage; else page">
+  <mat-progress-bar mode="query"></mat-progress-bar>
 </div>
+
+<ng-template #page>
+  <div
+    id="greeting-admin"
+    class="container d-flex flex-column align-items-center justify-content-center non-navheight"
+  >
+    <h1 class="fs-1">Welcome back Admin</h1>
+
+    <div
+      style="width: 400px; height: 300px; border-radius: 20px"
+      class="overflow-hidden"
+    >
+      <img [src]="catPhotoUrl" alt="" width="100%" />
+    </div>
+  </div>
+</ng-template>
