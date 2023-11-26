@@ -13,6 +13,7 @@ import { AccountService } from '../../services/account.service';
 export class ActivityOverViewComponent implements OnInit {
   activity?: Activity;
   isAuthenticated: boolean = false;
+  isAdmin?: boolean;
   // data states
   didLike: boolean = false;
   didRegister: boolean = false;
@@ -35,7 +36,11 @@ export class ActivityOverViewComponent implements OnInit {
     // get activity id from route
     const activityId = this.activatedRoute.snapshot.params['id'];
 
+    // check if user is authenticated
     this.isAuthenticated = this.authService.isAuthenticated();
+
+    // check if user is admin
+    this.isAdmin = this.authService.isAdmin();
 
     // get activity by id
     this.activityService.getActivityById(activityId).subscribe({

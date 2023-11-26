@@ -11,7 +11,9 @@ import { AuthService } from '../../services/auth.service';
 export class ActivityCardComponent implements OnInit {
   @Input() activity!: Activity;
   isAuthenticated!: boolean;
+  isAdmin?: boolean;
   didLike: boolean = false;
+  // loading states
   isLoadingLike: boolean = false;
   isPageLoading: boolean = false;
 
@@ -26,6 +28,9 @@ export class ActivityCardComponent implements OnInit {
 
     // set the authenticated state
     this.isAuthenticated = this.authService.isAuthenticated();
+
+    // set the admin state
+    this.isAdmin = this.authService.isAdmin();
 
     // if the user is authenticated
     if (this.isAuthenticated) {
