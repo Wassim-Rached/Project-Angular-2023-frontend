@@ -4,6 +4,7 @@ import { Categorie } from './categorie';
 export class Activity {
   public readonly created_at?: Date;
   public readonly updated_at?: Date;
+  public date?: Date;
 
   constructor(
     public readonly id?: string,
@@ -17,10 +18,11 @@ export class Activity {
     public description?: string,
     public max_participants?: number,
     public registred_accounts?: Account[],
-    public date?: string,
+    date?: string,
     created_at?: string,
     updated_at?: string
   ) {
+    if (date) this.date = new Date(date);
     if (created_at) this.created_at = new Date(created_at);
     if (updated_at) this.updated_at = new Date(updated_at);
   }
