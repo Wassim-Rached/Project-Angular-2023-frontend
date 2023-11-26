@@ -28,7 +28,7 @@ export class JoinUsDetailsAdminComponent implements OnInit {
     this.joinId = this.activatedRoute.snapshot.params['joinUsId'];
 
     // get the joinUs form by id
-    this.accountService.getJoinFormById(this.joinId!).subscribe({
+    this.accountService.getJoiningFormById(this.joinId!).subscribe({
       next: (joinForm) => {
         this.joinForm = joinForm;
         // set loading state to false
