@@ -72,4 +72,4 @@ This frontend project is licensed under the MIT License.
 
 **Note:** This project is a scholastic endeavor and not a real-world application.
 
-**Note:** This repository serves as the frontend for [Project-Angular-2023-frontend](https://github.com/Wassim-Rached/Project-Angular-2023-backend).
+**Note:** This repository serves as the frontend for [Project-Angular-2023-backend](https://github.com/Wassim-Rached/Project-Angular-2023-backend).
